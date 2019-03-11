@@ -4,8 +4,10 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": ""
+    "dev": "webpack-dev-server --open"
   },
   "author": "ldq <17778888138@189.cn>",
-  "license": "ISC"
+  "license": "ISC",
+  "devDependencies": {
+  }
 }
