@@ -1,0 +1,11 @@
+{
+  "name": "right-menu-pro",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": ""
+  },
+  "author": "ldq <17778888138@189.cn>",
+  "license": "ISC"
+}
