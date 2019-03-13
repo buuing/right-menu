@@ -18,16 +18,15 @@ const utils = {
    * 初始化遮罩层
    */
   initMask: (el) => {
+    utils.unMaskAndMenu()
     let mask = document.createElement('div')
     mask.id = 'ldq-mask'
     mask.style.width = window.innerWidth + 'px'
     mask.style.height =  window.innerHeight + 'px'
-    mask.style.background = 'rgba(255, 255, 255, 0.2)'
-    mask.style.background = 'rgba(0, 0, 0, 0.2)'
+    mask.style.background = 'rgba(0, 0, 0, 0)'
     mask.style.position = 'fixed'
-    mask.style.display = 'block'
-    mask.style.top = 0 + 'px'
     mask.style.left = 0 + 'px'
+    mask.style.top = 0 + 'px'
     mask.style.zIndex = 9999998
     document.body.appendChild(mask)
     utils.mask = mask
@@ -35,7 +34,6 @@ const utils = {
       utils.unMaskAndMenu()
     })
     mask.addEventListener('contextmenu', e => {
-      // console.log(555)
       utils.unMaskAndMenu()
       e.preventDefault ? e.preventDefault() : window.event.returnValue == false
     })
@@ -48,7 +46,15 @@ const utils = {
     const menu = utils.render(options)
     utils.menu = menu
     document.body.appendChild(menu)
-    const { x, y } = utils._getXY(menu, e)
+    // 计算位置
+		let x = e.clientX
+    let y = e.clientY
+		if (window.innerWidth - x < menu.offsetWidth) {
+			x -= menu.offsetWidth
+		}
+		if (window.innerHeight - y < menu.offsetHeight) {
+			y -= menu.offsetHeight
+    }
     menu.style.left = x + 'px'
     menu.style.top = y + 'px'
     menu.addEventListener('contextmenu', e => {
@@ -89,24 +95,6 @@ const utils = {
     return new utils.DomIfy('ul', {class: 'ldq-menu'}, menuList).render()
   },
 
-  _getXY (menu, e) {
-		const toTop = document.documentElement.scrollTop || document.body.scrollTop
-		const toLeft =  document.documentElement.scrollLeft || document.body.scrollLeft
-		const bodyWidth = window.innerWidth
-    const bodyHeight = window.innerHeight
-		const menuWidth = menu.offsetWidth
-    const menuHeight = menu.offsetHeight
-		let x = e.clientX + toLeft
-    let y = e.clientY + toTop
-		if (bodyWidth - x < menuWidth) {
-			x -= menuWidth
-		}
-		if (bodyHeight - y < menuHeight) {
-			y -= menuHeight
-    }
-		return {x, y}
-	},
-
   _a: (opt) => {
     const a = new utils.DomIfy('a', {
       href: opt.href,
@@ -137,19 +125,32 @@ const utils = {
 
   _ul: (opt) => {
     const li = new utils.DomIfy('li', {
-      class: 'ldq-menu-li' + (opt.disabled ? ' ldq-menu-disabled' : '')
+      class: 'ldq-menu-li ldq-menu-list' + (opt.disabled ? ' ldq-menu-disabled' : '')
     }, [opt.title]).render()
-    if (!opt.disabled) {
+    // 添加二级菜单
+    if (!opt.disabled && opt.children) {
       const ul = utils.render(opt.children)
       li.addEventListener('mouseover', e => {
         li.appendChild(ul)
         ul.style.position = 'fixed'
-        ul.style.top = ldq.y(li) + 'px'
-        ul.style.left = ldq.x(utils.menu) + ldq.width(utils.menu) + 'px'
+        // 计算位置
+        let x = ldq.x(utils.menu) + ldq.width(utils.menu)
+        let y = ldq.y(li)
+        if (window.innerWidth - x < ul.offsetWidth) {
+          x -= ldq.width(utils.menu) + ldq.width(ul)
+        }
+        if (window.innerHeight - y < ul.offsetHeight) {
+          ul.style.top = ldq.bottom(li) - ldq.height(ul) + 'px'
+        } else {
+          ul.style.top = ldq.y(li) + 'px'
+        }
+        ul.style.left = x + 'px'
       })
-      li.addEventListener('mouseout', function (e) {
-        if (e.toElement.parentNode != ul && e.toElement != ul) {
-          li.removeChild(ul)
+      li.addEventListener('mouseout', (e) => {
+        if (e.toElement) {
+          if (e.toElement.parentNode != ul && e.toElement != ul) {
+            li.removeChild(ul)
+          }
         }
       })
       // utils.mask.addEventListener('mouseover', e => {

@@ -18,7 +18,11 @@ const ldq = {
 
 	height: (node) => {
 		return node.getBoundingClientRect().height
-  },
+	},
+	
+	bottom: (node) => {
+		return node.getBoundingClientRect().bottom
+	},
   
   x: (node) => {
 		return node.getBoundingClientRect().x
