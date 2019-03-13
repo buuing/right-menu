@@ -22,14 +22,15 @@ import 'vue-right-menu/src/index.css'
 
 给对应的元素添加`v-menu`的指令, 菜单栏的内容以及回调函数可以自定义
 
-参数选项 | a链接 | 普通按钮 | 二级菜单 | 分割线
-:-: | :-: | :-: | :-:
-type     | a | li | ul | hr |
-title    | √ | √  | √  | × |
-href     | √ | ×  | ×  | × |
-func     | × | √  | ×  | × |
-disabled | √ | √  | √  | × |
-children | × | ×  | √  | × |
+| 参数选项  | a链接 | 普通按钮 | 二级菜单 | 分割线
+|  :-:     | :-:   | :-:     | :-: | :-:
+| type     |  a   |   li    |  ul  | hr 
+| title    |  √   |   √     |  √   | × 
+| href     |  √   |   ×     |  ×   | × 
+| func     |  ×   |   √     |  ×   | × 
+| disabled |  √   |   √     |  √   | × 
+| children |  ×   |   ×     |  √   | × 
+
 
 ```html
 <template>
