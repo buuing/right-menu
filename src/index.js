@@ -12,22 +12,18 @@ export default {
           // 阻止默认事件和冒泡
           utils.preventDefault(e)
           // 初始化遮罩层
-          utils.initMask()
-
+          utils.initMask(el)
+          // 初始化菜单栏
+          utils.initMenu(binding.value, el, e)
           // -----------------------
-          const menu = utils.render(binding.value)
-          console.log(e)
-          menu.style.top = e.clientY + 'px'
-          menu.style.left = e.clientX + 'px'
 
-          document.body.appendChild(menu)
 
-          // console.log(document.querySelectorAll('.ldq-menu'))
         })
+        // console.log(document.querySelectorAll('.ldq-menu'))
       },
       // 钩子函数, 解绑时触发
       unbind (el) {
-        alert('解绑了?')
+        console.log('解绑了?')
       }
     })
   }

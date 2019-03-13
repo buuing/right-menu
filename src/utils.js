@@ -1,5 +1,8 @@
-const utils = {
+import ldq from './ldq.js'
 
+const utils = {
+  mask: {},
+  menu: {},
   /**
    * 阻止默认事件和冒泡
    * @param { Event } e 事件参数
@@ -14,46 +17,58 @@ const utils = {
   /**
    * 初始化遮罩层
    */
-  initMask: () => {
+  initMask: (el) => {
     let mask = document.createElement('div')
     mask.id = 'ldq-mask'
     mask.style.width = window.innerWidth + 'px'
     mask.style.height =  window.innerHeight + 'px'
-    mask.style.background = 'rgba(0, 0, 0, 0.1)'
-    mask.style.position = 'absolute'
+    mask.style.background = 'rgba(255, 255, 255, 0.2)'
+    mask.style.background = 'rgba(0, 0, 0, 0.2)'
+    mask.style.position = 'fixed'
     mask.style.display = 'block'
     mask.style.top = 0 + 'px'
     mask.style.left = 0 + 'px'
     mask.style.zIndex = 9999998
     document.body.appendChild(mask)
+    utils.mask = mask
     mask.addEventListener('click', e => {
-      utils.clearMask()
-      utils.clearMenu()
+      utils.unMaskAndMenu()
     })
     mask.addEventListener('contextmenu', e => {
-      utils.clearMask()
-      utils.clearMenu()
+      // console.log(555)
+      utils.unMaskAndMenu()
       e.preventDefault ? e.preventDefault() : window.event.returnValue == false
     })
   },
 
   /**
-   * 卸载遮罩层
+   * 初始化菜单栏
    */
-  clearMask: () => {
+  initMenu: (options, el, e) => {
+    const menu = utils.render(options)
+    utils.menu = menu
+    document.body.appendChild(menu)
+    const { x, y } = utils._getXY(menu, e)
+    menu.style.left = x + 'px'
+    menu.style.top = y + 'px'
+    menu.addEventListener('contextmenu', e => {
+      utils.unMaskAndMenu()
+      e.preventDefault ? e.preventDefault() : window.event.returnValue == false
+    })
+    // console.log(menu)
+  },
+
+  /**
+   * 卸载遮罩层和菜单栏
+   */
+  unMaskAndMenu: () => {
     const temp = document.getElementById('ldq-mask')
     if (temp) {
       temp.parentNode.removeChild(temp)
     }
-  },
-
-  /**
-   * 卸载菜单栏
-   */
-  clearMenu: () => {
     const menuList = document.querySelectorAll('.ldq-menu')
     menuList.forEach(item => {
-      console.log(item.parentNode.removeChild(item))
+      item.parentNode.removeChild(item)
     })
   },
 
@@ -74,6 +89,24 @@ const utils = {
     return new utils.DomIfy('ul', {class: 'ldq-menu'}, menuList).render()
   },
 
+  _getXY (menu, e) {
+		const toTop = document.documentElement.scrollTop || document.body.scrollTop
+		const toLeft =  document.documentElement.scrollLeft || document.body.scrollLeft
+		const bodyWidth = window.innerWidth
+    const bodyHeight = window.innerHeight
+		const menuWidth = menu.offsetWidth
+    const menuHeight = menu.offsetHeight
+		let x = e.clientX + toLeft
+    let y = e.clientY + toTop
+		if (bodyWidth - x < menuWidth) {
+			x -= menuWidth
+		}
+		if (bodyHeight - y < menuHeight) {
+			y -= menuHeight
+    }
+		return {x, y}
+	},
+
   _a: (opt) => {
     const a = new utils.DomIfy('a', {
       href: opt.href,
@@ -93,9 +126,10 @@ const utils = {
     const li = new utils.DomIfy('li', {
       class: 'ldq-menu-li' + (opt.disabled ? ' ldq-menu-disabled' : '')
     }, [opt.title]).render()
-    if (!opt.disabled) {
+    if (!opt.disabled && opt.func) {
       li.addEventListener('click', e => {
         opt.func(e)
+        utils.unMaskAndMenu()
       })
     }
     return li
@@ -106,9 +140,21 @@ const utils = {
       class: 'ldq-menu-li' + (opt.disabled ? ' ldq-menu-disabled' : '')
     }, [opt.title]).render()
     if (!opt.disabled) {
+      const ul = utils.render(opt.children)
       li.addEventListener('mouseover', e => {
-        console.log('0-0')
+        li.appendChild(ul)
+        ul.style.position = 'fixed'
+        ul.style.top = ldq.y(li) + 'px'
+        ul.style.left = ldq.x(utils.menu) + ldq.width(utils.menu) + 'px'
       })
+      li.addEventListener('mouseout', function (e) {
+        if (e.toElement.parentNode != ul && e.toElement != ul) {
+          li.removeChild(ul)
+        }
+      })
+      // utils.mask.addEventListener('mouseover', e => {
+      //   li.removeChild(ul)
+      // })
     }
     return li
   },
@@ -141,24 +187,14 @@ const utils = {
       }
       // append所有子元素
       this.children.forEach(child => {
-        // console.log(el, child)
         if (typeof child === 'string') {
           el.innerHTML = child
         } else {
-          // console.log('---'+child+'----')
           el.appendChild(child)
         }
       })
       return el
     }
-
-    // addEvent (eventName, callBack) {
-		// 	this.event.push({
-		// 		eventName: eventName,
-		// 		callBack: callBack
-		// 	})
-		// 	return this
-    // }
   },
 }
 
