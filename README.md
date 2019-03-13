@@ -1,17 +1,17 @@
 
-### 介绍
+## 介绍
 
 一个基于vue的右键菜单插件, 通过添加指令的方式可以创建不同的列表
 
-### Demo
+## Demo
 
 http://www.baidu.com
 
-### 安装
+## 安装
 
 > `npm i vue-right-menu --save-dev`
 
-### 使用
+## 使用
 
 安装完成后, 在`main.js`入口文件中添加如下代码
 
@@ -43,7 +43,7 @@ export default {
     return {
       items: [
         {
-          type: 'a',  // type为a时可以点击跳转
+          type: 'a', // type为a时可以点击跳转
           title: '百度一下',
           href: 'http://www.baidu.com'
         }, {
@@ -97,6 +97,13 @@ export default {
   }
 }
 </script>
+
+<style>
+  #ldq {
+    height: 500px;
+    background-color: #82acff;
+  }
+</style>
 ```
 
-但是需要注意, 目前不支持三级菜单!!!
+> **但是需要注意, 目前不支持三级菜单!!!**
