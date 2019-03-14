@@ -5,7 +5,7 @@
 
 ## Demo
 
-http://www.baidu.com
+https://100px.net/vue-right-menu/
 
 ## 安装
 
