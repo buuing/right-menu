@@ -22,10 +22,10 @@ https://100px.net/vue-right-menu/
 安装完成后, 在`main.js`入口文件中添加如下代码
 
 ```js
-import rightMenuPro from 'vue-right-menu/dist/index.js'
-import 'vue-right-menu/dist/index.css'
+import rightMenu from 'vue-right-menu'
+import 'vue-right-menu/src/index.css'
 
-Vue.use(rightMenuPro)
+Vue.use(rightMenu)
 ```
 
 <br>
