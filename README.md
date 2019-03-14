@@ -1,23 +1,29 @@
 
 ## 介绍
 
-一个基于vue的右键菜单插件, 通过添加指令的方式可以创建不同的列表
+一个基于vue的右键菜单插件, 通过添加指令的方式可以展示不同的菜单内容
+
+<br>
 
 ## Demo
 
 https://100px.net/vue-right-menu/
 
+<br>
+
 ## 安装
 
 > `npm i vue-right-menu --save-dev`
+
+<br>
 
 ## 使用
 
 安装完成后, 在`main.js`入口文件中添加如下代码
 
 ```js
-import rightMenuPro from 'vue-right-menu/src/index.js'
-import 'vue-right-menu/src/index.css'
+import rightMenuPro from 'vue-right-menu/dist/index.js'
+import 'vue-right-menu/dist/index.css'
 ```
 
 给对应的元素添加`v-menu`的指令, 菜单栏的内容以及回调函数可以自定义
@@ -31,6 +37,9 @@ import 'vue-right-menu/src/index.css'
 | disabled |  √   |   √     |  √   | × 
 | children |  ×   |   ×     |  √   | × 
 
+<br>
+
+## 示例
 
 ```html
 <template>
@@ -41,26 +50,26 @@ import 'vue-right-menu/src/index.css'
 export default {
   data () {
     return {
-      items: [
+            items: [
         {
           type: 'a', // type为a时可以点击跳转
           title: '百度一下',
           href: 'http://www.baidu.com'
         }, {
-          type: 'li',
-          title: '复制(C)',
-          func: () => alert('点击了复制')
+          type: 'li', // type为li是普通按钮
+          title: '复制(C)', // 按钮的名称
+          func: () => alert('点击了复制') // 回调函数
         }, {
           type: 'li',
           title: '粘贴(V)',
-          disabled: true,
+          disabled: true, // 不可点击状态, 回调函数自然无法触发
           func: () => alert('点击了粘贴')
         }, {
-          type: 'hr'
+          type: 'hr' // 分割线, 无需其他参数
         }, {
-          type: 'ul',
+          type: 'ul', // type为ul是二级菜单
           title: '新建(W)',
-          children: [
+          children: [ // children里面配置二级菜单列表, 不支持三级菜单
             {
               type: 'li',
               title: '文件夹(F)',
