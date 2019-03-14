@@ -24,7 +24,11 @@ https://100px.net/vue-right-menu/
 ```js
 import rightMenuPro from 'vue-right-menu/dist/index.js'
 import 'vue-right-menu/dist/index.css'
+
+Vue.use(rightMenuPro)
 ```
+
+<br>
 
 给对应的元素添加`v-menu`的指令, 菜单栏的内容以及回调函数可以自定义
 
