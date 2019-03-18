@@ -1,53 +1,8 @@
-
-## 介绍
-
-一个基于vue的右键菜单插件, 通过添加指令的方式可以展示不同的菜单内容
-
-<br>
-
-## Demo
-
-https://100px.net/vue-right-menu/
-
-<br>
-
-## 安装
-
-> `npm i vue-right-menu --save-dev`
-
-<br>
-
-## 使用
-
-安装完成后, 在`main.js`入口文件中添加如下代码
-
-```js
-import rightMenu from 'vue-right-menu'
-import 'vue-right-menu/src/index.css'
-
-Vue.use(rightMenu)
-```
-
-<br>
-
-给对应的元素添加`v-menu`的指令, 菜单栏的内容以及回调函数可以自定义
-
-| 参数选项  | a链接 | 普通按钮 | 二级菜单 | 分割线
-|  :-:     | :-:   | :-:     | :-: | :-:
-| type     |  a   |   li    |  ul  | hr 
-| title    |  √   |   √     |  √   | × 
-| href     |  √   |   ×     |  ×   | × 
-| func     |  ×   |   √     |  ×   | × 
-| disabled |  √   |   √     |  √   | × 
-| children |  ×   |   ×     |  √   | × 
-
-<br>
-
-## 示例
-
-```html
 <template>
-  <div id="ldq" v-menu="items"></div>
+  <div id="ldq" v-menu="items">
+    <div class="box1" v-menu="box1"></div>
+    <div class="box2" v-menu="box2"></div>
+  </div>
 </template>
 
 <script>
@@ -105,6 +60,30 @@ export default {
           title: '属性(R)',
           func: () => alert('点击了属性')
         }
+      ],
+      box1: [
+        {
+          type: 'li',
+          title: '粉盒子'
+        }
+      ],
+      box2: [
+        {
+          type: 'li',
+          title: '紫盒子'
+        }, {
+          type: 'ul',
+          title: '技能',
+          children: [
+            {
+              type: 'li',
+              title: '隐身',
+              func: (e, dom) => {
+                dom.style.display = 'none'
+              }
+            }
+          ]
+        }
       ]
     }
   }
@@ -115,8 +94,20 @@ export default {
   #ldq {
     height: 500px;
     background-color: #82acff;
+    overflow: hidden;
+  }
+  .box1 {
+    width: 100px;
+    height: 100px;
+    margin: 100px;
+    background-color: #ff5d9e;
+    border-radius: 5px;
+  }
+  .box2 {
+    width: 100px;
+    height: 100px;
+    margin-left: 100px;
+    background-color: #494ca2;
+    border-radius: 5px;
   }
 </style>
-```
-
-> **但是需要注意, 目前不支持三级菜单!!!**

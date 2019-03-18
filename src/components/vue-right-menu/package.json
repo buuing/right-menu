@@ -1,0 +1,13 @@
+{
+  "name": "vue-right-menu",
+  "version": "0.0.8",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "webpack-dev-server --open"
+  },
+  "author": "ldq <17778888138@189.cn>",
+  "license": "ISC",
+  "devDependencies": {
+  }
+}

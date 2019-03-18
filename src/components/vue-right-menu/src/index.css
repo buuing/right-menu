@@ -50,7 +50,7 @@
 }
 .ldq-menu-list::after {
   content: '>';
-  font-family: "宋体";
+  font-family: 宋体;
   font-weight: 600;
   float: right;
   margin-top: 2px;
