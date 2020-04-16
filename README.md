@@ -23,7 +23,6 @@ https://100px.net/vue-right-menu/
 
 ```js
 import rightMenu from 'vue-right-menu'
-import 'vue-right-menu/src/index.css'
 
 Vue.use(rightMenu)
 ```
