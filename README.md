@@ -7,7 +7,7 @@
 
 ## Demo
 
-https://100px.net/vue-right-menu/
+https://buuing.github.io/vue-right-menu/
 
 <br>
 
