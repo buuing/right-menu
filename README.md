@@ -1,7 +1,36 @@
 
-## 介绍
+<div align="center">
+  <h1>vue-right-menu</h1>
+  <p>一个基于vue的右键菜单插件, 通过添加指令的方式可以展示不同的菜单内容</p>
+  <p>
+    <a href="https://github.com/buuing/vue-right-menu/stargazers" target="_black">
+      <img src="https://img.shields.io/github/stars/buuing/vue-right-menu?color=%238aacf9&logo=github&style=flat-square" alt="stars" />
+    </a>
+    <a href="https://github.com/buuing/vue-right-menu/network/members" target="_black">
+      <img src="https://img.shields.io/github/forks/buuing/vue-right-menu?color=%238aacf9&logo=github&style=flat-square" alt="forks" />
+    </a>
+    <a href="https://www.npmjs.com/package/vue-right-menu" target="_black">
+      <img src="https://img.shields.io/npm/v/vue-right-menu?color=%238aacf9&logo=npm&style=flat-square" alt="version" />
+    </a>
+    <a href="https://www.npmjs.com/package/vue-right-menu" target="_black">
+      <img src="https://img.shields.io/npm/dm/vue-right-menu?color=%238aacf9&logo=npm&style=flat-square" alt="downloads" />
+    </a>
+    <a href="https://www.jsdelivr.com/package/npm/vue-right-menu" target="_black">
+      <img src="https://data.jsdelivr.com/v1/package/npm/vue-right-menu/badge" alt="downloads" />
+    </a>
+  </p>
+  <p>
+    <a href="https://github.com/buuing" target="_black">
+      <img src="https://img.shields.io/badge/Author-%20buuing%20-4195a5.svg?&logo=github&style=flat-square" alt="author" />
+    </a>
+    <a href="https://github.com/buuing/vue-right-menu/blob/master/LICENSE" target="_black">
+      <img src="https://img.shields.io/github/license/buuing/vue-right-menu?color=%232dce89&logo=github&style=flat-square" alt="license" />
+    </a>
+  </p>
+</div>
 
-一个基于vue的右键菜单插件, 通过添加指令的方式可以展示不同的菜单内容
+<br />
+
 
 <br>
 
@@ -13,7 +42,9 @@ https://buuing.github.io/vue-right-menu/
 
 ## 安装
 
-> `npm i vue-right-menu --save-dev`
+> `npm install vue-right-menu`
+
+> `yarn add vue-right-menu`
 
 <br>
 
