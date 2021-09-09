@@ -1,14 +1,39 @@
 {
   "name": "vue-right-menu",
-  "version": "1.0.3",
-  "description": "",
+  "version": "1.0.4",
+  "description": "一个基于vue2和vue3的右键菜单插件",
   "main": "index.js",
   "scripts": {
-    "package": "vue-cli-service build --target lib --name index --dest ./src/components/vue-right-menu/dist/ ./src/components/vue-right-menu/src/index.js"
+    "dev": "vue-cli-service serve",
+    "package": "vue-cli-service build --target lib --name RightMenu --dest ./dist/ ./src/index.js",
+    "docs": "vue-cli-service build --dest ./docss/",
+    "build": "npm run package && npm run docs",
+    "lint": "vue-cli-service lint"
   },
   "keywords": ["vue右键菜单插件"],
-  "author": "ldq <17778888138@189.cn>",
-  "license": "ISC",
+  "author": "ldq <ldq404@qq.com>",
+  "license": "MIT",
+  "files": [
+    "dist",
+    "index.js",
+    "package.json",
+    "README.md"
+  ],
+  "dependencies": {},
   "devDependencies": {
+    "core-js": "^3.6.5",
+    "vue": "^2.6.11",
+    "@vue/cli-plugin-babel": "~4.5.0",
+    "@vue/cli-plugin-eslint": "~4.5.0",
+    "@vue/cli-service": "~4.5.0",
+    "@vue/eslint-config-standard": "^5.1.2",
+    "babel-eslint": "^10.1.0",
+    "eslint": "^6.7.2",
+    "eslint-plugin-import": "^2.20.2",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-promise": "^4.2.1",
+    "eslint-plugin-standard": "^4.0.0",
+    "eslint-plugin-vue": "^6.2.2",
+    "vue-template-compiler": "^2.6.11"
   }
 }

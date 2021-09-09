@@ -1,4 +1,10 @@
-import ldq from './ldq.js'
+import {
+  getWidth,
+  getHeight,
+  getBottom,
+  getX,
+  getY
+} from './getInfo.js'
 
 const utils = {
   mask: {},
@@ -19,8 +25,8 @@ const utils = {
    */
   initMask: () => {
     utils.unMaskAndMenu()
-    let mask = document.createElement('div')
-    mask.id = 'ldq-mask'
+    const mask = document.createElement('div')
+    mask.id = 'vue-right-mask'
     mask.style.width = window.innerWidth + 'px'
     mask.style.height = window.innerHeight + 'px'
     mask.style.background = 'rgba(0, 0, 0, 0)'
@@ -69,11 +75,11 @@ const utils = {
    * 卸载遮罩层和菜单栏
    */
   unMaskAndMenu: () => {
-    const temp = document.getElementById('ldq-mask')
+    const temp = document.getElementById('vue-right-mask')
     if (temp) {
       temp.parentNode.removeChild(temp)
     }
-    const menuList = document.querySelectorAll('.ldq-menu')
+    const menuList = document.querySelectorAll('.vue-right-menu')
     menuList.forEach(item => {
       item.parentNode.removeChild(item)
     })
@@ -93,7 +99,7 @@ const utils = {
         default: return false
       }
     })
-    return new utils.DomIfy('ul', {class: 'ldq-menu'}, menuList).render()
+    return new utils.DomIfy('ul', { class: 'vue-right-menu' }, menuList).render()
   },
 
   _a: (opt) => {
@@ -102,18 +108,18 @@ const utils = {
       target: '_blank'
     }, [opt.title]).render()
     const li = new utils.DomIfy('li', {
-      class: 'ldq-menu-li ldq-menu-a'
+      class: 'vue-right-menu-li vue-right-menu-a'
     }, [a]).render()
     return li
   },
 
   _hr: (opt) => {
-    return new utils.DomIfy('li', {class: 'ldq-menu-hr'}).render()
+    return new utils.DomIfy('li', { class: 'vue-right-menu-hr' }).render()
   },
 
   _li: (opt) => {
     const li = new utils.DomIfy('li', {
-      class: 'ldq-menu-li' + (opt.disabled ? ' ldq-menu-disabled' : '')
+      class: 'vue-right-menu-li' + (opt.disabled ? ' vue-right-menu-disabled' : '')
     }, [opt.title]).render()
     if (!opt.disabled && opt.func) {
       li.addEventListener('click', e => {
@@ -126,7 +132,7 @@ const utils = {
 
   _ul: (opt) => {
     const li = new utils.DomIfy('li', {
-      class: 'ldq-menu-li ldq-menu-list' + (opt.disabled ? ' ldq-menu-disabled' : '')
+      class: 'vue-right-menu-li vue-right-menu-list' + (opt.disabled ? ' vue-right-menu-disabled' : '')
     }, [opt.title]).render()
     // 添加二级菜单
     if (!opt.disabled && opt.children) {
@@ -135,15 +141,15 @@ const utils = {
         li.appendChild(ul)
         ul.style.position = 'fixed'
         // 计算位置
-        let x = ldq.x(utils.menu) + ldq.width(utils.menu)
-        let y = ldq.y(li)
+        let x = getX(utils.menu) + getWidth(utils.menu)
+        const y = getY(li)
         if (window.innerWidth - x < ul.offsetWidth) {
-          x -= ldq.width(utils.menu) + ldq.width(ul)
+          x -= getWidth(utils.menu) + getWidth(ul)
         }
         if (window.innerHeight - y < ul.offsetHeight) {
-          ul.style.top = ldq.bottom(li) - ldq.height(ul) + 'px'
+          ul.style.top = getBottom(li) - getHeight(ul) + 'px'
         } else {
-          ul.style.top = ldq.y(li) + 'px'
+          ul.style.top = getY(li) + 'px'
         }
         ul.style.left = x + 'px'
       })
@@ -178,7 +184,7 @@ const utils = {
     render () {
       const el = document.createElement(this.tagName)
       // 循环添加属性
-      for (let key in this.attrs) {
+      for (const key in this.attrs) {
         el.setAttribute(key, this.attrs[key])
       }
       // 循环绑定事件

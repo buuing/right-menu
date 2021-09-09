@@ -1,17 +1,12 @@
-<meta charset="utf-8">
-<title>RightMenu demo</title>
+<template>
+  <div id="box" v-menu="items"></div>
+</template>
 
-<link rel="stylesheet" href="../src/index.css">
-<script src="https://cdn.bootcdn.net/ajax/libs/vue/2.6.10/vue.min.js"></script>
-<script src="./RightMenu.umd.js"></script>
-<div id="app">
-    <div v-menu="items">222</div>
-</div>
 <script>
-    new Vue({
-        el: '#app',
-        data: {
-            items: [
+export default {
+  data () {
+    return {
+      items: [
         {
           type: 'a', // type为a时可以点击跳转
           title: '百度一下',
@@ -64,6 +59,13 @@
         }
       ]
     }
-
-    })
+  }
+}
 </script>
+
+<style>
+  #box {
+    height: 500px;
+    background-color: #82acff;
+  }
+</style>
