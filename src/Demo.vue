@@ -1,12 +1,12 @@
 <template>
-  <div id="box" v-menu="items"></div>
+  <div v-menu="options" style="height: 300px; background-color: #82acff"></div>
 </template>
 
 <script>
 export default {
   data () {
     return {
-      items: [
+      options: [
         {
           type: 'a', // type为a时可以点击跳转
           title: '百度一下',
@@ -62,10 +62,3 @@ export default {
   }
 }
 </script>
-
-<style>
-  #box {
-    height: 500px;
-    background-color: #82acff;
-  }
-</style>

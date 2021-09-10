@@ -1,9 +1,8 @@
 import Vue from 'vue'
 import App from './Demo.vue'
-import RightMenu from './index.js'
-import './index.css'
+import rightMenu from './index.js'
 
-Vue.use(RightMenu)
+Vue.use(rightMenu)
 Vue.config.productionTip = false
 
 new Vue({
