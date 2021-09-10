@@ -20,9 +20,6 @@
   box-sizing: border-box;
   background-color: #e7e7e7;
   box-shadow: 0 2px 12px 0 rgba(0,0,0,.1);
-  -webkit-user-select:none;
-  -moz-user-select:none;
-  -ms-user-select:none;
   user-select:none;
   transition: 1s;
 }
@@ -39,7 +36,7 @@
   cursor: default;
   border-radius: 3px;
 }
-.vue-right-menu-li:hover, .vue-right-menu-a a:hover {
+.vue-right-menu-li:hover, .vue-right-menu-a:hover a {
   color: #fff;
   background-color: #69a2f9;
 }

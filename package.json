@@ -2,10 +2,10 @@
   "name": "vue-right-menu",
   "version": "1.0.4",
   "description": "一个基于vue2和vue3的右键菜单插件",
-  "main": "index.js",
+  "main": "dist/rightMenu.common.js",
   "scripts": {
     "dev": "vue-cli-service serve",
-    "pkg": "vue-cli-service build --target lib --name RightMenu --dest ./dist/ ./src/index.js",
+    "pkg": "vue-cli-service build --target lib --name rightMenu --dest ./dist/ ./src/index.js",
     "docs": "vue-cli-service build --dest ./docs/",
     "build": "npm run pkg",
     "lint": "vue-cli-service lint"

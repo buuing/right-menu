@@ -40,17 +40,23 @@ https://buuing.github.io/vue-right-menu/
 
 <br>
 
-## 安装
+## 使用 Usage
 
-> `npm install vue-right-menu`
+### 通过 `import` 使用
 
-> `yarn add vue-right-menu`
+1. 安装插件
 
-<br>
+```shell
+# 通过 npm 安装
+npm install vue-right-menu
 
-## 使用
+# 通过 yarn 安装
+yarn add vue-right-menu
+```
 
-安装完成后, 在`main.js`入口文件中添加如下代码
+2. 使用插件
+
+在 `main.js` 入口文件中添加代码
 
 ```js
 import rightMenu from 'vue-right-menu'
@@ -58,7 +64,59 @@ import rightMenu from 'vue-right-menu'
 Vue.use(rightMenu)
 ```
 
+在 `xxx.vue` 中使用
+
+```vue
+<template>
+  <div v-menu="options" style="height: 300px; background-color: #82acff"></div>
+</template>
+
+<script>
+export default {
+  data () {
+    return {
+      options: [{
+        type: 'li', // type为li是普通按钮
+        title: '复制(C)', // 按钮的名称
+        func: () => alert('点击了复制') // 回调函数
+      }]
+    }
+  }
+}
+</script>
+```
+
 <br>
+
+### 通过 `script` 标签使用
+
+- `CDN链接`: https://cdn.jsdelivr.net/npm/vue-right-menu/dist/rightMenu.umd.min.js
+
+```html
+<div id="#app">
+  <div v-menu="options" style="height: 300px; background-color: #82acff"></div>
+</div>
+<script src="https://cdn.bootcdn.net/ajax/libs/vue/2.6.9/vue.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/vue-right-menu/dist/rightMenu.umd.min.js"></script>
+<script>
+  new Vue({
+    el: '#app',
+    data () {
+      return {
+        options: [{
+          type: 'li', // type为li是普通按钮
+          title: '复制(C)', // 按钮的名称
+          func: () => alert('点击了复制') // 回调函数
+        }]
+      }
+    }
+  })
+</script>
+```
+
+<br>
+
+## 插件选项
 
 给对应的元素添加`v-menu`的指令, 菜单栏的内容以及回调函数可以自定义
 
@@ -73,18 +131,18 @@ Vue.use(rightMenu)
 
 <br>
 
-## 示例
+## 完整示例
 
 ```html
 <template>
-  <div id="ldq" v-menu="items"></div>
+  <div v-menu="options" style="height: 300px; background-color: #82acff"></div>
 </template>
 
 <script>
 export default {
   data () {
     return {
-      items: [
+      options: [
         {
           type: 'a', // type为a时可以点击跳转
           title: '百度一下',
@@ -140,24 +198,17 @@ export default {
   }
 }
 </script>
-
-<style>
-  #ldq {
-    height: 500px;
-    background-color: #82acff;
-  }
-</style>
 ```
 
 ## 更新计划
 
 - [x] 当前组件增加对vue3的支持
 - [ ] 目前最多支持二级菜单, 后续增加三级菜单 / 多级菜单的逻辑
-- [ ] 把css样式和js逻辑打包到一个umd包里面, 以便于`script`标签引入
+- [x] 把css样式和js逻辑打包到一个umd包里面, 以便于`script`标签引入
 - [ ] 搭建官网文档详细描述插件如何引入和使用
 - [ ] 增加不同的主题样式: mac / win7 / win10 / win11
 - [ ] 增加内置图标
 
 ## 友情链接
 
-- ...
+> ...

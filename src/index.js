@@ -1,4 +1,5 @@
 import utils from './utils'
+import './style/index.css'
 
 function init (el, binding, vnode) {
   // 注册鼠标右击事件
