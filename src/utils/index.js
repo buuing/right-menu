@@ -29,20 +29,10 @@ const utils = {
     mask.id = 'vue-right-mask'
     mask.style.width = window.innerWidth + 'px'
     mask.style.height = window.innerHeight + 'px'
-    mask.style.background = 'rgba(0, 0, 0, 0)'
-    mask.style.position = 'fixed'
-    mask.style.left = 0 + 'px'
-    mask.style.top = 0 + 'px'
-    mask.style.zIndex = 9999998
     document.body.appendChild(mask)
     utils.mask = mask
-    mask.addEventListener('click', e => {
-      utils.unMaskAndMenu()
-    })
-    mask.addEventListener('contextmenu', e => {
-      utils.unMaskAndMenu()
-      e.preventDefault ? e.preventDefault() : window.event.returnValue = false
-    })
+    document.addEventListener('mousedown', utils.unMaskAndMenu)
+    document.addEventListener('contextmenu', utils.unMaskAndMenu)
   },
 
   /**
@@ -65,6 +55,7 @@ const utils = {
     menu.style.left = x + 'px'
     menu.style.top = y + 'px'
     menu.addEventListener('contextmenu', e => {
+      console.log(555)
       utils.unMaskAndMenu()
       e.preventDefault ? e.preventDefault() : window.event.returnValue = false
     })
@@ -99,30 +90,30 @@ const utils = {
         default: return false
       }
     })
-    return new utils.DomIfy('ul', { class: 'vue-right-menu' }, menuList).render()
+    return new utils.NewDom('ul', { class: 'vue-right-menu' }, menuList).render()
   },
 
   _a: (opt) => {
-    const a = new utils.DomIfy('a', {
+    const a = new utils.NewDom('a', {
       href: opt.href,
       target: '_blank'
     }, [opt.title]).render()
-    const li = new utils.DomIfy('li', {
+    const li = new utils.NewDom('li', {
       class: 'vue-right-menu-li vue-right-menu-a'
     }, [a]).render()
     return li
   },
 
   _hr: (opt) => {
-    return new utils.DomIfy('li', { class: 'vue-right-menu-hr' }).render()
+    return new utils.NewDom('li', { class: 'vue-right-menu-hr' }).render()
   },
 
   _li: (opt) => {
-    const li = new utils.DomIfy('li', {
+    const li = new utils.NewDom('li', {
       class: 'vue-right-menu-li' + (opt.disabled ? ' vue-right-menu-disabled' : '')
     }, [opt.title]).render()
     if (!opt.disabled && opt.func) {
-      li.addEventListener('click', e => {
+      li.addEventListener('mousedown', e => {
         opt.func(e, utils.el)
         utils.unMaskAndMenu()
       })
@@ -131,7 +122,7 @@ const utils = {
   },
 
   _ul: (opt) => {
-    const li = new utils.DomIfy('li', {
+    const li = new utils.NewDom('li', {
       class: 'vue-right-menu-li vue-right-menu-list' + (opt.disabled ? ' vue-right-menu-disabled' : '')
     }, [opt.title]).render()
     // 添加二级菜单
@@ -141,15 +132,15 @@ const utils = {
         li.appendChild(ul)
         ul.style.position = 'fixed'
         // 计算位置
-        let x = getX(utils.menu) + getWidth(utils.menu)
+        let x = getX(utils.menu) + getWidth(utils.menu) - 5
         const y = getY(li)
         if (window.innerWidth - x < ul.offsetWidth) {
-          x -= getWidth(utils.menu) + getWidth(ul)
+          x -= getWidth(utils.menu) + getWidth(ul) - 10
         }
         if (window.innerHeight - y < ul.offsetHeight) {
-          ul.style.top = getBottom(li) - getHeight(ul) + 'px'
+          ul.style.top = getBottom(li) - getHeight(ul) + 5 + 'px'
         } else {
-          ul.style.top = getY(li) + 'px'
+          ul.style.top = getY(li) - 5 + 'px'
         }
         ul.style.left = x + 'px'
       })
@@ -167,7 +158,7 @@ const utils = {
     return li
   },
 
-  DomIfy: class DomIfy {
+  NewDom: class NewDom {
     /**
      * 渲染dom
      * @param { String } [ tagName = 'ul' ] 元素名称

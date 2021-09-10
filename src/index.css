@@ -1,42 +1,55 @@
+#vue-right-mask {
+  background: rgba(0, 0, 0, 0);
+  position: fixed;
+  left: 0;
+  top: 0;
+  z-index: 9999998;
+  pointer-events: none;
+}
 .vue-right-menu {
   width: 160px;
-  font-size: 14px;
+  font-size: 13px;
   margin: 0;
-  padding: 5px 0;
+  color: #222;
+  padding: 5px 4px;
   z-index: 9999999;
   position: fixed;
   display: block;
-  border: 0.3px solid #aaa;
-  border-radius: 3px;
+  border: 0.5px solid #cdcdcd;
+  border-radius: 5px;
   box-sizing: border-box;
-  background-color: #fff;
+  background-color: #e7e7e7;
   box-shadow: 0 2px 12px 0 rgba(0,0,0,.1);
   -webkit-user-select:none;
   -moz-user-select:none;
   -ms-user-select:none;
   user-select:none;
+  transition: 1s;
 }
 .vue-right-menu li {
   list-style: none;
 }
 .vue-right-menu-hr {
-  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  border-bottom: 1px solid #cdcdcd;
   padding: 0;
-  margin: 5px 0;
+  margin: 5px 8px;
 }
 .vue-right-menu-li {
-  padding: 3px 10px;
+  padding: 3px 8px;
   cursor: default;
+  border-radius: 3px;
 }
-.vue-right-menu-li:hover {
-  background-color: #409eff;
+.vue-right-menu-li:hover, .vue-right-menu-a a:hover {
+  color: #fff;
+  background-color: #69a2f9;
 }
 .vue-right-menu-disabled {
-  color: rgba(0, 0, 0, 0.6);
+  color: #a8a8a8;
   cursor: not-allowed;
 }
 .vue-right-menu-disabled:hover {
-  background-color: #fff;
+  color: #a8a8a8;
+  background-color: #e7e7e7;
 }
 .vue-right-menu-a {
   cursor: pointer;
@@ -49,12 +62,10 @@
   text-decoration: none;
 }
 .vue-right-menu-list::after {
-  content: '>';
-  font-family: 宋体;
+  content: '▸';
   font-weight: 600;
   float: right;
-  margin-top: 2px;
-  margin-right: -5px;
+  margin-right: -8px;
   width: 15px;
   height: 15px;
 }

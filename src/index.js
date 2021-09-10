@@ -8,7 +8,7 @@ const install = (Vue, options) => {
         // 阻止默认事件和冒泡
         utils.preventDefault(e)
         // 初始化遮罩层
-        // utils.initMask(el)
+        utils.initMask(el)
         // 初始化菜单栏
         utils.initMenu(binding.value, el, e)
       })
