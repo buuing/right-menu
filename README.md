@@ -92,7 +92,7 @@ export default {
 - `CDN链接`: https://cdn.jsdelivr.net/npm/vue-right-menu/dist/rightMenu.umd.min.js
 
 ```html
-<div id="#app">
+<div id="app">
   <div v-menu="options" style="height: 300px; background-color: #82acff"></div>
 </div>
 
