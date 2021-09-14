@@ -1,10 +1,4 @@
-import {
-  getWidth,
-  getHeight,
-  getBottom,
-  getX,
-  getY
-} from './getInfo.js'
+import { getWidth, getHeight, getBottom, getX, getY } from './getInfo.js'
 
 const utils = {
   mask: {},
@@ -55,11 +49,9 @@ const utils = {
     menu.style.left = x + 'px'
     menu.style.top = y + 'px'
     menu.addEventListener('contextmenu', e => {
-      console.log(555)
       utils.unMaskAndMenu()
       e.preventDefault ? e.preventDefault() : window.event.returnValue = false
     })
-    // console.log(menu)
   },
 
   /**
@@ -90,31 +82,32 @@ const utils = {
         default: return false
       }
     })
-    return new utils.NewDom('ul', { class: 'vue-right-menu' }, menuList).render()
+    const res = new utils.NewDom('ul', { class: 'vue-right-menu' }, menuList).render()
+    return res
   },
 
   _a: (opt) => {
     const a = new utils.NewDom('a', {
       href: opt.href,
       target: '_blank'
-    }, [opt.title]).render()
+    }, [opt.text]).render()
     const li = new utils.NewDom('li', {
-      class: 'vue-right-menu-li vue-right-menu-a'
+      class: 'menu-li menu-a'
     }, [a]).render()
     return li
   },
 
   _hr: (opt) => {
-    return new utils.NewDom('li', { class: 'vue-right-menu-hr' }).render()
+    return new utils.NewDom('li', { class: 'menu-hr' }).render()
   },
 
   _li: (opt) => {
     const li = new utils.NewDom('li', {
-      class: 'vue-right-menu-li' + (opt.disabled ? ' vue-right-menu-disabled' : '')
-    }, [opt.title]).render()
-    if (!opt.disabled && opt.func) {
+      class: (opt.disabled ? ' menu-disabled' : '')
+    }, [opt.text]).render()
+    if (!opt.disabled && opt.callback) {
       li.addEventListener('mousedown', e => {
-        opt.func(e, utils.el)
+        opt.callback(e, utils.el)
         utils.unMaskAndMenu()
       })
     }
@@ -123,8 +116,8 @@ const utils = {
 
   _ul: (opt) => {
     const li = new utils.NewDom('li', {
-      class: 'vue-right-menu-li vue-right-menu-list' + (opt.disabled ? ' vue-right-menu-disabled' : '')
-    }, [opt.title]).render()
+      class: 'menu-list' + (opt.disabled ? ' menu-disabled' : '')
+    }, [opt.text]).render()
     // 添加二级菜单
     if (!opt.disabled && opt.children) {
       const ul = utils.render(opt.children)
