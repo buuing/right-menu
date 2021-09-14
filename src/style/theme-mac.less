@@ -14,26 +14,21 @@
     line-height: 18px;
     padding: 2.5px 8px;
     border-radius: 3px;
-  }
-  .menu-hr {
-    border-bottom: 1px solid #cdcdcd;
-    padding: 0;
-    margin: 5px 8px;
-  }
-  li:hover, .menu-a:hover a {
-    color: #fff;
-    background-color: #69a2f9;
-  }
-  .menu-disabled {
-    color: #a8a8a8;
     &:hover {
-      color: #a8a8a8;
-      background-color: #e7e7e7;
+      color: #fff;
+      background-color: #69a2f9;
     }
-  }
-  .menu-a {
-    a {
-      color: #222;
+    &.menu-hr {
+      border-bottom: 1px solid #cdcdcd;
+      padding: 0;
+      margin: 5px 8px;
+    }
+    &.menu-disabled {
+      color: #a8a8a8;
+      &:hover {
+        color: #a8a8a8;
+        background-color: #e7e7e7;
+      }
     }
   }
 }

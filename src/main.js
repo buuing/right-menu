@@ -1,76 +1,58 @@
 import Vue from 'vue'
 import App from './Demo.vue'
 import rightMenu from './index.js'
+import { name, version } from '../package.json'
 
 Vue.config.productionTip = false
 Vue.use(rightMenu, (event, options) => {
   return [
-    {
-      type: 'li',
-      text: '在新标签页中打开链接',
-      callback: () => console.log('在新标签页中打开链接')
-    },
-    {
-      type: 'li',
-      text: '在新窗口中打开链接',
-      callback: () => console.log('在新窗口中打开链接')
-    },
-    {
-      type: 'li',
-      text: '在隐身窗口中打开链接',
-      disabled: true
-    },
+    ...options,
     { type: 'hr' },
-    {
-      type: 'li',
-      text: '链接存储为',
-      disabled: true
-    },
-    {
-      type: 'li',
-      text: '复制链接地址',
-      disabled: true
-    },
-    { type: 'hr' },
-    {
-      type: 'li',
-      text: '复制',
-      disabled: true
-    },
     {
       type: 'ul',
-      text: '排序方式',
+      text: '关于',
       children: [
         {
           type: 'li',
-          text: '名称'
-        },
-        {
-          type: 'li',
-          text: '时间',
+          text: `${name} ${version}`,
           disabled: true
         },
         { type: 'hr' },
         {
           type: 'li',
-          text: '标签',
+          text: 'Github 仓库',
+          callback: () => window.open('https://github.com/buuing/vue-right-menu')
+        },
+        {
+          type: 'li',
+          text: 'Bug 反馈',
+          callback: () => window.open('https://github.com/buuing/vue-right-menu/issues/new')
+        },
+        { type: 'hr' },
+        {
+          type: 'li',
+          text: '入门教程',
           disabled: true
+        },
+        {
+          type: 'li',
+          text: '高级配置',
+          disabled: true
+        },
+        { type: 'hr' },
+        {
+          type: 'li',
+          text: '查看历史更新',
+          disabled: true
+        },
+        { type: 'hr' },
+        {
+          type: 'li',
+          text: '📋 开源协议 License MIT',
+          callback: () => window.open('https://github.com/buuing/vue-right-menu/blob/master/LICENSE')
         }
       ]
-    },
-    { type: 'hr' },
-    {
-      type: 'li',
-      text: '显示网页源代码',
-      disabled: true
-    },
-    {
-      type: 'li',
-      text: '检查',
-      disabled: true
-    },
-    { type: 'hr' },
-    ...options
+    }
   ]
 })
 
