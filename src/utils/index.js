@@ -75,7 +75,6 @@ const utils = {
     const menuList = []
     options.forEach(item => {
       switch (item.type) {
-        case 'a': menuList.push(utils._a(item)); break
         case 'hr': menuList.push(utils._hr(item)); break
         case 'li': menuList.push(utils._li(item)); break
         case 'ul': menuList.push(utils._ul(item)); break
@@ -84,17 +83,6 @@ const utils = {
     })
     const res = new utils.NewDom('ul', { class: 'vue-right-menu' }, menuList).render()
     return res
-  },
-
-  _a: (opt) => {
-    const a = new utils.NewDom('a', {
-      href: opt.href,
-      target: '_blank'
-    }, [opt.text]).render()
-    const li = new utils.NewDom('li', {
-      class: 'menu-li menu-a'
-    }, [a]).render()
-    return li
   },
 
   _hr: (opt) => {

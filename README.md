@@ -150,7 +150,6 @@ export default {
 
 | 参数选项  | type | text | href | callback | disabled | children | class | icon |
 | :-:      | :-:  | :-:  | :-:  |    :-:   |   :-:    |    :-:   |  :-:  | :-:  |
-| a链接     |  a   |  √   |  √   |    ×     |   √      |    ×     |   -   |  -   |
 | 普通按钮   |  li  |  √   |  ×   |    ×     |   √      |    ×     |   -   |  -   |
 | 二级菜单   |  ul  |  √   |  ×   |    √     |   √      |    √     |   -   |  -   |
 | 分割线     |  hr  |  ×   |  ×   |    ×     |   ×      |    ×     |   -   |  -   |
@@ -179,10 +178,6 @@ export default {
     return {
       options: [
         {
-          type: 'a', // type为a时可以点击跳转
-          title: '百度一下',
-          href: 'http://www.baidu.com'
-        }, {
           type: 'li', // type为li是普通按钮
           title: '复制(C)', // 按钮的名称
           func: () => alert('点击了复制') // 回调函数
@@ -257,10 +252,6 @@ export default {
     return {
       options: [
         {
-          type: 'a', // type为a时可以点击跳转
-          text: '百度一下',
-          href: 'http://www.baidu.com'
-        }, {
           type: 'li', // type为li是普通按钮
           text: '复制(C)', // 按钮的名称
           callback: () => alert('点击了复制') // 回调函数
