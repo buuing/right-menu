@@ -1,7 +1,6 @@
 import { getWidth, getHeight, getBottom, getX, getY } from './getInfo.js'
 
 const state = {
-  mask: {},
   menu: {},
   el: null
 }
@@ -9,6 +8,7 @@ const state = {
 /**
  * 阻止默认事件和冒泡
  * @param { Event } e 事件参数
+ * @return { void }
  */
 export const preventDefault = e => {
   // 阻止冒泡
@@ -18,24 +18,16 @@ export const preventDefault = e => {
 }
 
 /**
- * 初始化遮罩层
- */
-export const initMask = () => {
-  unMaskAndMenu()
-  const mask = document.createElement('div')
-  mask.id = 'vue-right-mask'
-  mask.style.width = window.innerWidth + 'px'
-  mask.style.height = window.innerHeight + 'px'
-  document.body.appendChild(mask)
-  state.mask = mask
-  document.addEventListener('mousedown', unMaskAndMenu)
-  document.addEventListener('contextmenu', unMaskAndMenu)
-}
-
-/**
  * 初始化菜单栏
+ * @param { Promise<object[]> | object[]} thenable 菜单列表
+ * @param { HTMLDivElement } el 绑定指令的元素
+ * @param { Event } e 事件参数
+ * @return { void }
  */
-export const initMenu = (options, el, e) => {
+export const initMenu = async (thenable, el, e) => {
+  console.log(el)
+  const options = await Promise.resolve(thenable)
+  destroyMenu()
   const menu = renderMenu(options)
   state.menu = menu
   state.el = el
@@ -52,19 +44,15 @@ export const initMenu = (options, el, e) => {
   menu.style.left = x + 'px'
   menu.style.top = y + 'px'
   menu.addEventListener('contextmenu', e => {
-    unMaskAndMenu()
-    e.preventDefault ? e.preventDefault() : window.event.returnValue = false
+    // destroyMenu()
+    preventDefault(e)
   })
 }
 
 /**
- * 卸载遮罩层和菜单栏
+ * 销毁菜单栏
  */
-const unMaskAndMenu = () => {
-  const temp = document.getElementById('vue-right-mask')
-  if (temp) {
-    temp.parentNode.removeChild(temp)
-  }
+const destroyMenu = () => {
   const menuList = document.querySelectorAll('.vue-right-menu')
   menuList.forEach(item => {
     item.parentNode.removeChild(item)
@@ -99,7 +87,7 @@ const _li = opt => {
   if (!opt.disabled && opt.callback) {
     li.addEventListener('mousedown', e => {
       opt.callback(e, state.el)
-      unMaskAndMenu()
+      destroyMenu()
     })
   }
   return li
@@ -135,9 +123,6 @@ const _ul = opt => {
         }
       }
     })
-    // state.mask.addEventListener('mouseover', e => {
-    //   li.removeChild(ul)
-    // })
   }
   return li
 }

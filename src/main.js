@@ -3,8 +3,11 @@ import App from './Demo.vue'
 import rightMenu from './index.js'
 import { name, version } from '../package.json'
 
+const sleep = (wait) => new Promise(resolve => setTimeout(resolve, wait))
+sleep()
 Vue.config.productionTip = false
-Vue.use(rightMenu, (event, options) => {
+Vue.use(rightMenu, async (event, options) => {
+  await sleep(500)
   return [
     ...options,
     { type: 'hr' },
@@ -21,7 +24,7 @@ Vue.use(rightMenu, (event, options) => {
         {
           type: 'li',
           text: 'Github 仓库',
-          callback: () => window.open('https://github.com/buuing/vue-right-menu')
+          callback: async () => window.open('https://github.com/buuing/vue-right-menu')
         },
         {
           type: 'li',

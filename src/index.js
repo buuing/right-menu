@@ -1,4 +1,4 @@
-import { preventDefault, initMask, initMenu } from './utils'
+import { preventDefault, initMenu } from './utils'
 import './style/index.less'
 import './style/theme-mac.less'
 
@@ -7,8 +7,6 @@ function init (el, binding, options) {
   el.addEventListener('contextmenu', e => {
     // 阻止默认事件和冒泡
     preventDefault(e)
-    // 初始化遮罩层
-    initMask(el)
     // 初始化菜单栏
     let res = []
     if (typeof options === 'function') {
