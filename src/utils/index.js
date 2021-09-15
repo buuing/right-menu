@@ -36,7 +36,7 @@ export const initMask = () => {
  * 初始化菜单栏
  */
 export const initMenu = (options, el, e) => {
-  const menu = render(options)
+  const menu = renderMenu(options)
   state.menu = menu
   state.el = el
   document.body.appendChild(menu)
@@ -74,7 +74,7 @@ const unMaskAndMenu = () => {
 /**
  * 渲染菜单栏
  */
-const render = (options) => {
+const renderMenu = (options) => {
   const menuList = []
   options.forEach(item => {
     switch (item.type) {
@@ -84,16 +84,16 @@ const render = (options) => {
       default: return console.error('未知的 type 类型: ' + item.type)
     }
   })
-  const res = new NewDom('ul', { class: 'vue-right-menu' }, menuList).render()
+  const res = new CreateDom('ul', { class: 'vue-right-menu' }, menuList).render()
   return res
 }
 
-const _hr = (opt) => {
-  return new NewDom('li', { class: 'menu-hr' }).render()
+const _hr = opt => {
+  return new CreateDom('li', { class: 'menu-hr' }).render()
 }
 
-const _li = (opt) => {
-  const li = new NewDom('li', {
+const _li = opt => {
+  const li = new CreateDom('li', {
     class: (opt.disabled ? ' menu-disabled' : '')
   }, [opt.text]).render()
   if (!opt.disabled && opt.callback) {
@@ -105,13 +105,13 @@ const _li = (opt) => {
   return li
 }
 
-const _ul = (opt) => {
-  const li = new NewDom('li', {
+const _ul = opt => {
+  const li = new CreateDom('li', {
     class: 'menu-list' + (opt.disabled ? ' menu-disabled' : '')
   }, [opt.text]).render()
   // 添加二级菜单
   if (!opt.disabled && opt.children) {
-    const ul = render(opt.children)
+    const ul = renderMenu(opt.children)
     li.addEventListener('mouseover', e => {
       li.appendChild(ul)
       ul.style.position = 'fixed'
@@ -142,7 +142,7 @@ const _ul = (opt) => {
   return li
 }
 
-class NewDom {
+class CreateDom {
   /**
    * 渲染dom
    * @param { String } [ tagName = 'ul' ] 元素名称
