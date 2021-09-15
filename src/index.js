@@ -1,4 +1,4 @@
-import utils from './utils'
+import { preventDefault, initMenu } from './utils'
 import './style/index.less'
 import './style/theme-mac.less'
 
@@ -6,9 +6,7 @@ function init (el, binding, options) {
   // 注册鼠标右击事件
   el.addEventListener('contextmenu', e => {
     // 阻止默认事件和冒泡
-    utils.preventDefault(e)
-    // 初始化遮罩层
-    utils.initMask(el)
+    preventDefault(e)
     // 初始化菜单栏
     let res = []
     if (typeof options === 'function') {
@@ -16,7 +14,7 @@ function init (el, binding, options) {
     } else {
       res = binding.value
     }
-    utils.initMenu(res, el, e)
+    initMenu(res, el, e)
   })
 }
 

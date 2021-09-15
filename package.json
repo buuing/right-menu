@@ -8,9 +8,12 @@
     "pkg": "vue-cli-service build --target lib --name rightMenu --dest ./dist/ ./src/index.js",
     "docs": "vue-cli-service build --dest ./docs/",
     "build": "npm run pkg",
-    "lint": "vue-cli-service lint"
+    "lint": "vue-cli-service lint",
+    "postinstall": "node ./postinstall.js"
   },
-  "keywords": ["vue右键菜单插件"],
+  "keywords": [
+    "vue右键菜单插件"
+  ],
   "author": "ldq <ldq404@qq.com>",
   "license": "MIT",
   "files": [
