@@ -314,6 +314,7 @@ export default {
   <tr>
     <td align="center"><a href="https://github.com/buuing" target="_blank"><img width="50px" src="https://avatars.githubusercontent.com/u/36689704"></a><div><span title="核心开发">🤖</span> <span title="修复bug">🚧</span> <span title="维护文档">📚</span></div></td>
     <td align="center"><a href="https://github.com/dora1995" target="_blank"><img width="50px" src="https://avatars.githubusercontent.com/u/53267289"></a><div>-</div></td>
+    <td align="center"><a href="https://github.com/yushen7" target="_blank"><img width="50px" src="https://avatars.githubusercontent.com/u/35678187"></a><div>-</div></td>
   </tr>
 </table>
 
@@ -326,15 +327,16 @@ export default {
 - [x] `v2.0.0 新增` ~把css样式和js逻辑打包到一个umd包里面, 以便于`script`标签引入~
 - [x] `v2.0.1 新增` ~点击非窗口区域时, 看看能不能监听到然后关闭菜单~
 - [x] `v2.0.1 新增` ~尝试支持`Vue.use(rightMenu, async () => [])`异步返回~
-- [ ] `进行中` *菜单的宽度根据文字长度做到自适应*
+- [ ] `进行中` 菜单的宽度根据文字长度做到自适应
+- [ ] `进行中` 目前最多支持二级菜单, 后续增加三级菜单 / 多级菜单的逻辑
+- [ ] `已预定` 增加初始化高级配置, 可以设置一些全局的选项, 以及菜单创建的生命周期
 - [ ] **增加不同的主题样式: mac / win7 / win10, 看看能不能根据系统自动切换主题**
 - [ ] **自适应系统的主题色 (mac的暗黑模式)**
 - [ ] **浏览器放大之后, 看看能否保持跟系统菜单同样的大小**
 - [ ] **增加class选项, 可以给当前标签添加类样式**
 - [ ] **增加icon选项, 可以使用一些内置图标, 图片待定**
-- [ ] 增加初始化高级配置, 可以设置一些全局的选项, 以及菜单创建的生命周期
-- [ ] 目前最多支持二级菜单, 后续增加三级菜单 / 多级菜单的逻辑
-- [ ] 看看能否对外暴露一个作用域插槽或者是render函数, 来渲染jsx?
+- [ ] **看看能否对外暴露一个作用域插槽或者是render函数, 来渲染jsx?**
+- [ ] **看看react里是否可以像vue一样通过自定义指令的方式来使用插件, 最好统一一下这俩框架的用法**
 
 <br />
 
