@@ -7,7 +7,7 @@ const sleep = (wait) => new Promise(resolve => setTimeout(resolve, wait))
 sleep()
 Vue.config.productionTip = false
 Vue.use(rightMenu, async (event, options) => {
-  await sleep(500)
+  await sleep(50)
   return [
     ...options,
     { type: 'hr' },

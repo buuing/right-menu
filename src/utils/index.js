@@ -25,7 +25,6 @@ export const preventDefault = e => {
  * @return { void }
  */
 export const initMenu = async (thenable, el, e) => {
-  console.log(el)
   const options = await Promise.resolve(thenable)
   destroyMenu()
   const menu = renderMenu(options)
@@ -43,10 +42,23 @@ export const initMenu = async (thenable, el, e) => {
   }
   menu.style.left = x + 'px'
   menu.style.top = y + 'px'
+  window.removeEventListener('blur', destroyMenu)
+  window.addEventListener('blur', destroyMenu)
+  document.removeEventListener('click', clickPage)
+  document.addEventListener('click', clickPage)
   menu.addEventListener('contextmenu', e => {
     // destroyMenu()
     preventDefault(e)
   })
+}
+
+/**
+ * 点击页面时销毁菜单栏
+ * @param { Event } e 事件参数
+ */
+const clickPage = e => {
+  const hasMenu = e?.path?.some(node => node === state.menu)
+  if (!hasMenu) destroyMenu()
 }
 
 /**
