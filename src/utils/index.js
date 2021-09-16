@@ -26,6 +26,7 @@ export const preventDefault = e => {
  */
 export const initMenu = async (thenable, el, e) => {
   const options = await Promise.resolve(thenable)
+  // 先移除之前的菜单（若有）
   destroyMenu()
   const menu = renderMenu(options)
   state.menu = menu
@@ -42,12 +43,13 @@ export const initMenu = async (thenable, el, e) => {
   }
   menu.style.left = x + 'px'
   menu.style.top = y + 'px'
-  window.removeEventListener('blur', destroyMenu)
+  // 添加浏览器失焦响应
   window.addEventListener('blur', destroyMenu)
-  document.removeEventListener('click', clickPage)
+  // 添加浏览器窗口调整响应
+  window.addEventListener('resize', destroyMenu)
   document.addEventListener('click', clickPage)
+  // 防止菜单组件里点出系统菜单
   menu.addEventListener('contextmenu', e => {
-    // destroyMenu()
     preventDefault(e)
   })
 }
@@ -66,9 +68,20 @@ const clickPage = e => {
  */
 const destroyMenu = () => {
   const menuList = document.querySelectorAll('.vue-right-menu')
-  menuList.forEach(item => {
-    item.parentNode.removeChild(item)
-  })
+  if (menuList.length) {
+    menuList.forEach(item => {
+      item.parentNode.removeChild(item)
+    })
+  }
+  // 在已有菜单的情况下才进行清除
+  if (state.menu) {
+    // 移除菜单后把监听事件移除，以免事件仍在激活状态
+    window.removeEventListener('blur', destroyMenu)
+    window.removeEventListener('resize', destroyMenu)
+    document.removeEventListener('click', clickPage)
+  }
+  state.el = null
+  state.menu = null
 }
 
 /**
