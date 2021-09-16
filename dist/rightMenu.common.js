@@ -849,30 +849,6 @@ module.exports = function (it) {
 
 /***/ }),
 
-/***/ "37e8":
-/***/ (function(module, exports, __webpack_require__) {
-
-var DESCRIPTORS = __webpack_require__("83ab");
-var definePropertyModule = __webpack_require__("9bf2");
-var anObject = __webpack_require__("825a");
-var objectKeys = __webpack_require__("df75");
-
-// `Object.defineProperties` method
-// https://tc39.es/ecma262/#sec-object.defineproperties
-// eslint-disable-next-line es/no-object-defineproperties -- safe
-module.exports = DESCRIPTORS ? Object.defineProperties : function defineProperties(O, Properties) {
-  anObject(O);
-  var keys = objectKeys(Properties);
-  var length = keys.length;
-  var index = 0;
-  var key;
-  while (length > index) definePropertyModule.f(O, key = keys[index++], Properties[key]);
-  return O;
-};
-
-
-/***/ }),
-
 /***/ "3bbe":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -883,44 +859,6 @@ module.exports = function (it) {
     throw TypeError("Can't set " + String(it) + ' as a prototype');
   } return it;
 };
-
-
-/***/ }),
-
-/***/ "3ca3":
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-var charAt = __webpack_require__("6547").charAt;
-var toString = __webpack_require__("577e");
-var InternalStateModule = __webpack_require__("69f3");
-var defineIterator = __webpack_require__("7dd0");
-
-var STRING_ITERATOR = 'String Iterator';
-var setInternalState = InternalStateModule.set;
-var getInternalState = InternalStateModule.getterFor(STRING_ITERATOR);
-
-// `String.prototype[@@iterator]` method
-// https://tc39.es/ecma262/#sec-string.prototype-@@iterator
-defineIterator(String, 'String', function (iterated) {
-  setInternalState(this, {
-    type: STRING_ITERATOR,
-    string: toString(iterated),
-    index: 0
-  });
-// `%StringIteratorPrototype%.next` method
-// https://tc39.es/ecma262/#sec-%stringiteratorprototype%.next
-}, function next() {
-  var state = getInternalState(this);
-  var string = state.string;
-  var index = state.index;
-  var point;
-  if (index >= string.length) return { value: undefined, done: true };
-  point = charAt(string, index);
-  state.index += point.length;
-  return { value: point, done: false };
-});
 
 
 /***/ }),
@@ -1347,56 +1285,6 @@ module.exports = {
 
 /***/ }),
 
-/***/ "4df4":
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-var bind = __webpack_require__("0366");
-var toObject = __webpack_require__("7b0b");
-var callWithSafeIterationClosing = __webpack_require__("9bdd");
-var isArrayIteratorMethod = __webpack_require__("e95a");
-var toLength = __webpack_require__("50c4");
-var createProperty = __webpack_require__("8418");
-var getIterator = __webpack_require__("9a1f");
-var getIteratorMethod = __webpack_require__("35a1");
-
-// `Array.from` method implementation
-// https://tc39.es/ecma262/#sec-array.from
-module.exports = function from(arrayLike /* , mapfn = undefined, thisArg = undefined */) {
-  var O = toObject(arrayLike);
-  var C = typeof this == 'function' ? this : Array;
-  var argumentsLength = arguments.length;
-  var mapfn = argumentsLength > 1 ? arguments[1] : undefined;
-  var mapping = mapfn !== undefined;
-  var iteratorMethod = getIteratorMethod(O);
-  var index = 0;
-  var length, result, step, iterator, next, value;
-  if (mapping) mapfn = bind(mapfn, argumentsLength > 2 ? arguments[2] : undefined, 2);
-  // if the target is not iterable or it's an array with the default iterator - use a simple case
-  if (iteratorMethod != undefined && !(C == Array && isArrayIteratorMethod(iteratorMethod))) {
-    iterator = getIterator(O, iteratorMethod);
-    next = iterator.next;
-    result = new C();
-    for (;!(step = next.call(iterator)).done; index++) {
-      value = mapping ? callWithSafeIterationClosing(iterator, mapfn, [step.value, index], true) : step.value;
-      createProperty(result, index, value);
-    }
-  } else {
-    length = toLength(O.length);
-    result = new C(length);
-    for (;length > index; index++) {
-      value = mapping ? mapfn(O[index], index) : O[index];
-      createProperty(result, index, value);
-    }
-  }
-  result.length = index;
-  return result;
-};
-
-
-/***/ }),
-
 /***/ "50c4":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -1462,15 +1350,16 @@ module.exports = getBuiltIn('Reflect', 'ownKeys') || function ownKeys(it) {
 
 /***/ }),
 
-/***/ "577e":
+/***/ "5978":
 /***/ (function(module, exports, __webpack_require__) {
 
-var isSymbol = __webpack_require__("d9b5");
-
-module.exports = function (argument) {
-  if (isSymbol(argument)) throw TypeError('Cannot convert a Symbol value to a string');
-  return String(argument);
-};
+// Imports
+var ___CSS_LOADER_API_IMPORT___ = __webpack_require__("24fb");
+exports = ___CSS_LOADER_API_IMPORT___(false);
+// Module
+exports.push([module.i, ".vue-right-menu{min-width:260px;max-width:500px;color:#202124;font-size:14px;margin:0;padding:5px 0;border:.5px solid #dadce0;border-radius:0;background-color:#fff;box-shadow:0 2px 12px 0 rgba(0,0,0,.1);letter-spacing:.5px}.vue-right-menu li{line-height:18px;padding:7px 40px;border-radius:0}.vue-right-menu li:hover{color:#202124;background-color:#e8e8e9}.vue-right-menu li.menu-hr{border-bottom:1px solid #dadce0;padding:0;margin:5px 0}.vue-right-menu li.menu-disabled{color:#ccc}.vue-right-menu li.menu-disabled:hover{color:#ccc;background-color:#fff}.vue-right-menu li.menu-list:after{color:#626365;font-size:20px;position:absolute;right:15px}", ""]);
+// Exports
+module.exports = exports;
 
 
 /***/ }),
@@ -1505,41 +1394,6 @@ module.exports = classof(global.process) == 'process';
 /***/ (function(module, exports) {
 
 module.exports = typeof window == 'object';
-
-
-/***/ }),
-
-/***/ "6547":
-/***/ (function(module, exports, __webpack_require__) {
-
-var toInteger = __webpack_require__("a691");
-var toString = __webpack_require__("577e");
-var requireObjectCoercible = __webpack_require__("1d80");
-
-// `String.prototype.codePointAt` methods implementation
-var createMethod = function (CONVERT_TO_STRING) {
-  return function ($this, pos) {
-    var S = toString(requireObjectCoercible($this));
-    var position = toInteger(pos);
-    var size = S.length;
-    var first, second;
-    if (position < 0 || position >= size) return CONVERT_TO_STRING ? '' : undefined;
-    first = S.charCodeAt(position);
-    return first < 0xD800 || first > 0xDBFF || position + 1 === size
-      || (second = S.charCodeAt(position + 1)) < 0xDC00 || second > 0xDFFF
-        ? CONVERT_TO_STRING ? S.charAt(position) : first
-        : CONVERT_TO_STRING ? S.slice(position, position + 2) : (first - 0xD800 << 10) + (second - 0xDC00) + 0x10000;
-  };
-};
-
-module.exports = {
-  // `String.prototype.codePointAt` method
-  // https://tc39.es/ecma262/#sec-string.prototype.codepointat
-  codeAt: createMethod(false),
-  // `String.prototype.at` method
-  // https://github.com/mathiasbynens/String.prototype.at
-  charAt: createMethod(true)
-};
 
 
 /***/ }),
@@ -1733,193 +1587,6 @@ module.exports = function (argument) {
 
 /***/ }),
 
-/***/ "7c73":
-/***/ (function(module, exports, __webpack_require__) {
-
-/* global ActiveXObject -- old IE, WSH */
-var anObject = __webpack_require__("825a");
-var defineProperties = __webpack_require__("37e8");
-var enumBugKeys = __webpack_require__("7839");
-var hiddenKeys = __webpack_require__("d012");
-var html = __webpack_require__("1be4");
-var documentCreateElement = __webpack_require__("cc12");
-var sharedKey = __webpack_require__("f772");
-
-var GT = '>';
-var LT = '<';
-var PROTOTYPE = 'prototype';
-var SCRIPT = 'script';
-var IE_PROTO = sharedKey('IE_PROTO');
-
-var EmptyConstructor = function () { /* empty */ };
-
-var scriptTag = function (content) {
-  return LT + SCRIPT + GT + content + LT + '/' + SCRIPT + GT;
-};
-
-// Create object with fake `null` prototype: use ActiveX Object with cleared prototype
-var NullProtoObjectViaActiveX = function (activeXDocument) {
-  activeXDocument.write(scriptTag(''));
-  activeXDocument.close();
-  var temp = activeXDocument.parentWindow.Object;
-  activeXDocument = null; // avoid memory leak
-  return temp;
-};
-
-// Create object with fake `null` prototype: use iframe Object with cleared prototype
-var NullProtoObjectViaIFrame = function () {
-  // Thrash, waste and sodomy: IE GC bug
-  var iframe = documentCreateElement('iframe');
-  var JS = 'java' + SCRIPT + ':';
-  var iframeDocument;
-  iframe.style.display = 'none';
-  html.appendChild(iframe);
-  // https://github.com/zloirock/core-js/issues/475
-  iframe.src = String(JS);
-  iframeDocument = iframe.contentWindow.document;
-  iframeDocument.open();
-  iframeDocument.write(scriptTag('document.F=Object'));
-  iframeDocument.close();
-  return iframeDocument.F;
-};
-
-// Check for document.domain and active x support
-// No need to use active x approach when document.domain is not set
-// see https://github.com/es-shims/es5-shim/issues/150
-// variation of https://github.com/kitcambridge/es5-shim/commit/4f738ac066346
-// avoid IE GC bug
-var activeXDocument;
-var NullProtoObject = function () {
-  try {
-    activeXDocument = new ActiveXObject('htmlfile');
-  } catch (error) { /* ignore */ }
-  NullProtoObject = typeof document != 'undefined'
-    ? document.domain && activeXDocument
-      ? NullProtoObjectViaActiveX(activeXDocument) // old IE
-      : NullProtoObjectViaIFrame()
-    : NullProtoObjectViaActiveX(activeXDocument); // WSH
-  var length = enumBugKeys.length;
-  while (length--) delete NullProtoObject[PROTOTYPE][enumBugKeys[length]];
-  return NullProtoObject();
-};
-
-hiddenKeys[IE_PROTO] = true;
-
-// `Object.create` method
-// https://tc39.es/ecma262/#sec-object.create
-module.exports = Object.create || function create(O, Properties) {
-  var result;
-  if (O !== null) {
-    EmptyConstructor[PROTOTYPE] = anObject(O);
-    result = new EmptyConstructor();
-    EmptyConstructor[PROTOTYPE] = null;
-    // add "__proto__" for Object.getPrototypeOf polyfill
-    result[IE_PROTO] = O;
-  } else result = NullProtoObject();
-  return Properties === undefined ? result : defineProperties(result, Properties);
-};
-
-
-/***/ }),
-
-/***/ "7dd0":
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-var $ = __webpack_require__("23e7");
-var createIteratorConstructor = __webpack_require__("9ed3");
-var getPrototypeOf = __webpack_require__("e163");
-var setPrototypeOf = __webpack_require__("d2bb");
-var setToStringTag = __webpack_require__("d44e");
-var createNonEnumerableProperty = __webpack_require__("9112");
-var redefine = __webpack_require__("6eeb");
-var wellKnownSymbol = __webpack_require__("b622");
-var IS_PURE = __webpack_require__("c430");
-var Iterators = __webpack_require__("3f8c");
-var IteratorsCore = __webpack_require__("ae93");
-
-var IteratorPrototype = IteratorsCore.IteratorPrototype;
-var BUGGY_SAFARI_ITERATORS = IteratorsCore.BUGGY_SAFARI_ITERATORS;
-var ITERATOR = wellKnownSymbol('iterator');
-var KEYS = 'keys';
-var VALUES = 'values';
-var ENTRIES = 'entries';
-
-var returnThis = function () { return this; };
-
-module.exports = function (Iterable, NAME, IteratorConstructor, next, DEFAULT, IS_SET, FORCED) {
-  createIteratorConstructor(IteratorConstructor, NAME, next);
-
-  var getIterationMethod = function (KIND) {
-    if (KIND === DEFAULT && defaultIterator) return defaultIterator;
-    if (!BUGGY_SAFARI_ITERATORS && KIND in IterablePrototype) return IterablePrototype[KIND];
-    switch (KIND) {
-      case KEYS: return function keys() { return new IteratorConstructor(this, KIND); };
-      case VALUES: return function values() { return new IteratorConstructor(this, KIND); };
-      case ENTRIES: return function entries() { return new IteratorConstructor(this, KIND); };
-    } return function () { return new IteratorConstructor(this); };
-  };
-
-  var TO_STRING_TAG = NAME + ' Iterator';
-  var INCORRECT_VALUES_NAME = false;
-  var IterablePrototype = Iterable.prototype;
-  var nativeIterator = IterablePrototype[ITERATOR]
-    || IterablePrototype['@@iterator']
-    || DEFAULT && IterablePrototype[DEFAULT];
-  var defaultIterator = !BUGGY_SAFARI_ITERATORS && nativeIterator || getIterationMethod(DEFAULT);
-  var anyNativeIterator = NAME == 'Array' ? IterablePrototype.entries || nativeIterator : nativeIterator;
-  var CurrentIteratorPrototype, methods, KEY;
-
-  // fix native
-  if (anyNativeIterator) {
-    CurrentIteratorPrototype = getPrototypeOf(anyNativeIterator.call(new Iterable()));
-    if (CurrentIteratorPrototype !== Object.prototype && CurrentIteratorPrototype.next) {
-      if (!IS_PURE && getPrototypeOf(CurrentIteratorPrototype) !== IteratorPrototype) {
-        if (setPrototypeOf) {
-          setPrototypeOf(CurrentIteratorPrototype, IteratorPrototype);
-        } else if (typeof CurrentIteratorPrototype[ITERATOR] != 'function') {
-          createNonEnumerableProperty(CurrentIteratorPrototype, ITERATOR, returnThis);
-        }
-      }
-      // Set @@toStringTag to native iterators
-      setToStringTag(CurrentIteratorPrototype, TO_STRING_TAG, true, true);
-      if (IS_PURE) Iterators[TO_STRING_TAG] = returnThis;
-    }
-  }
-
-  // fix Array.prototype.{ values, @@iterator }.name in V8 / FF
-  if (DEFAULT == VALUES && nativeIterator && nativeIterator.name !== VALUES) {
-    INCORRECT_VALUES_NAME = true;
-    defaultIterator = function values() { return nativeIterator.call(this); };
-  }
-
-  // define iterator
-  if ((!IS_PURE || FORCED) && IterablePrototype[ITERATOR] !== defaultIterator) {
-    createNonEnumerableProperty(IterablePrototype, ITERATOR, defaultIterator);
-  }
-  Iterators[NAME] = defaultIterator;
-
-  // export additional methods
-  if (DEFAULT) {
-    methods = {
-      values: getIterationMethod(VALUES),
-      keys: IS_SET ? defaultIterator : getIterationMethod(KEYS),
-      entries: getIterationMethod(ENTRIES)
-    };
-    if (FORCED) for (KEY in methods) {
-      if (BUGGY_SAFARI_ITERATORS || INCORRECT_VALUES_NAME || !(KEY in IterablePrototype)) {
-        redefine(IterablePrototype, KEY, methods[KEY]);
-      }
-    } else $({ target: NAME, proto: true, forced: BUGGY_SAFARI_ITERATORS || INCORRECT_VALUES_NAME }, methods);
-  }
-
-  return methods;
-};
-
-
-/***/ }),
-
 /***/ "7f9a":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -1957,24 +1624,6 @@ module.exports = !fails(function () {
   // eslint-disable-next-line es/no-object-defineproperty -- required for testing
   return Object.defineProperty({}, 1, { get: function () { return 7; } })[1] != 7;
 });
-
-
-/***/ }),
-
-/***/ "8418":
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-var toPropertyKey = __webpack_require__("a04b");
-var definePropertyModule = __webpack_require__("9bf2");
-var createPropertyDescriptor = __webpack_require__("5c6c");
-
-module.exports = function (object, key, value) {
-  var propertyKey = toPropertyKey(key);
-  if (propertyKey in object) definePropertyModule.f(object, propertyKey, createPropertyDescriptor(0, value));
-  else object[propertyKey] = value;
-};
 
 
 /***/ }),
@@ -2928,24 +2577,6 @@ module.exports = function (it, usingIterator) {
 
 /***/ }),
 
-/***/ "9bdd":
-/***/ (function(module, exports, __webpack_require__) {
-
-var anObject = __webpack_require__("825a");
-var iteratorClose = __webpack_require__("2a62");
-
-// call something on iterator step with safe closing on error
-module.exports = function (iterator, fn, value, ENTRIES) {
-  try {
-    return ENTRIES ? fn(anObject(value)[0], value[1]) : fn(value);
-  } catch (error) {
-    iteratorClose(iterator, 'throw', error);
-  }
-};
-
-
-/***/ }),
-
 /***/ "9bf2":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -2974,30 +2605,6 @@ exports.f = DESCRIPTORS ? $defineProperty : function defineProperty(O, P, Attrib
 
 /***/ }),
 
-/***/ "9ed3":
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-var IteratorPrototype = __webpack_require__("ae93").IteratorPrototype;
-var create = __webpack_require__("7c73");
-var createPropertyDescriptor = __webpack_require__("5c6c");
-var setToStringTag = __webpack_require__("d44e");
-var Iterators = __webpack_require__("3f8c");
-
-var returnThis = function () { return this; };
-
-module.exports = function (IteratorConstructor, NAME, next) {
-  var TO_STRING_TAG = NAME + ' Iterator';
-  IteratorConstructor.prototype = create(IteratorPrototype, { next: createPropertyDescriptor(1, next) });
-  setToStringTag(IteratorConstructor, TO_STRING_TAG, false, true);
-  Iterators[TO_STRING_TAG] = returnThis;
-  return IteratorConstructor;
-};
-
-
-/***/ }),
-
 /***/ "a04b":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -3020,27 +2627,6 @@ module.exports = function (argument) {
 var userAgent = __webpack_require__("342f");
 
 module.exports = /web0s(?!.*chrome)/i.test(userAgent);
-
-
-/***/ }),
-
-/***/ "a630":
-/***/ (function(module, exports, __webpack_require__) {
-
-var $ = __webpack_require__("23e7");
-var from = __webpack_require__("4df4");
-var checkCorrectnessOfIteration = __webpack_require__("1c7e");
-
-var INCORRECT_ITERATION = !checkCorrectnessOfIteration(function (iterable) {
-  // eslint-disable-next-line es/no-array-from -- required for testing
-  Array.from(iterable);
-});
-
-// `Array.from` method
-// https://tc39.es/ecma262/#sec-array.from
-$({ target: 'Array', stat: true, forced: INCORRECT_ITERATION }, {
-  from: from
-});
 
 
 /***/ }),
@@ -3073,61 +2659,6 @@ var floor = Math.floor;
 // https://tc39.es/ecma262/#sec-tointeger
 module.exports = function (argument) {
   return isNaN(argument = +argument) ? 0 : (argument > 0 ? floor : ceil)(argument);
-};
-
-
-/***/ }),
-
-/***/ "ae93":
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-var fails = __webpack_require__("d039");
-var create = __webpack_require__("7c73");
-var getPrototypeOf = __webpack_require__("e163");
-var createNonEnumerableProperty = __webpack_require__("9112");
-var wellKnownSymbol = __webpack_require__("b622");
-var IS_PURE = __webpack_require__("c430");
-
-var ITERATOR = wellKnownSymbol('iterator');
-var BUGGY_SAFARI_ITERATORS = false;
-
-// `%IteratorPrototype%` object
-// https://tc39.es/ecma262/#sec-%iteratorprototype%-object
-var IteratorPrototype, PrototypeOfArrayIteratorPrototype, arrayIterator;
-
-/* eslint-disable es/no-array-prototype-keys -- safe */
-if ([].keys) {
-  arrayIterator = [].keys();
-  // Safari 8 has buggy iterators w/o `next`
-  if (!('next' in arrayIterator)) BUGGY_SAFARI_ITERATORS = true;
-  else {
-    PrototypeOfArrayIteratorPrototype = getPrototypeOf(getPrototypeOf(arrayIterator));
-    if (PrototypeOfArrayIteratorPrototype !== Object.prototype) IteratorPrototype = PrototypeOfArrayIteratorPrototype;
-  }
-}
-
-var NEW_ITERATOR_PROTOTYPE = IteratorPrototype == undefined || fails(function () {
-  var test = {};
-  // FF44- legacy iterators case
-  return IteratorPrototype[ITERATOR].call(test) !== test;
-});
-
-if (NEW_ITERATOR_PROTOTYPE) IteratorPrototype = {};
-else if (IS_PURE) IteratorPrototype = create(IteratorPrototype);
-
-// `%IteratorPrototype%[@@iterator]()` method
-// https://tc39.es/ecma262/#sec-%iteratorprototype%-@@iterator
-if (typeof IteratorPrototype[ITERATOR] !== 'function') {
-  createNonEnumerableProperty(IteratorPrototype, ITERATOR, function () {
-    return this;
-  });
-}
-
-module.exports = {
-  IteratorPrototype: IteratorPrototype,
-  BUGGY_SAFARI_ITERATORS: BUGGY_SAFARI_ITERATORS
 };
 
 
@@ -3263,6 +2794,27 @@ module.exports = function (name) {
     }
   } return WellKnownSymbolsStore[name];
 };
+
+
+/***/ }),
+
+/***/ "b64b":
+/***/ (function(module, exports, __webpack_require__) {
+
+var $ = __webpack_require__("23e7");
+var toObject = __webpack_require__("7b0b");
+var nativeKeys = __webpack_require__("df75");
+var fails = __webpack_require__("d039");
+
+var FAILS_ON_PRIMITIVES = fails(function () { nativeKeys(1); });
+
+// `Object.keys` method
+// https://tc39.es/ecma262/#sec-object.keys
+$({ target: 'Object', stat: true, forced: FAILS_ON_PRIMITIVES }, {
+  keys: function keys(it) {
+    return nativeKeys(toObject(it));
+  }
+});
 
 
 /***/ }),
@@ -3717,46 +3269,6 @@ var enumBugKeys = __webpack_require__("7839");
 module.exports = Object.keys || function keys(O) {
   return internalObjectKeys(O, enumBugKeys);
 };
-
-
-/***/ }),
-
-/***/ "e163":
-/***/ (function(module, exports, __webpack_require__) {
-
-var has = __webpack_require__("5135");
-var toObject = __webpack_require__("7b0b");
-var sharedKey = __webpack_require__("f772");
-var CORRECT_PROTOTYPE_GETTER = __webpack_require__("e177");
-
-var IE_PROTO = sharedKey('IE_PROTO');
-var ObjectPrototype = Object.prototype;
-
-// `Object.getPrototypeOf` method
-// https://tc39.es/ecma262/#sec-object.getprototypeof
-// eslint-disable-next-line es/no-object-getprototypeof -- safe
-module.exports = CORRECT_PROTOTYPE_GETTER ? Object.getPrototypeOf : function (O) {
-  O = toObject(O);
-  if (has(O, IE_PROTO)) return O[IE_PROTO];
-  if (typeof O.constructor == 'function' && O instanceof O.constructor) {
-    return O.constructor.prototype;
-  } return O instanceof Object ? ObjectPrototype : null;
-};
-
-
-/***/ }),
-
-/***/ "e177":
-/***/ (function(module, exports, __webpack_require__) {
-
-var fails = __webpack_require__("d039");
-
-module.exports = !fails(function () {
-  function F() { /* empty */ }
-  F.prototype.constructor = null;
-  // eslint-disable-next-line es/no-object-getprototypeof -- required for testing
-  return Object.getPrototypeOf(new F()) !== F.prototype;
-});
 
 
 /***/ }),
@@ -4269,6 +3781,22 @@ module.exports.f = function (C) {
 
 /***/ }),
 
+/***/ "f4f1":
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__("5978");
+if(content.__esModule) content = content.default;
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var add = __webpack_require__("499e").default
+var update = add("34efe4c0", content, true, {"sourceMap":false,"shadowMode":false});
+
+/***/ }),
+
 /***/ "f5df":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -4348,28 +3876,6 @@ if (typeof window !== 'undefined') {
 // Indicate to webpack that this file can be concatenated
 /* harmony default export */ var setPublicPath = (null);
 
-// CONCATENATED MODULE: ./node_modules/@babel/runtime/helpers/esm/classCallCheck.js
-function _classCallCheck(instance, Constructor) {
-  if (!(instance instanceof Constructor)) {
-    throw new TypeError("Cannot call a class as a function");
-  }
-}
-// CONCATENATED MODULE: ./node_modules/@babel/runtime/helpers/esm/createClass.js
-function _defineProperties(target, props) {
-  for (var i = 0; i < props.length; i++) {
-    var descriptor = props[i];
-    descriptor.enumerable = descriptor.enumerable || false;
-    descriptor.configurable = true;
-    if ("value" in descriptor) descriptor.writable = true;
-    Object.defineProperty(target, descriptor.key, descriptor);
-  }
-}
-
-function _createClass(Constructor, protoProps, staticProps) {
-  if (protoProps) _defineProperties(Constructor.prototype, protoProps);
-  if (staticProps) _defineProperties(Constructor, staticProps);
-  return Constructor;
-}
 // EXTERNAL MODULE: ./node_modules/core-js/modules/es.object.to-string.js
 var es_object_to_string = __webpack_require__("d3b7");
 
@@ -4421,11 +3927,8 @@ var runtime = __webpack_require__("96cf");
 // EXTERNAL MODULE: ./node_modules/core-js/modules/web.dom-collections.for-each.js
 var web_dom_collections_for_each = __webpack_require__("159b");
 
-// EXTERNAL MODULE: ./node_modules/core-js/modules/es.array.from.js
-var es_array_from = __webpack_require__("a630");
-
-// EXTERNAL MODULE: ./node_modules/core-js/modules/es.string.iterator.js
-var es_string_iterator = __webpack_require__("3ca3");
+// EXTERNAL MODULE: ./node_modules/core-js/modules/es.object.keys.js
+var es_object_keys = __webpack_require__("b64b");
 
 // CONCATENATED MODULE: ./src/utils/getInfo.js
 var setCss = function setCss(node, styles) {
@@ -4454,17 +3957,14 @@ var getY = function getY(node) {
 
 
 
-
-
-
 var state = {
-  menu: {},
+  menu: null,
   el: null
 };
 /**
  * 阻止默认事件和冒泡
  * @param { Event } e 事件参数
- * @return { void }
+ * @returns { void }
  */
 
 var preventDefault = function preventDefault(e) {
@@ -4478,7 +3978,7 @@ var preventDefault = function preventDefault(e) {
  * @param { Promise<object[]> | object[]} thenable 菜单列表
  * @param { HTMLDivElement } el 绑定指令的元素
  * @param { Event } e 事件参数
- * @return { void }
+ * @returns { void }
  */
 
 var initMenu = /*#__PURE__*/function () {
@@ -4493,6 +3993,7 @@ var initMenu = /*#__PURE__*/function () {
 
           case 2:
             options = _context.sent;
+            // 先移除之前的菜单（若有）
             destroyMenu();
             menu = renderMenu(options);
             state.menu = menu;
@@ -4511,17 +4012,17 @@ var initMenu = /*#__PURE__*/function () {
             }
 
             menu.style.left = x + 'px';
-            menu.style.top = y + 'px';
-            window.removeEventListener('blur', destroyMenu);
-            window.addEventListener('blur', destroyMenu);
-            document.removeEventListener('click', clickPage);
-            document.addEventListener('click', clickPage);
-            menu.addEventListener('contextmenu', function (e) {
-              // destroyMenu()
-              preventDefault(e);
-            });
+            menu.style.top = y + 'px'; // 窗口 blur 时销毁菜单栏
 
-          case 19:
+            window.addEventListener('blur', destroyMenu); // 窗口 resize 时销毁菜单栏
+
+            window.addEventListener('resize', destroyMenu); // 页面点击时销毁菜单栏
+
+            document.addEventListener('click', clickPage); // 防止菜单组件里点出系统菜单
+
+            menu.addEventListener('contextmenu', preventDefault);
+
+          case 18:
           case "end":
             return _context.stop();
         }
@@ -4536,6 +4037,7 @@ var initMenu = /*#__PURE__*/function () {
 /**
  * 点击页面时销毁菜单栏
  * @param { Event } e 事件参数
+ * @returns { void }
  */
 
 var clickPage = function clickPage(e) {
@@ -4548,17 +4050,31 @@ var clickPage = function clickPage(e) {
 };
 /**
  * 销毁菜单栏
+ * @returns { void }
  */
 
 
 var destroyMenu = function destroyMenu() {
-  var menuList = document.querySelectorAll('.vue-right-menu');
-  menuList.forEach(function (item) {
+  var menuList = document.querySelectorAll('.vue-right-menu'); // 清除所有菜单栏, 有多少清多少
+
+  menuList && menuList.forEach(function (item) {
     item.parentNode.removeChild(item);
-  });
+  }); // 在已有菜单的情况下才进行清除
+
+  if (state.menu) {
+    // 移除菜单后把监听事件移除，以免事件仍在激活状态
+    window.removeEventListener('blur', destroyMenu);
+    window.removeEventListener('resize', destroyMenu);
+    document.removeEventListener('click', clickPage);
+  }
+
+  state.el = null;
+  state.menu = null;
 };
 /**
  * 渲染菜单栏
+ * @param { object[] } options
+ * @returns { HTMLDivElement }
  */
 
 
@@ -4567,37 +4083,71 @@ var renderMenu = function renderMenu(options) {
   options.forEach(function (item) {
     switch (item.type) {
       case 'hr':
-        menuList.push(_hr(item));
+        menuList.push(createHr(item));
         break;
 
       case 'li':
-        menuList.push(_li(item));
+        menuList.push(createLi(item));
         break;
 
       case 'ul':
-        menuList.push(utils_ul(item));
+        menuList.push(utils_createUl(item));
         break;
 
       default:
         return console.error('未知的 type 类型: ' + item.type);
     }
   });
-  var res = new utils_CreateDom('ul', {
+  return createDom('ul', {
     class: 'vue-right-menu'
-  }, menuList).render();
-  return res;
+  }, menuList);
+};
+/**
+ * 渲染dom
+ * @param { String } [ tagName = 'ul' ] 元素名称
+ * @param { Object } [ attrs = {} ] 元素属性对象
+ * @param { Array } [ children = [] ] 子元素集合
+ * @returns { HTMLDivElement }
+ */
+
+
+var createDom = function createDom() {
+  var tagName = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 'ul';
+  var attrs = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+  var children = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : [];
+  var el = document.createElement(tagName); // 循环添加属性
+
+  Object.keys(attrs).forEach(function (key) {
+    el.setAttribute(key, attrs[key]);
+  }); // 循环绑定事件
+  // if (event.length) {
+  //   event.forEach(item => {
+  //     el.addEventListener(item.eventName, item.callBack)
+  //   })
+  // }
+  // append所有子元素
+
+  children.forEach(function (child) {
+    if (typeof child === 'string') {
+      el.innerHTML = child;
+    } else {
+      el.appendChild(child);
+    }
+  });
+  return el;
 };
 
-var _hr = function _hr(opt) {
-  return new utils_CreateDom('li', {
+var createHr = function createHr(opt) {
+  return createDom('li', {
     class: 'menu-hr'
-  }).render();
+  });
 };
 
-var _li = function _li(opt) {
-  var li = new utils_CreateDom('li', {
-    class: opt.disabled ? ' menu-disabled' : ''
-  }, [opt.text]).render();
+var createLi = function createLi(opt) {
+  var span = createDom('span', {}, [opt.text]);
+  var li = createDom('li', {
+    class: opt.disabled ? 'menu-disabled' : ''
+  }, [span]);
 
   if (!opt.disabled && opt.callback) {
     li.addEventListener('mousedown', function (e) {
@@ -4609,10 +4159,11 @@ var _li = function _li(opt) {
   return li;
 };
 
-var utils_ul = function _ul(opt) {
-  var li = new utils_CreateDom('li', {
+var utils_createUl = function createUl(opt) {
+  var span = createDom('span', {}, [opt.text]);
+  var li = createDom('li', {
     class: 'menu-list' + (opt.disabled ? ' menu-disabled' : '')
-  }, [opt.text]).render(); // 添加二级菜单
+  }, [span]); // 添加二级菜单
 
   if (!opt.disabled && opt.children) {
     var ul = renderMenu(opt.children);
@@ -4636,67 +4187,23 @@ var utils_ul = function _ul(opt) {
       ul.style.left = x + 'px';
     });
     li.addEventListener('mouseout', function (e) {
-      if (e.toElement) {
-        if (e.toElement.parentNode !== ul && e.toElement !== ul) {
-          li.removeChild(ul);
-        }
+      if (!e.toElement) return;
+      var path = [];
+      var curr = e.toElement;
+
+      while (curr) {
+        // 如果路径里存在 ul 标签, 就不需要销毁
+        if (curr === ul) return;
+        path.push(curr);
+        curr = curr.parentNode;
       }
+
+      li.removeChild(ul);
     });
   }
 
   return li;
 };
-
-var utils_CreateDom = /*#__PURE__*/function () {
-  /**
-   * 渲染dom
-   * @param { String } [ tagName = 'ul' ] 元素名称
-   * @param { Object } [ attrs = {} ] 元素属性对象
-   * @param { Array } [ children = [] ] 子元素集合
-   */
-  function CreateDom() {
-    var tagName = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 'ul';
-    var attrs = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
-    var children = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : [];
-
-    _classCallCheck(this, CreateDom);
-
-    this.tagName = tagName;
-    this.attrs = attrs;
-    this.children = Array.from(children);
-    this.event = event || [];
-  }
-
-  _createClass(CreateDom, [{
-    key: "render",
-    value: function render() {
-      var el = document.createElement(this.tagName); // 循环添加属性
-
-      for (var key in this.attrs) {
-        el.setAttribute(key, this.attrs[key]);
-      } // 循环绑定事件
-
-
-      if (this.event.length) {
-        this.event.forEach(function (item) {
-          el.addEventListener(item.eventName, item.callBack);
-        });
-      } // append所有子元素
-
-
-      this.children.forEach(function (child) {
-        if (typeof child === 'string') {
-          el.innerHTML = child;
-        } else {
-          el.appendChild(child);
-        }
-      });
-      return el;
-    }
-  }]);
-
-  return CreateDom;
-}();
 // EXTERNAL MODULE: ./src/style/index.less
 var style = __webpack_require__("cd22");
 
@@ -4707,6 +4214,13 @@ var theme_mac = __webpack_require__("3d93");
 
 
 
+var isWin = navigator.platform === 'Win32' || navigator.platform === 'Windows'; // const isMac = (navigator.platform === 'Mac68K') || (navigator.platform === 'MacPPC') || (navigator.platform === 'Macintosh') || (navigator.platform === 'MacIntel')
+
+if (isWin) {
+  __webpack_require__("f4f1");
+} else {
+  __webpack_require__("3d93");
+}
 
 function init(el, binding, options) {
   // 注册鼠标右击事件
@@ -4774,7 +4288,7 @@ module.exports = function (it) {
 var ___CSS_LOADER_API_IMPORT___ = __webpack_require__("24fb");
 exports = ___CSS_LOADER_API_IMPORT___(false);
 // Module
-exports.push([module.i, ".vue-right-menu{color:#222;font-size:13px;margin:0;padding:5px 4px;border:.5px solid #cdcdcd;border-radius:5px;background-color:#eae8e9;box-shadow:0 2px 12px 0 rgba(0,0,0,.1)}.vue-right-menu li{line-height:18px;padding:2.5px 8px;border-radius:3px}.vue-right-menu li:hover{color:#fff;background-color:#68a1f9}.vue-right-menu li.menu-hr{border-bottom:1px solid #d0cecf;padding:0;margin:5px 8px}.vue-right-menu li.menu-disabled{color:#a8a8a8}.vue-right-menu li.menu-disabled:hover{color:#a8a8a8;background-color:#eae8e9}", ""]);
+exports.push([module.i, ".vue-right-menu{min-width:180px;color:#222;font-size:13px;margin:0;padding:5px 4px;border:.5px solid #cdcdcd;border-radius:5px;background-color:#eae8e9;box-shadow:0 2px 12px 0 rgba(0,0,0,.1)}.vue-right-menu li{line-height:18px;padding:2.5px 8px;border-radius:3px}.vue-right-menu li:hover{color:#fff;background-color:#68a1f9}.vue-right-menu li.menu-hr{border-bottom:1px solid #d0cecf;padding:0;margin:5px 8px}.vue-right-menu li.menu-disabled{color:#a8a8a8}.vue-right-menu li.menu-disabled:hover{color:#a8a8a8;background-color:#eae8e9}", ""]);
 // Exports
 module.exports = exports;
 
@@ -4788,7 +4302,7 @@ module.exports = exports;
 var ___CSS_LOADER_API_IMPORT___ = __webpack_require__("24fb");
 exports = ___CSS_LOADER_API_IMPORT___(false);
 // Module
-exports.push([module.i, ".vue-right-menu{width:180px;z-index:9999999;position:fixed;display:block;box-sizing:border-box;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}.vue-right-menu li{display:block;list-style:none;cursor:default}.vue-right-menu li.menu-hr{height:0;border-bottom:1px solid #ccc}.vue-right-menu li.menu-hr:hover{background-color:transparent!important}.vue-right-menu li.menu-list:after{content:\"▸\";font-weight:600;float:right;margin-right:-8px;width:15px;height:15px}", ""]);
+exports.push([module.i, ".vue-right-menu{width:auto;min-width:0;max-width:300px;z-index:9999999;position:fixed;display:block;box-sizing:border-box;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}.vue-right-menu li{display:block;list-style:none;cursor:default;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.vue-right-menu li.menu-hr{height:0;border-bottom:1px solid #ccc}.vue-right-menu li.menu-hr:hover{background-color:transparent!important}.vue-right-menu li.menu-list:after{content:\"▸\";font-weight:600;float:right;margin-left:10px;margin-right:-8px;width:15px;height:15px}", ""]);
 // Exports
 module.exports = exports;
 
