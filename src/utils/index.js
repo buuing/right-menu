@@ -1,14 +1,14 @@
 import { getWidth, getHeight, getBottom, getX, getY } from './getInfo.js'
 
 const state = {
-  menu: {},
+  menu: null,
   el: null
 }
 
 /**
  * 阻止默认事件和冒泡
  * @param { Event } e 事件参数
- * @return { void }
+ * @returns { void }
  */
 export const preventDefault = e => {
   // 阻止冒泡
@@ -22,7 +22,7 @@ export const preventDefault = e => {
  * @param { Promise<object[]> | object[]} thenable 菜单列表
  * @param { HTMLDivElement } el 绑定指令的元素
  * @param { Event } e 事件参数
- * @return { void }
+ * @returns { void }
  */
 export const initMenu = async (thenable, el, e) => {
   const options = await Promise.resolve(thenable)
@@ -55,6 +55,7 @@ export const initMenu = async (thenable, el, e) => {
 /**
  * 点击页面时销毁菜单栏
  * @param { Event } e 事件参数
+ * @returns { void }
  */
 const clickPage = e => {
   const hasMenu = e?.path?.some(node => node === state.menu)
@@ -63,6 +64,7 @@ const clickPage = e => {
 
 /**
  * 销毁菜单栏
+ * @returns { void }
  */
 const destroyMenu = () => {
   const menuList = document.querySelectorAll('.vue-right-menu')
@@ -73,29 +75,59 @@ const destroyMenu = () => {
 
 /**
  * 渲染菜单栏
+ * @param { object[] } options
+ * @returns { HTMLDivElement }
  */
 const renderMenu = (options) => {
   const menuList = []
   options.forEach(item => {
     switch (item.type) {
-      case 'hr': menuList.push(_hr(item)); break
-      case 'li': menuList.push(_li(item)); break
-      case 'ul': menuList.push(_ul(item)); break
+      case 'hr': menuList.push(createHr(item)); break
+      case 'li': menuList.push(createLi(item)); break
+      case 'ul': menuList.push(createUl(item)); break
       default: return console.error('未知的 type 类型: ' + item.type)
     }
   })
-  const res = new CreateDom('ul', { class: 'vue-right-menu' }, menuList).render()
-  return res
+  return createDom('ul', { class: 'vue-right-menu' }, menuList)
 }
 
-const _hr = opt => {
-  return new CreateDom('li', { class: 'menu-hr' }).render()
+/**
+ * 渲染dom
+ * @param { String } [ tagName = 'ul' ] 元素名称
+ * @param { Object } [ attrs = {} ] 元素属性对象
+ * @param { Array } [ children = [] ] 子元素集合
+ * @returns { HTMLDivElement }
+ */
+const createDom = (tagName = 'ul', attrs = {}, children = []) => {
+  const el = document.createElement(tagName)
+  // 循环添加属性
+  Object.keys(attrs).forEach(key => {
+    el.setAttribute(key, attrs[key])
+  })
+  // 循环绑定事件
+  // if (event.length) {
+  //   event.forEach(item => {
+  //     el.addEventListener(item.eventName, item.callBack)
+  //   })
+  // }
+  // append所有子元素
+  children.forEach(child => {
+    if (typeof child === 'string') {
+      el.innerHTML = child
+    } else {
+      el.appendChild(child)
+    }
+  })
+  return el
 }
 
-const _li = opt => {
-  const li = new CreateDom('li', {
-    class: (opt.disabled ? ' menu-disabled' : '')
-  }, [opt.text]).render()
+const createHr = opt => {
+  return createDom('li', { class: 'menu-hr' })
+}
+
+const createLi = opt => {
+  const span = createDom('span', {}, [opt.text])
+  const li = createDom('li', { class: (opt.disabled ? 'menu-disabled' : '') }, [span])
   if (!opt.disabled && opt.callback) {
     li.addEventListener('mousedown', e => {
       opt.callback(e, state.el)
@@ -105,10 +137,9 @@ const _li = opt => {
   return li
 }
 
-const _ul = opt => {
-  const li = new CreateDom('li', {
-    class: 'menu-list' + (opt.disabled ? ' menu-disabled' : '')
-  }, [opt.text]).render()
+const createUl = opt => {
+  const span = createDom('span', {}, [opt.text])
+  const li = createDom('li', { class: 'menu-list' + (opt.disabled ? ' menu-disabled' : '') }, [span])
   // 添加二级菜单
   if (!opt.disabled && opt.children) {
     const ul = renderMenu(opt.children)
@@ -129,50 +160,17 @@ const _ul = opt => {
       ul.style.left = x + 'px'
     })
     li.addEventListener('mouseout', (e) => {
-      if (e.toElement) {
-        if (e.toElement.parentNode !== ul && e.toElement !== ul) {
-          li.removeChild(ul)
-        }
+      if (!e.toElement) return
+      const path = []
+      let curr = e.toElement
+      while (curr) {
+        // 如果路径里存在 ul 标签, 就不需要销毁
+        if (curr === ul) return
+        path.push(curr)
+        curr = curr.parentNode
       }
+      li.removeChild(ul)
     })
   }
   return li
-}
-
-class CreateDom {
-  /**
-   * 渲染dom
-   * @param { String } [ tagName = 'ul' ] 元素名称
-   * @param { Object } [ attrs = {} ] 元素属性对象
-   * @param { Array } [ children = [] ] 子元素集合
-   */
-  constructor (tagName = 'ul', attrs = {}, children = []) {
-    this.tagName = tagName
-    this.attrs = attrs
-    this.children = Array.from(children)
-    this.event = event || []
-  }
-
-  render () {
-    const el = document.createElement(this.tagName)
-    // 循环添加属性
-    for (const key in this.attrs) {
-      el.setAttribute(key, this.attrs[key])
-    }
-    // 循环绑定事件
-    if (this.event.length) {
-      this.event.forEach(item => {
-        el.addEventListener(item.eventName, item.callBack)
-      })
-    }
-    // append所有子元素
-    this.children.forEach(child => {
-      if (typeof child === 'string') {
-        el.innerHTML = child
-      } else {
-        el.appendChild(child)
-      }
-    })
-    return el
-  }
 }

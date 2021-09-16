@@ -13,11 +13,11 @@ Vue.use(rightMenu, async (event, options) => {
     { type: 'hr' },
     {
       type: 'ul',
-      text: '关于',
+      text: `关于 ${name}`,
       children: [
         {
           type: 'li',
-          text: `${name} ${version}`,
+          text: `version ${version}`,
           disabled: true
         },
         { type: 'hr' },
