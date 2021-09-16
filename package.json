@@ -1,6 +1,6 @@
 {
   "name": "vue-right-menu",
-  "version": "2.0.1",
+  "version": "2.0.2",
   "description": "一个基于vue2和vue3的右键菜单插件",
   "main": "dist/rightMenu.common.js",
   "scripts": {
@@ -19,8 +19,10 @@
   "files": [
     "dist",
     "index.js",
-    "package.json",
-    "README.md"
+    "postinstall.js",
+    "LICENSE",
+    "README.md",
+    "package.json"
   ],
   "dependencies": {},
   "devDependencies": {

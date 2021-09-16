@@ -26,6 +26,7 @@ export const preventDefault = e => {
  */
 export const initMenu = async (thenable, el, e) => {
   const options = await Promise.resolve(thenable)
+  // 先移除之前的菜单（若有）
   destroyMenu()
   const menu = renderMenu(options)
   state.menu = menu
@@ -42,14 +43,14 @@ export const initMenu = async (thenable, el, e) => {
   }
   menu.style.left = x + 'px'
   menu.style.top = y + 'px'
-  window.removeEventListener('blur', destroyMenu)
+  // 窗口 blur 时销毁菜单栏
   window.addEventListener('blur', destroyMenu)
-  document.removeEventListener('click', clickPage)
+  // 窗口 resize 时销毁菜单栏
+  window.addEventListener('resize', destroyMenu)
+  // 页面点击时销毁菜单栏
   document.addEventListener('click', clickPage)
-  menu.addEventListener('contextmenu', e => {
-    // destroyMenu()
-    preventDefault(e)
-  })
+  // 防止菜单组件里点出系统菜单
+  menu.addEventListener('contextmenu', preventDefault)
 }
 
 /**
@@ -68,9 +69,19 @@ const clickPage = e => {
  */
 const destroyMenu = () => {
   const menuList = document.querySelectorAll('.vue-right-menu')
-  menuList.forEach(item => {
+  // 清除所有菜单栏, 有多少清多少
+  menuList && menuList.forEach(item => {
     item.parentNode.removeChild(item)
   })
+  // 在已有菜单的情况下才进行清除
+  if (state.menu) {
+    // 移除菜单后把监听事件移除，以免事件仍在激活状态
+    window.removeEventListener('blur', destroyMenu)
+    window.removeEventListener('resize', destroyMenu)
+    document.removeEventListener('click', clickPage)
+  }
+  state.el = null
+  state.menu = null
 }
 
 /**
