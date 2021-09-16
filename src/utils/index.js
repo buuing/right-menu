@@ -1,7 +1,7 @@
 import { getWidth, getHeight, getBottom, getX, getY } from './getInfo.js'
 
 const state = {
-  menu: {},
+  menu: null,
   el: null
 }
 
@@ -43,15 +43,14 @@ export const initMenu = async (thenable, el, e) => {
   }
   menu.style.left = x + 'px'
   menu.style.top = y + 'px'
-  // 添加浏览器失焦响应
+  // 窗口 blur 时销毁菜单栏
   window.addEventListener('blur', destroyMenu)
-  // 添加浏览器窗口调整响应
+  // 窗口 resize 时销毁菜单栏
   window.addEventListener('resize', destroyMenu)
+  // 页面点击时销毁菜单栏
   document.addEventListener('click', clickPage)
   // 防止菜单组件里点出系统菜单
-  menu.addEventListener('contextmenu', e => {
-    preventDefault(e)
-  })
+  menu.addEventListener('contextmenu', preventDefault)
 }
 
 /**
@@ -68,11 +67,10 @@ const clickPage = e => {
  */
 const destroyMenu = () => {
   const menuList = document.querySelectorAll('.vue-right-menu')
-  if (menuList.length) {
-    menuList.forEach(item => {
-      item.parentNode.removeChild(item)
-    })
-  }
+  // 清除所有菜单栏, 有多少清多少
+  menuList && menuList.forEach(item => {
+    item.parentNode.removeChild(item)
+  })
   // 在已有菜单的情况下才进行清除
   if (state.menu) {
     // 移除菜单后把监听事件移除，以免事件仍在激活状态
