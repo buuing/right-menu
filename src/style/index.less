@@ -1,5 +1,7 @@
 .vue-right-menu {
-  width: 180px;
+  width: auto;
+  min-width: 0px;
+  max-width: 300px;
   z-index: 9999999;
   position: fixed;
   display: block;
@@ -9,6 +11,10 @@
     display: block;
     list-style: none;
     cursor: default;
+    // 文本溢出隐藏
+    overflow: hidden;
+    text-overflow:ellipsis;
+    white-space: nowrap;
     &.menu-hr {
       height: 0;
       border-bottom: 1px solid #ccc;
@@ -23,6 +29,7 @@
       content: '▸';
       font-weight: 600;
       float: right;
+      margin-left: 10px;
       margin-right: -8px;
       width: 15px;
       height: 15px;
