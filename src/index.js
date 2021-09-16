@@ -2,6 +2,14 @@ import { preventDefault, initMenu } from './utils'
 import './style/index.less'
 import './style/theme-mac.less'
 
+const isWin = (navigator.platform === 'Win32') || (navigator.platform === 'Windows')
+// const isMac = (navigator.platform === 'Mac68K') || (navigator.platform === 'MacPPC') || (navigator.platform === 'Macintosh') || (navigator.platform === 'MacIntel')
+if (isWin) {
+  require('./style/theme-win10.less')
+} else {
+  require('./style/theme-mac.less')
+}
+
 function init (el, binding, options) {
   // 注册鼠标右击事件
   el.addEventListener('contextmenu', e => {
