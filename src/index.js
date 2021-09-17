@@ -1,11 +1,11 @@
 import { preventDefault, initMenu } from './utils'
 import { isWin } from './utils/system'
-import './style/index.less'
+import './theme/index.less'
 
 if (isWin) {
-  require('./style/theme-win10.less')
+  require('./theme/theme-win10.less')
 } else {
-  require('./style/theme-mac.less')
+  require('./theme/theme-mac.less')
 }
 
 function init (el, binding, options) {
