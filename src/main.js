@@ -33,15 +33,9 @@ Vue.use(rightMenu, async (event, options) => {
         },
         { type: 'hr' },
         {
-          type: 'ul',
+          type: 'li',
           text: '入门教程',
-          disabled: false,
-          children: [
-            {
-              text: '第三季菜单',
-              type: 'li'
-            }
-          ]
+          disabled: true
         },
         {
           type: 'li',

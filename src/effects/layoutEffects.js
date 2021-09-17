@@ -1,19 +1,28 @@
+import { ConnectOffset } from '../constants'
 import { getBottom, getHeight, getX, getY, getWidth } from '../utils/getInfo'
 
-export const layoutElPositionEffect = (parent, child) => {
-  child.style.position = 'fixed'
+export const layoutMenuPositionEffect = ({
+  baseEl,
+  menu
+}) => {
+  const { menu: baseMenu } = baseEl._state
+  menu.style.position = 'fixed'
   // 计算位置
-  const state = parent._state
-  let x = getX(state.menu) + getWidth(parent)
-  let y = getY(parent)
-  if (window.innerWidth - x < child.offsetWidth) {
-    x -= getWidth(state.menu) + getWidth(child) - 10
-  }
-  if (window.innerHeight - y < child.offsetHeight) {
-    y = getBottom(parent) - getHeight(child) + 5
+  const [baseX, baseW] = [getX(baseMenu), getWidth(baseMenu)]
+  const [baseElY, baseElBot] = [getY(baseEl), getBottom(baseEl)]
+  const [menuH, menuW] = [getHeight(menu), getWidth(menu)]
+  let x = baseX + baseW
+  let y = baseElY
+  if (window.innerWidth < menu.offsetWidth + x) {
+    x = baseX - menuW + ConnectOffset
   } else {
-    y -= 5
+    x -= ConnectOffset
   }
-  child.style.top = y + 'px'
-  child.style.left = x + 'px'
+  if (window.innerHeight < menu.offsetHeight + y) {
+    y = baseElBot - menuH + ConnectOffset
+  } else {
+    y -= ConnectOffset
+  }
+  menu.style.top = y + 'px'
+  menu.style.left = x + 'px'
 }
