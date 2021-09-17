@@ -27,14 +27,25 @@ export const preventDefault = e => {
  * @returns { void }
  */
 export const initMenu = async (thenable, el, e) => {
+  // 统计异步创建前, 有没有点击事件
+  let flag = false
+  const countClick = () => (flag = true)
+  document.addEventListener('mousedown', countClick)
+  addEvent(document, 'mousedown', countClick)
+  // 异步获取到菜单配置项 options
   const options = await Promise.resolve(thenable)
+  // 清除异步前创建的事件
+  removeEvent()
+  // 如果异步前有点击次数, 则打断逻辑, 不创建菜单
+  if (flag) return
   // 先移除之前的菜单（若有）
   destroyMenu()
+  // 开始创建菜单栏
   const menu = renderMenu(options)
   state.menu = menu
   state.el = el
   document.body.appendChild(menu)
-  // 计算位置
+  // 计算一级菜单栏的位置
   let x = e.clientX
   let y = e.clientY
   if (window.innerWidth - x < menu.offsetWidth) {
