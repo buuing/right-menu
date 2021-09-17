@@ -1,5 +1,4 @@
 import { layoutMenuPositionEffect } from '../effects/layoutEffects'
-import { computeRectPosition } from './getInfo'
 import { attrList, splitSymbol } from '../config'
 
 const state = {
@@ -57,7 +56,6 @@ export const initMenu = async (thenable, el, e) => {
   addEvent(window, 'resize', destroyMenu)
   // 页面点击时销毁菜单栏
   addEvent(document, 'mousedown', clickPage)
-
 }
 
 /**
@@ -139,19 +137,17 @@ export const filterAttrs = (options, params) => {
 
 const renderMenu = (options) => {
   const cache = { hr: createHr, li: createLi, ul: createUl }
-
-  try {
-    const state = {
-      menu: null,
-      el: null
+  const children = options.map(item => {
+    try {
+      return cache[item.type](item, state)
+    } catch (err) {
+      throw new Error('未知的 type 类型 => ' + item.type)
     }
-
-    state.menu = createDom('ul', { class: 'vue-right-menu' }, options.map(item => cache[item.type](item, state)))
-
-    return state.menu
-  } catch (e) {
-    throw new Error('未知的 type 类型')
-  }
+  })
+  state.menu = null
+  state.el = null
+  state.menu = createDom('ul', { class: 'vue-right-menu' }, children)
+  return state.menu
 }
 
 /**
@@ -194,18 +190,6 @@ const createLi = opt => {
       destroyMenu()
     })
   }
-
-  // [TODO:] 每一项非禁止的菜单项目都应该对应一个回调函数
-  // if (!opt.callback) {
-  //   throw new Error('菜单选项对应的事件未添加')
-  // }
-  const li = createDom('li', { class: (opt.disabled ? 'menu-disabled' : '') }, [createDom('span', {}, [opt.text, '测试'])])
-
-  li.addEventListener('mousedown', e => {
-    opt.callback(e, state.el)
-    destroyMenu()
-  })
-
   return li
 }
 
@@ -226,12 +210,10 @@ const createUl = (opt, state) => {
     })
     li.addEventListener('mouseout', (e) => {
       if (!e.toElement) return
-      // const path = []  why defined a path here ?
       let curr = e.toElement
       while (curr) {
         // 如果路径里存在 ul 标签, 就不需要销毁
         if (curr === ul) return
-        // path.push(curr)
         curr = curr.parentNode
       }
       li.removeChild(ul)

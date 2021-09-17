@@ -18,19 +18,11 @@ export const getX = node => node.getBoundingClientRect().x
 
 export const getY = node => node.getBoundingClientRect().y
 
-// bottom = y + height = top + height
-// right = x + width = left + width
-export const computeRectPosition = node => {
-  const {
-    bottom,
-    height,
-    left,
-    right,
-    top,
-    width,
-    x,
-    y
-  } = node.getBoundingClientRect()
-
-  return { bottom, height, left, right, top, width, x, y }
-}
+/**
+ * 获取元素在窗口中的几何属性
+ * bottom = y + height = top + height
+ * right = x + width = left + width
+ * @param { HTMLDivElement } node 元素
+ * @returns { width, height, left, right, top, bottom, x, y }
+ */
+export const computeRectPosition = node => node.getBoundingClientRect()

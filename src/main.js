@@ -13,6 +13,22 @@ Vue.use(rightMenu, async (event, options) => {
     { type: 'hr' },
     {
       type: 'ul',
+      text: 'deep',
+      callback: () => console.log(111),
+      children: [
+        {
+          type: 'ul',
+          text: 'deep',
+          children: [{
+            type: 'ul',
+            text: 'deep',
+            children: []
+          }]
+        }
+      ]
+    },
+    {
+      type: 'ul',
       text: `关于 ${name}`,
       children: [
         {

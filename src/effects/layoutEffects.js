@@ -1,5 +1,6 @@
 import { ConnectOffset } from '../config'
 import { getBottom, getHeight, getX, getY, getWidth } from '../utils/getInfo'
+// import { computeRectPosition } from '../utils/getInfo'
 
 export const layoutMenuPositionEffect = ({
   baseEl,
@@ -8,9 +9,9 @@ export const layoutMenuPositionEffect = ({
   const { menu: baseMenu } = baseEl._state
   menu.style.position = 'fixed'
   // 计算位置
-  const { right: baseRight, left: baseLeft } = computeRectPosition(baseMenu)
-  const { top: baseElTop, bottom: baseElBot } = computeRectPosition(baseEl)
-  const { width: menuW, height: menuH } = computeRectPosition(menu)
+  const [baseX, baseW] = [getX(baseMenu), getWidth(baseMenu)]
+  const [baseElY, baseElBot] = [getY(baseEl), getBottom(baseEl)]
+  const [menuH, menuW] = [getHeight(menu), getWidth(menu)]
   let x = baseX + baseW
   let y = baseElY
   if (window.innerWidth < menu.offsetWidth + x) {
