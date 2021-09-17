@@ -31,11 +31,10 @@ export const initMenu = async (thenable, el, e) => {
   let flag = false
   const countClick = () => (flag = true)
   document.addEventListener('mousedown', countClick)
-  addEvent(document, 'mousedown', countClick)
   // 异步获取到菜单配置项 options
   const options = await Promise.resolve(thenable)
   // 清除异步前创建的事件
-  removeEvent()
+  document.removeEventListener('mousedown', countClick)
   // 如果异步前有点击次数, 则打断逻辑, 不创建菜单
   if (flag) return
   // 先移除之前的菜单（若有）
@@ -148,17 +147,19 @@ export const filterAttrs = (options, params) => {
 
 const renderMenu = (options) => {
   const cache = { hr: createHr, li: createLi, ul: createUl }
+  const _state = {
+    menu: null,
+    el: null
+  }
   const children = options.map(item => {
     try {
-      return cache[item.type](item, state)
+      return cache[item.type](item, _state)
     } catch (err) {
       throw new Error('未知的 type 类型 => ' + item.type)
     }
   })
-  state.menu = null
-  state.el = null
-  state.menu = createDom('ul', { class: 'vue-right-menu' }, children)
-  return state.menu
+  _state.menu = createDom('ul', { class: 'vue-right-menu' }, children)
+  return _state.menu
 }
 
 /**
@@ -210,7 +211,7 @@ const createUl = (opt, state) => {
   const li = createDom('li', filterAttrs(opt, attrs), [span])
   li._state = state
   // 添加二级菜单
-  if (opt.children) {
+  if (opt.children && opt.children.length) {
     const ul = renderMenu(opt.children)
     li.addEventListener('mouseover', e => {
       li.appendChild(ul)
