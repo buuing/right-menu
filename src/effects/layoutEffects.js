@@ -1,4 +1,4 @@
-import { ConnectOffset } from '../constants'
+import { ConnectOffset } from '../config'
 import { getBottom, getHeight, getX, getY, getWidth } from '../utils/getInfo'
 
 export const layoutMenuPositionEffect = ({

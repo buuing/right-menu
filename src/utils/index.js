@@ -1,8 +1,10 @@
-import { layoutMenuPositionEffect } from '../effects/layoutEffects.js'
+import { layoutMenuPositionEffect } from '../effects/layoutEffects'
+import { attrList, splitSymbol } from '../config'
 
 const state = {
   menu: null,
-  el: null
+  el: null,
+  eventList: []
 }
 
 /**
@@ -44,13 +46,36 @@ export const initMenu = async (thenable, el, e) => {
   menu.style.left = x + 'px'
   menu.style.top = y + 'px'
   // 窗口 blur 时销毁菜单栏
-  window.addEventListener('blur', destroyMenu)
+  addEvent(window, 'blur', destroyMenu)
   // 窗口 resize 时销毁菜单栏
-  window.addEventListener('resize', destroyMenu)
+  addEvent(window, 'resize', destroyMenu)
   // 页面点击时销毁菜单栏
-  document.addEventListener('click', clickPage)
+  addEvent(document, 'mousedown', clickPage)
   // 防止菜单组件里点出系统菜单
   menu.addEventListener('contextmenu', preventDefault)
+}
+
+/**
+ * 添加事件
+ * @param { Window | Document } target 目标事件源
+ * @param { string } eventName 事件名称
+ * @param { Function } callback 事件回调
+ * @returns { void }
+ */
+const addEvent = (target, eventName, callback) => {
+  target.addEventListener(eventName, callback)
+  state.eventList.push([target, eventName, callback])
+}
+
+/**
+ * 移除所有事件
+ * @returns { void }
+ */
+const removeEvent = () => {
+  while (state.eventList.length) {
+    const [target, eventName, callback] = state.eventList.shift()
+    target.removeEventListener(eventName, callback)
+  }
 }
 
 /**
@@ -73,15 +98,32 @@ const destroyMenu = () => {
   menuList && menuList.forEach(item => {
     item.parentNode.removeChild(item)
   })
-  // 在已有菜单的情况下才进行清除
-  if (state.menu) {
-    // 移除菜单后把监听事件移除，以免事件仍在激活状态
-    window.removeEventListener('blur', destroyMenu)
-    window.removeEventListener('resize', destroyMenu)
-    document.removeEventListener('click', clickPage)
-  }
+  // 移除所有事件
+  removeEvent()
   state.el = null
   state.menu = null
+}
+
+/**
+ * 过滤合法的 dom 属性
+ * @param { object } opt 菜单的item
+ * @returns { object }
+ */
+export const filterAttrs = (options, params) => {
+  const res = {}
+  attrList.forEach(key => {
+    if (options[key]) {
+      res[key] = options[key]
+    }
+    if (params[key]) {
+      if (res[key]) {
+        res[key] += (splitSymbol[key] + params[key])
+      } else {
+        res[key] = params[key]
+      }
+    }
+  })
+  return res
 }
 
 /**
@@ -120,12 +162,6 @@ const createDom = (tagName = 'ul', attrs = {}, children = []) => {
   Object.keys(attrs).forEach(key => {
     el.setAttribute(key, attrs[key])
   })
-  // 循环绑定事件
-  // if (event.length) {
-  //   event.forEach(item => {
-  //     el.addEventListener(item.eventName, item.callBack)
-  //   })
-  // }
   // append所有子元素
   children.forEach(child => {
     if (typeof child === 'string') {
@@ -138,12 +174,14 @@ const createDom = (tagName = 'ul', attrs = {}, children = []) => {
 }
 
 const createHr = opt => {
-  return createDom('li', { class: 'menu-hr' })
+  const attrs = { class: 'menu-hr' }
+  return createDom('li', filterAttrs(opt, attrs))
 }
 
 const createLi = opt => {
   const span = createDom('span', {}, [opt.text])
-  const li = createDom('li', { class: (opt.disabled ? 'menu-disabled' : '') }, [span])
+  const attrs = { class: opt.disabled ? 'menu-disabled' : '' }
+  const li = createDom('li', filterAttrs(opt, attrs), [span])
   if (!opt.disabled && opt.callback) {
     li.addEventListener('mousedown', e => {
       opt.callback(e, state.el)
@@ -155,7 +193,8 @@ const createLi = opt => {
 
 const createUl = (opt, state) => {
   const span = createDom('span', {}, [opt.text])
-  const li = createDom('li', { class: 'menu-list' + (opt.disabled ? ' menu-disabled' : '') }, [span])
+  const attrs = { class: 'menu-list' + (opt.disabled ? ' menu-disabled' : '') }
+  const li = createDom('li', filterAttrs(opt, attrs), [span])
   li._state = state
   // 添加二级菜单
   if (!opt.disabled && opt.children) {
