@@ -1,4 +1,4 @@
-import { getWidth, getHeight, getBottom, getX, getY } from './getInfo.js'
+import { layoutMenuPositionEffect } from '../effects/layoutEffects.js'
 
 const state = {
   menu: null,
@@ -91,15 +91,20 @@ const destroyMenu = () => {
  */
 const renderMenu = (options) => {
   const menuList = []
+  const state = {
+    menu: null,
+    el: null
+  }
   options.forEach(item => {
     switch (item.type) {
       case 'hr': menuList.push(createHr(item)); break
       case 'li': menuList.push(createLi(item)); break
-      case 'ul': menuList.push(createUl(item)); break
+      case 'ul': menuList.push(createUl(item, state)); break
       default: return console.error('未知的 type 类型: ' + item.type)
     }
   })
-  return createDom('ul', { class: 'vue-right-menu' }, menuList)
+  state.menu = createDom('ul', { class: 'vue-right-menu' }, menuList)
+  return state.menu
 }
 
 /**
@@ -148,27 +153,19 @@ const createLi = opt => {
   return li
 }
 
-const createUl = opt => {
+const createUl = (opt, state) => {
   const span = createDom('span', {}, [opt.text])
   const li = createDom('li', { class: 'menu-list' + (opt.disabled ? ' menu-disabled' : '') }, [span])
+  li._state = state
   // 添加二级菜单
   if (!opt.disabled && opt.children) {
     const ul = renderMenu(opt.children)
     li.addEventListener('mouseover', e => {
       li.appendChild(ul)
-      ul.style.position = 'fixed'
-      // 计算位置
-      let x = getX(state.menu) + getWidth(state.menu) - 5
-      const y = getY(li)
-      if (window.innerWidth - x < ul.offsetWidth) {
-        x -= getWidth(state.menu) + getWidth(ul) - 10
-      }
-      if (window.innerHeight - y < ul.offsetHeight) {
-        ul.style.top = getBottom(li) - getHeight(ul) + 5 + 'px'
-      } else {
-        ul.style.top = getY(li) - 5 + 'px'
-      }
-      ul.style.left = x + 'px'
+      layoutMenuPositionEffect({
+        baseEl: li,
+        menu: ul
+      })
     })
     li.addEventListener('mouseout', (e) => {
       if (!e.toElement) return
