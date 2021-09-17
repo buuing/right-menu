@@ -1,4 +1,4 @@
-import { getWidth, getHeight, getBottom, getX, getY } from './getInfo.js'
+import { computeRectPosition } from './getInfo.js'
 
 const state = {
   menu: null,
@@ -28,29 +28,35 @@ export const initMenu = async (thenable, el, e) => {
   const options = await Promise.resolve(thenable)
   // 先移除之前的菜单（若有）
   destroyMenu()
+
   const menu = renderMenu(options)
   state.menu = menu
   state.el = el
   document.body.appendChild(menu)
-  // 计算位置
-  let x = e.clientX
-  let y = e.clientY
-  if (window.innerWidth - x < menu.offsetWidth) {
-    x -= menu.offsetWidth
-  }
-  if (window.innerHeight - y < menu.offsetHeight) {
-    y -= menu.offsetHeight
-  }
-  menu.style.left = x + 'px'
-  menu.style.top = y + 'px'
+
+  // 计算 menu 的位置
+  const { clientX: x0, clientY: y0 } = e
+  const { width } = computeRectPosition(menu)
+
+  const x1 = window.innerWidth - x0
+  const y1 = window.innerHeight - y0
+
+  menu.style[['left', 'right'][+(x1 < width)]] = [x0, x1][+(x1 < width)] + 'px'
+  menu.style[['top', 'bottom'][+(y1 < width)]] = [y0, y1][+(y1 < width)] + 'px'
+
+  // 防止菜单组件里点出系统菜单
+  menu.addEventListener('contextmenu', preventDefault)
+
   // 窗口 blur 时销毁菜单栏
-  window.addEventListener('blur', destroyMenu)
+  window.addEventListener('blur', () => {
+    console.log(1)
+    destroyMenu()
+    this.focus()
+  })
   // 窗口 resize 时销毁菜单栏
   window.addEventListener('resize', destroyMenu)
   // 页面点击时销毁菜单栏
   document.addEventListener('click', clickPage)
-  // 防止菜单组件里点出系统菜单
-  menu.addEventListener('contextmenu', preventDefault)
 }
 
 /**
@@ -89,17 +95,15 @@ const destroyMenu = () => {
  * @param { object[] } options
  * @returns { HTMLDivElement }
  */
+
 const renderMenu = (options) => {
-  const menuList = []
-  options.forEach(item => {
-    switch (item.type) {
-      case 'hr': menuList.push(createHr(item)); break
-      case 'li': menuList.push(createLi(item)); break
-      case 'ul': menuList.push(createUl(item)); break
-      default: return console.error('未知的 type 类型: ' + item.type)
-    }
-  })
-  return createDom('ul', { class: 'vue-right-menu' }, menuList)
+  const cache = { hr: createHr, li: createLi, ul: createUl }
+  try {
+    const menuList = options.map(item => cache[item.type](item))
+    return createDom('ul', { class: 'vue-right-menu' }, menuList)
+  } catch (e) {
+    throw new Error('未知的 type 类型')
+  }
 }
 
 /**
@@ -122,13 +126,15 @@ const createDom = (tagName = 'ul', attrs = {}, children = []) => {
   //   })
   // }
   // append所有子元素
+  // [TODO:]bug here  innerHTML 会清除之前 append 的所有 child
   children.forEach(child => {
     if (typeof child === 'string') {
-      el.innerHTML = child
-    } else {
+      el.innerHTML += child
+    } else if (child.nodeType === 1) {
       el.appendChild(child)
     }
   })
+  // el.innerHTML = children.join('')
   return el
 }
 
@@ -137,47 +143,56 @@ const createHr = opt => {
 }
 
 const createLi = opt => {
-  const span = createDom('span', {}, [opt.text])
-  const li = createDom('li', { class: (opt.disabled ? 'menu-disabled' : '') }, [span])
-  if (!opt.disabled && opt.callback) {
-    li.addEventListener('mousedown', e => {
-      opt.callback(e, state.el)
-      destroyMenu()
-    })
+  const li = createDom('li', { class: (opt.disabled ? 'menu-disabled' : '') }, [createDom('span', {}, [opt.text, '测试'])])
+
+  if (opt.disabled) {
+    return li
   }
+
+  if (!opt.callback) {
+    throw new Error('菜单选项对应的事件未添加')
+  }
+
+  li.addEventListener('mousedown', e => {
+    opt.callback(e, state.el)
+    destroyMenu()
+  })
+
   return li
 }
 
 const createUl = opt => {
-  const span = createDom('span', {}, [opt.text])
-  const li = createDom('li', { class: 'menu-list' + (opt.disabled ? ' menu-disabled' : '') }, [span])
+  if (opt.disabled) {
+    return createDom('li', { class: 'menu-list menu-disabled' }, [createDom('span', {}, [opt.text])])
+  }
+
+  const li = createDom('li', { class: 'menu-list' }, [createDom('span', {}, [opt.text])])
   // 添加二级菜单
-  if (!opt.disabled && opt.children) {
+  if (opt.children) {
     const ul = renderMenu(opt.children)
+    ul.style.position = 'fixed'
+
     li.addEventListener('mouseover', e => {
       li.appendChild(ul)
-      ul.style.position = 'fixed'
       // 计算位置
-      let x = getX(state.menu) + getWidth(state.menu) - 5
-      const y = getY(li)
-      if (window.innerWidth - x < ul.offsetWidth) {
-        x -= getWidth(state.menu) + getWidth(ul) - 10
-      }
-      if (window.innerHeight - y < ul.offsetHeight) {
-        ul.style.top = getBottom(li) - getHeight(ul) + 5 + 'px'
-      } else {
-        ul.style.top = getY(li) - 5 + 'px'
-      }
-      ul.style.left = x + 'px'
+      const { right: menuRight, left: menuLeft } = computeRectPosition(state.menu)
+
+      const { top: liTop, bottom: liBottom } = computeRectPosition(li)
+
+      const { width: ulWidth, height: ulHeight } = computeRectPosition(ul)
+
+      ul.style.left = (window.innerWidth - menuRight < ulWidth ? menuLeft - ulWidth + 5 : menuRight - 5) + 'px'
+
+      ul.style.top = (window.innerHeight - liBottom < ulHeight ? liBottom - ulHeight : liTop) + 'px'
     })
     li.addEventListener('mouseout', (e) => {
       if (!e.toElement) return
-      const path = []
+      // const path = []  for ?
       let curr = e.toElement
       while (curr) {
         // 如果路径里存在 ul 标签, 就不需要销毁
         if (curr === ul) return
-        path.push(curr)
+        // path.push(curr)
         curr = curr.parentNode
       }
       li.removeChild(ul)
