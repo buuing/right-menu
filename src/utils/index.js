@@ -1,4 +1,5 @@
 import { layoutMenuPositionEffect } from '../effects/layoutEffects'
+import { computeRectPosition } from './getInfo'
 import { attrList, splitSymbol } from '../config'
 
 const state = {
@@ -30,11 +31,13 @@ export const initMenu = async (thenable, el, e) => {
   const options = await Promise.resolve(thenable)
   // 先移除之前的菜单（若有）
   destroyMenu()
+
   const menu = renderMenu(options)
   state.menu = menu
   state.el = el
   document.body.appendChild(menu)
-  // 计算位置
+
+  // 计算一级菜单栏的位置
   let x = e.clientX
   let y = e.clientY
   if (window.innerWidth - x < menu.offsetWidth) {
@@ -45,14 +48,16 @@ export const initMenu = async (thenable, el, e) => {
   }
   menu.style.left = x + 'px'
   menu.style.top = y + 'px'
+
+  // 防止菜单组件里点出系统菜单
+  menu.addEventListener('contextmenu', preventDefault)
   // 窗口 blur 时销毁菜单栏
   addEvent(window, 'blur', destroyMenu)
   // 窗口 resize 时销毁菜单栏
   addEvent(window, 'resize', destroyMenu)
   // 页面点击时销毁菜单栏
   addEvent(document, 'mousedown', clickPage)
-  // 防止菜单组件里点出系统菜单
-  menu.addEventListener('contextmenu', preventDefault)
+
 }
 
 /**
@@ -131,22 +136,22 @@ export const filterAttrs = (options, params) => {
  * @param { object[] } options
  * @returns { HTMLDivElement }
  */
+
 const renderMenu = (options) => {
-  const menuList = []
-  const state = {
-    menu: null,
-    el: null
-  }
-  options.forEach(item => {
-    switch (item.type) {
-      case 'hr': menuList.push(createHr(item)); break
-      case 'li': menuList.push(createLi(item)); break
-      case 'ul': menuList.push(createUl(item, state)); break
-      default: return console.error('未知的 type 类型: ' + item.type)
+  const cache = { hr: createHr, li: createLi, ul: createUl }
+
+  try {
+    const state = {
+      menu: null,
+      el: null
     }
-  })
-  state.menu = createDom('ul', { class: 'vue-right-menu' }, menuList)
-  return state.menu
+
+    state.menu = createDom('ul', { class: 'vue-right-menu' }, options.map(item => cache[item.type](item, state)))
+
+    return state.menu
+  } catch (e) {
+    throw new Error('未知的 type 类型')
+  }
 }
 
 /**
@@ -163,10 +168,11 @@ const createDom = (tagName = 'ul', attrs = {}, children = []) => {
     el.setAttribute(key, attrs[key])
   })
   // append所有子元素
+  // [TODO:]bug here  innerHTML 会清除之前 append 的所有 child
   children.forEach(child => {
     if (typeof child === 'string') {
-      el.innerHTML = child
-    } else {
+      el.innerHTML += child
+    } else if (child.nodeType === 1) {
       el.appendChild(child)
     }
   })
@@ -188,6 +194,18 @@ const createLi = opt => {
       destroyMenu()
     })
   }
+
+  // [TODO:] 每一项非禁止的菜单项目都应该对应一个回调函数
+  // if (!opt.callback) {
+  //   throw new Error('菜单选项对应的事件未添加')
+  // }
+  const li = createDom('li', { class: (opt.disabled ? 'menu-disabled' : '') }, [createDom('span', {}, [opt.text, '测试'])])
+
+  li.addEventListener('mousedown', e => {
+    opt.callback(e, state.el)
+    destroyMenu()
+  })
+
   return li
 }
 
@@ -197,7 +215,7 @@ const createUl = (opt, state) => {
   const li = createDom('li', filterAttrs(opt, attrs), [span])
   li._state = state
   // 添加二级菜单
-  if (!opt.disabled && opt.children) {
+  if (opt.children) {
     const ul = renderMenu(opt.children)
     li.addEventListener('mouseover', e => {
       li.appendChild(ul)
@@ -208,12 +226,12 @@ const createUl = (opt, state) => {
     })
     li.addEventListener('mouseout', (e) => {
       if (!e.toElement) return
-      const path = []
+      // const path = []  why defined a path here ?
       let curr = e.toElement
       while (curr) {
         // 如果路径里存在 ul 标签, 就不需要销毁
         if (curr === ul) return
-        path.push(curr)
+        // path.push(curr)
         curr = curr.parentNode
       }
       li.removeChild(ul)

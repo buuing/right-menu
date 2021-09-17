@@ -8,9 +8,9 @@ export const layoutMenuPositionEffect = ({
   const { menu: baseMenu } = baseEl._state
   menu.style.position = 'fixed'
   // 计算位置
-  const [baseX, baseW] = [getX(baseMenu), getWidth(baseMenu)]
-  const [baseElY, baseElBot] = [getY(baseEl), getBottom(baseEl)]
-  const [menuH, menuW] = [getHeight(menu), getWidth(menu)]
+  const { right: baseRight, left: baseLeft } = computeRectPosition(baseMenu)
+  const { top: baseElTop, bottom: baseElBot } = computeRectPosition(baseEl)
+  const { width: menuW, height: menuH } = computeRectPosition(menu)
   let x = baseX + baseW
   let y = baseElY
   if (window.innerWidth < menu.offsetWidth + x) {
