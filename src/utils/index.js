@@ -1,3 +1,4 @@
+import { layoutMenuPositionEffect } from '../effects/layoutEffects.js'
 import { computeRectPosition } from './getInfo.js'
 
 const state = {
@@ -48,11 +49,7 @@ export const initMenu = async (thenable, el, e) => {
   menu.addEventListener('contextmenu', preventDefault)
 
   // 窗口 blur 时销毁菜单栏
-  window.addEventListener('blur', () => {
-    console.log(1)
-    destroyMenu()
-    this.focus()
-  })
+  window.addEventListener('blur', destroyMenu)
   // 窗口 resize 时销毁菜单栏
   window.addEventListener('resize', destroyMenu)
   // 页面点击时销毁菜单栏
@@ -98,9 +95,16 @@ const destroyMenu = () => {
 
 const renderMenu = (options) => {
   const cache = { hr: createHr, li: createLi, ul: createUl }
+
   try {
-    const menuList = options.map(item => cache[item.type](item))
-    return createDom('ul', { class: 'vue-right-menu' }, menuList)
+    const state = {
+      menu: null,
+      el: null
+    }
+
+    state.menu = createDom('ul', { class: 'vue-right-menu' }, options.map(item => cache[item.type](item, state)))
+
+    return state.menu
   } catch (e) {
     throw new Error('未知的 type 类型')
   }
@@ -134,7 +138,6 @@ const createDom = (tagName = 'ul', attrs = {}, children = []) => {
       el.appendChild(child)
     }
   })
-  // el.innerHTML = children.join('')
   return el
 }
 
@@ -143,15 +146,15 @@ const createHr = opt => {
 }
 
 const createLi = opt => {
-  const li = createDom('li', { class: (opt.disabled ? 'menu-disabled' : '') }, [createDom('span', {}, [opt.text, '测试'])])
-
   if (opt.disabled) {
-    return li
+    return createDom('li', { class: (opt.disabled ? 'menu-disabled' : '') }, [createDom('span', {}, [opt.text, '测试'])])
   }
 
-  if (!opt.callback) {
-    throw new Error('菜单选项对应的事件未添加')
-  }
+  // [TODO:] 每一项非禁止的菜单项目都应该对应一个回调函数
+  // if (!opt.callback) {
+  //   throw new Error('菜单选项对应的事件未添加')
+  // }
+  const li = createDom('li', { class: (opt.disabled ? 'menu-disabled' : '') }, [createDom('span', {}, [opt.text, '测试'])])
 
   li.addEventListener('mousedown', e => {
     opt.callback(e, state.el)
@@ -161,33 +164,27 @@ const createLi = opt => {
   return li
 }
 
-const createUl = opt => {
+const createUl = (opt, state) => {
   if (opt.disabled) {
     return createDom('li', { class: 'menu-list menu-disabled' }, [createDom('span', {}, [opt.text])])
   }
 
-  const li = createDom('li', { class: 'menu-list' }, [createDom('span', {}, [opt.text])])
+  const li = createDom('li', { class: 'menu-list' + (opt.disabled ? ' menu-disabled' : '') }, [createDom('span', {}, [opt.text])])
+  li._state = state
   // 添加二级菜单
   if (opt.children) {
     const ul = renderMenu(opt.children)
-    ul.style.position = 'fixed'
 
     li.addEventListener('mouseover', e => {
       li.appendChild(ul)
-      // 计算位置
-      const { right: menuRight, left: menuLeft } = computeRectPosition(state.menu)
-
-      const { top: liTop, bottom: liBottom } = computeRectPosition(li)
-
-      const { width: ulWidth, height: ulHeight } = computeRectPosition(ul)
-
-      ul.style.left = (window.innerWidth - menuRight < ulWidth ? menuLeft - ulWidth + 5 : menuRight - 5) + 'px'
-
-      ul.style.top = (window.innerHeight - liBottom < ulHeight ? liBottom - ulHeight : liTop) + 'px'
+      layoutMenuPositionEffect({
+        baseEl: li,
+        menu: ul
+      })
     })
     li.addEventListener('mouseout', (e) => {
       if (!e.toElement) return
-      // const path = []  for ?
+      // const path = []  why defined a path here ?
       let curr = e.toElement
       while (curr) {
         // 如果路径里存在 ul 标签, 就不需要销毁
