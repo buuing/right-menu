@@ -13,20 +13,21 @@ Vue.use(rightMenu, async (event, options) => {
     { type: 'hr' },
     {
       type: 'ul',
-      text: 'deep',
-      callback: () => console.log(111),
+      text: '一级',
       children: [
         {
           type: 'ul',
-          text: 'deep',
-          children: [{
-            type: 'ul',
-            text: 'deep',
-            children: []
-          }]
+          text: '二级',
+          children: [
+            {
+              type: 'li',
+              text: '三级'
+            }
+          ]
         }
       ]
     },
+    { type: 'hr' },
     {
       type: 'ul',
       text: `关于 ${name}`,

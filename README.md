@@ -313,8 +313,9 @@ export default {
 <table>
   <tr>
     <td align="center"><a href="https://github.com/buuing" target="_blank"><img width="50px" src="https://avatars.githubusercontent.com/u/36689704"></a><div><span title="核心开发">🤖</span> <span title="修复bug">🚧</span> <span title="维护文档">📚</span></div></td>
-    <td align="center"><a href="https://github.com/dora1995" target="_blank"><img width="50px" src="https://avatars.githubusercontent.com/u/53267289"></a><div><span title="修复bug">🚧</span></div></td>
     <td align="center"><a href="https://github.com/yushen7" target="_blank"><img width="50px" src="https://avatars.githubusercontent.com/u/35678187"></a><div><span title="核心开发">🤖</span></div></td>
+    <td align="center"><a href="https://github.com/qingtiantongxie" target="_blank"><img width="50px" src="https://avatars.githubusercontent.com/u/24731632"></a><div><span title="逻辑优化">🦄</span><span title="修复bug">🚧</span></div></td>
+    <td align="center"><a href="https://github.com/dora1995" target="_blank"><img width="50px" src="https://avatars.githubusercontent.com/u/53267289"></a><div><span title="修复bug">🚧</span></div></td>
   </tr>
 </table>
 
@@ -328,12 +329,13 @@ export default {
   - [ ] 增加icon选项, 可以使用一些内置图标, 图片待定
 
 - `💡 待认领`
+  - [ ] 🛠 [**在mac系统下, 第二次点击控制台时 blur 事件没有触发**](https://github.com/buuing/vue-right-menu/issues/10)
   - [ ] 🥉 **增加 win7 / win8 浏览器菜单主题样式**
   - [ ] 🥉 **自适应系统的主题色 (mac的暗黑模式)**
   - [ ] 🥈 **浏览器放大之后, 看看能否保持跟系统菜单同样的大小**
-  - [ ] 🥈 [**在mac系统下, 第二次点击控制台时 blur 事件没有触发**](https://github.com/buuing/vue-right-menu/issues/10)
   - [ ] 🥇 **看看能否对外暴露一个作用域插槽或者是render函数, 来渲染jsx?**
   - [ ] 🥇 **看看react里是否可以像vue一样通过自定义指令的方式来使用插件, 最好统一一下这俩框架的用法**
+  - [ ] 🥇 **后续也可以继续优化一下三级菜单的方向**
 
 <br />
 
