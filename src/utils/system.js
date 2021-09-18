@@ -14,3 +14,12 @@ export const isWin7 = userAgent.indexOf('Windows NT 6.1') > -1 || userAgent.inde
 
 export const isWin8 = userAgent.indexOf('Windows NT 8') > -1 || userAgent.indexOf('Windows 8') > -1
 export const isWin10 = userAgent.indexOf('Windows NT 10') > -1 || userAgent.indexOf('Windows 10') > -1
+
+export const getOperatSystem = () => {
+  const osList = { isWin, isWin10, isMac, isWin7, isWin8, isUnix, isLinux, isWin2000, isWinXP, isWin2003, isWinVista }
+  for (const key in osList) {
+    if (osList[key]) { return key }
+  }
+  // 如果没有对应的主题样式，默认引入mac的样式
+  return 'isMac'
+}
