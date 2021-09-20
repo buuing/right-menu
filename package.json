@@ -5,7 +5,6 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "docs": "vuepress dev ./packages/docs"
   },
   "keywords": [],
   "author": "",
