@@ -1,5 +1,5 @@
 <template>
-  <div v-menu>
+  <div v-if="show" v-menu>
     <Header />
     <el-container style="margin-top: 60px; max-width: none; background: #f3f4fa">
       <el-aside class="hidden-719" style="width: 260px">

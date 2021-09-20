@@ -3,7 +3,6 @@ import 'element-ui/lib/theme-chalk/index.css'
 // import { install } from '@icon-park/vue/es/all'
 import pubsub from 'pubsub-js'
 import Vuex from 'vuex'
-import axios from 'axios'
 
 export function interceptRouterError (router) {
   // 获取原型对象上的 push 函数

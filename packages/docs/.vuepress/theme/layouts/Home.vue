@@ -1,5 +1,5 @@
 <template>
-  <div v-menu class="home-page">
+  <div v-if="show" v-menu class="home-page">
     <Header />
     <div class="home-page-banner">
       <el-container style="align-items: center">
