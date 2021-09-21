@@ -3,6 +3,10 @@ import { computeRectPosition } from '../utils/getInfo'
 import { filterAttrs, renderMenu, destroyMenu } from './index'
 import { ItemType, AttrsType } from '../types/index'
 
+type HTMLListElement = HTMLElement & {
+  _state: { menu?: HTMLElement }
+}
+
 /**
  * 渲染dom
  * @param { String } [ tagName = 'ul' ] 元素名称
@@ -52,21 +56,18 @@ export const createLi = (opt: ItemType): HTMLElement => {
 
 export const createUl = (
   opt: ItemType,
-  state: { menu: HTMLElement | null}
+  state: HTMLListElement['_state']
 ): HTMLElement => {
   const span = createDom('span', {}, [opt.text])
   const attrs = { class: 'menu-list' + (opt.disabled ? ' menu-disabled' : '') }
-  const li = createDom('li', filterAttrs(opt, attrs), [span])
-  li['_state'] = state
+  const li: HTMLListElement = createDom('li', filterAttrs(opt, attrs), [span]) as HTMLListElement
+  li._state = state
   // 添加二级菜单
   if (opt.children && opt.children.length) {
     const ul = renderMenu(opt.children)
     li.addEventListener('mouseover', e => {
       li.appendChild(ul)
-      layoutMenuPositionEffect({
-        baseEl: li,
-        menu: ul
-      })
+      layoutMenuPositionEffect(li, ul)
     })
     li.addEventListener('mouseout', (e: MouseEvent) => {
       if (!e['toElement']) return
@@ -82,11 +83,12 @@ export const createUl = (
   return li
 }
 
-const layoutMenuPositionEffect = ({
-  baseEl,
-  menu
-}: { [key: string]: HTMLElement }): void => {
+const layoutMenuPositionEffect = (
+  baseEl: HTMLListElement,
+  menu: HTMLElement
+): void => {
   const { menu: baseMenu } = baseEl['_state']
+  if (!baseMenu) return
   menu.style.position = 'fixed'
   // 计算位置
   const { x: baseX, width: baseW } = computeRectPosition(baseMenu)

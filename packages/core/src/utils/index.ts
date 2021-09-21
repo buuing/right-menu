@@ -120,9 +120,7 @@ const clickPage: EventListener = e => {
  * @returns { HTMLElement }
  */
 export const renderMenu = (options: ItemType[]): HTMLElement => {
-  const _state = {
-    menu: null as HTMLElement | null,
-  }
+  const _state: { menu?: HTMLElement } = {}
   const children = options.map(item => {
     switch (item.type) {
       case 'hr': return createHr(item)
