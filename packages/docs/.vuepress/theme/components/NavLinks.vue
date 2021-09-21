@@ -19,7 +19,7 @@
       />
     </div>
     <div class="nav-item">
-      <a href="https://github.com/buuing/right-menu" class="nav-link">
+      <a href="https://github.com/buuing/right-menu" target="_black" class="nav-link">
         Github&ensp;
         <img src="https://img.shields.io/github/stars/buuing/right-menu?style=social" height="22" align="top" style="transform: translateY(5px)" />
       </a>

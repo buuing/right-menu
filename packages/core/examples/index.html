@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <div oncontextmenu="e => fn(e)">111</div>
+  <div onclick="e => fn(e)">222</div>
+  <script src="../dist/right-menu.umd.js"></script>
+  <script>
+    function fn(e, options) {
+      console.log(e, options)
+    }
+  </script>
+</body>
+</html>

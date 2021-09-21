@@ -1,13 +1,13 @@
 
 <div align="center">
-  <h1>vue-right-menu</h1>
+  <h1>right-menu</h1>
   <p>一个基于vue的右键菜单插件, 通过添加指令的方式可以展示不同的菜单内容</p>
   <p>
-    <a href="https://github.com/buuing/vue-right-menu/stargazers" target="_black">
-      <img src="https://img.shields.io/github/stars/buuing/vue-right-menu?color=%238aacf9&logo=github&style=flat-square" alt="stars" />
+    <a href="https://github.com/buuing/right-menu/stargazers" target="_black">
+      <img src="https://img.shields.io/github/stars/buuing/right-menu?color=%238aacf9&logo=github&style=flat-square" alt="stars" />
     </a>
-    <a href="https://github.com/buuing/vue-right-menu/network/members" target="_black">
-      <img src="https://img.shields.io/github/forks/buuing/vue-right-menu?color=%238aacf9&logo=github&style=flat-square" alt="forks" />
+    <a href="https://github.com/buuing/right-menu/network/members" target="_black">
+      <img src="https://img.shields.io/github/forks/buuing/right-menu?color=%238aacf9&logo=github&style=flat-square" alt="forks" />
     </a>
     <a href="https://www.npmjs.com/package/vue-right-menu" target="_black">
       <img src="https://img.shields.io/npm/v/vue-right-menu?color=%238aacf9&logo=npm&style=flat-square" alt="version" />
