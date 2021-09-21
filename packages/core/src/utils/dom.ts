@@ -36,12 +36,13 @@ export const createDom = (
   return dom
 }
 
-export const createHr = (opt: ItemType): HTMLElement => {
+export const createHr = <T extends ItemType & { type: 'hr' }>(opt: T): HTMLElement => {
   const attrs = { class: 'menu-hr' }
   return createDom('li', filterAttrs(opt, attrs))
 }
 
-export const createLi = (opt: ItemType): HTMLElement => {
+
+export const createLi = <T extends ItemType & { type: 'li' }>(opt: T): HTMLElement => {
   const span = createDom('span', {}, [opt.text])
   const attrs = { class: opt.disabled ? 'menu-disabled' : '' }
   const li = createDom('li', filterAttrs(opt, attrs), [span])
@@ -54,8 +55,9 @@ export const createLi = (opt: ItemType): HTMLElement => {
   return li
 }
 
-export const createUl = (
-  opt: ItemType,
+
+export const createUl = <T extends ItemType & { type: 'ul' }>(
+  opt: T,
   state: HTMLListElement['_state']
 ): HTMLElement => {
   const span = createDom('span', {}, [opt.text])
