@@ -6,7 +6,7 @@ import resolve from '@rollup/plugin-node-resolve'
 import commonjs from '@rollup/plugin-commonjs'
 import babel from 'rollup-plugin-babel'
 import { terser } from 'rollup-plugin-terser'
-import del from 'rollup-plugin-delete'
+// import del from 'rollup-plugin-delete'
 import pkg from './package.json'
 
 export default [
@@ -56,20 +56,4 @@ export default [
       babel({ exclude: 'node_modules/**' }),
     ]
   },
-  // {
-  //   input: "dist/src/index.d.ts",
-  //   output: [
-  //     {
-  //       file: "dist/index.d.ts",
-  //       format: "es"
-  //     }
-  //   ],
-  //   plugins: [
-  //     dts(),
-  //     del({
-  //       targets: 'dist/src',
-  //       hook: 'buildEnd'
-  //     })
-  //   ],
-  // },
 ]
