@@ -13,4 +13,33 @@ npm install @right-menu/core
 yarn add @right-menu/core
 ```
 
+2. 使用
+
+```js
+import RightMenu from '@right-menu/core'
+
+new RightMenu('.box', [
+  {
+    type: 'li',
+    text: '按钮'
+  }
+])
+```
+
 ## 通过 script 标签引入
+
+```html
+<div class="box" style="height: 300px; background: #ccc"></div>
+
+<script src="../dist/right-menu.umd.js"></script>
+<script>
+
+  new RightMenu('.box', [
+    {
+      type: 'li',
+      text: '按钮'
+    }
+  ])
+
+</script>
+```
