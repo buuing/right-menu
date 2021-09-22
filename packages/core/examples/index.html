@@ -7,13 +7,17 @@
   <title>Document</title>
 </head>
 <body>
-  <div oncontextmenu="e => fn(e)">111</div>
-  <div onclick="e => fn(e)">222</div>
+  <div class="box" style="height: 300px; background: #ccc"></div>
   <script src="../dist/right-menu.umd.js"></script>
   <script>
-    function fn(e, options) {
-      console.log(e, options)
-    }
+
+    new RightMenu('.box', [
+      {
+        type: 'li',
+        text: '哈哈哈'
+      }
+    ])
+
   </script>
 </body>
 </html>

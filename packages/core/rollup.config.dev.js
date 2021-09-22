@@ -1,5 +1,5 @@
 import path from 'path'
-import typescript from 'rollup-plugin-typescript2'
+import ts from 'rollup-plugin-typescript2'
 import json from '@rollup/plugin-json'
 import resolve from '@rollup/plugin-node-resolve'
 import commonjs from '@rollup/plugin-commonjs'
@@ -15,20 +15,28 @@ export default {
   output: [
     {
       file: `${pkg.browser}.js`,
-      format: 'es',
+      format: 'umd',
       name: 'RightMenu',
+      sourcemap: true,
+    },
+    {
+      file: `${pkg.module}.js`,
+      format: 'es',
       sourcemap: true,
     },
   ],
   plugins: [
-    resolve(),
-    commonjs(),
-    typescript({
+    styles(),
+    ts({
       tsconfig: path.resolve(__dirname, './tsconfig.json'),
       extensions: ['.js', '.ts']
     }),
+    resolve({
+      jsnext: true, 
+      main: true 
+    }),
+    commonjs(),
     json(),
-    // styles(),
     // eslint({
     //   throwOnError: true,
     //   throwOnWarning: true,
