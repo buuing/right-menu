@@ -1,12 +1,18 @@
 {
-  "name": "right-menu",
-  "version": "1.0.0",
-  "private": true,
-  "description": "",
-  "main": "index.js",
-  "scripts": {
+  "name": "root",
+  "devDependencies": {
+    "lerna": "^4.0.0"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC"
+  "scripts": {
+    "bootstrap": "lerna bootstrap",
+    "vue": "lerna run --scope @right-menu/core --scope vue-right-menu dev --parallel",
+    "build": "lerna run build --sort --stream",
+    "update-version": "lerna version --conventional-commits --no-push --no-changelog --no-git-tag-version",
+    "publish-to-npm": "lerna publish from-package",
+    "publish-beta": "lerna publish --no-git-tag-version --dist-tag beta"
+  },
+  "private": true,
+  "workspaces": [
+    "packages/*"
+  ]
 }
