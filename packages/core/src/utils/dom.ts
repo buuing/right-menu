@@ -41,7 +41,6 @@ export const createHr = <T extends ItemType & { type: 'hr' }>(opt: T): HTMLEleme
   return createDom('li', filterAttrs(opt, attrs))
 }
 
-
 export const createLi = <T extends ItemType & { type: 'li' }>(opt: T): HTMLElement => {
   const span = createDom('span', {}, [opt.text])
   const attrs = { class: opt.disabled ? 'menu-disabled' : '' }
@@ -55,13 +54,12 @@ export const createLi = <T extends ItemType & { type: 'li' }>(opt: T): HTMLEleme
   return li
 }
 
-
 export const createUl = <T extends ItemType & { type: 'ul' }>(
   opt: T,
   state: HTMLListElement['_state']
 ): HTMLElement => {
   const span = createDom('span', {}, [opt.text])
-  const attrs = { class: 'menu-list' + (opt.disabled ? ' menu-disabled' : '') }
+  const attrs = { class: 'menu-ul' + (opt.disabled ? ' menu-disabled' : '') }
   const li: HTMLListElement = createDom('li', filterAttrs(opt, attrs), [span]) as HTMLListElement
   li._state = state
   // 添加二级菜单

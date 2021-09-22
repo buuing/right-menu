@@ -6,11 +6,11 @@ import {
   createDom,
 } from './dom'
 import { ATTR_LIST, SPLIT_SYMBOL } from '../config'
-import { ItemType, AttrsType } from '../types/index'
+import { LiType, ItemType, AttrsType } from '../types/index'
 
 const state = {
   menu: null as HTMLElement | null,
-  eventList: [] as Array<[Window | Document, string, ItemType['callback']]>
+  eventList: [] as Array<[Window | Document, string, LiType['callback']]>
 }
 
 /**
@@ -87,7 +87,7 @@ export const initMenu = async (
 const addEvent = (
   target: Window | Document,
   eventName: string,
-  callback: ItemType['callback']
+  callback: LiType['callback']
 ): void => {
   target.addEventListener(eventName, callback)
   state.eventList.push([target, eventName, callback])
@@ -126,7 +126,7 @@ export const renderMenu = (options: ItemType[]): HTMLElement => {
       case 'hr': return createHr(item)
       case 'li': return createLi(item)
       case 'ul': return createUl(item, _state)
-      default: throw new Error('未知的 type 类型 => ' + item.type)
+      default: throw new Error('未知的 type 类型 => ' + item['type'])
     }
   })
   return (_state.menu = createDom('ul', { class: 'vue-right-menu' }, children))

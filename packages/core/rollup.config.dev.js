@@ -1,4 +1,4 @@
-// import path from 'path'
+import path from 'path'
 import typescript from 'rollup-plugin-typescript2'
 import json from '@rollup/plugin-json'
 import resolve from '@rollup/plugin-node-resolve'
@@ -23,24 +23,24 @@ export default {
   plugins: [
     resolve(),
     commonjs(),
+    typescript({
+      tsconfig: path.resolve(__dirname, './tsconfig.json'),
+      extensions: ['.js', '.ts']
+    }),
     json(),
-    styles(),
+    // styles(),
     // eslint({
     //   throwOnError: true,
     //   throwOnWarning: true,
     //   include: ['src/**'],
     //   exclude: ['node_modules/**']
     // }),
-    typescript({
-      // tsconfig: path.resolve(__dirname, './tsconfig.json'),
-      // extensions: ['.js', '.ts']
-    }),
     babel({ exclude: 'node_modules/**' }),
-    // livereload(),
-    // serve({
-    //   open: true,
-    //   openPage: '/examples/index.html',
-    //   contentBase: './'
-    // }),
+    livereload(),
+    serve({
+      open: true,
+      openPage: '/examples/index.html',
+      contentBase: './'
+    }),
   ]
 }
