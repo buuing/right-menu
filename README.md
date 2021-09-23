@@ -310,18 +310,20 @@ export default {
 
 ## 贡献者
 
-+ `🤖 核心开发`: 实现了某个重要的功能, 或者是核心逻辑
-+ `🦄 逻辑优化`: 优化了某处逻辑问题, 对代码性能做出了贡献
-+ `🚧 修复bug`: 修复了某个可能会导致代码运行的漏洞
-+ `📚 维护文档`: 参与了文档的开发 / 维护 / 翻译
++ **🤖 `核心开发`：** 实现了某个重要的功能 / 核心逻辑, 或者是提交过多次PR
++ **🦄 `逻辑优化`：** 优化了某处逻辑问题, 对代码的性能做出了贡献
++ **🛰 `基础建设`：** 完善项目的打包发布流程, 优化了一些项目构建相关
++ **🚧 `需求功能`：** 参与项目的需求开发, 提交PR完成合并
++ **🛠 `修复bug`：** 修复了某个可能会导致代码运行的漏洞
++ **📚 `维护文档`：** 参与了文档的开发 / 维护 / 翻译
 
 <table>
   <tr>
-    <td align="center"><a href="https://github.com/buuing" target="_blank"><img width="50px" src="https://avatars.githubusercontent.com/u/36689704"></a><div><span title="核心开发">🤖</span> <span title="修复bug">🚧</span> <span title="维护文档">📚</span></div></td>
+    <td align="center"><a href="https://github.com/buuing" target="_blank"><img width="50px" src="https://avatars.githubusercontent.com/u/36689704"></a><div><span title="核心开发">🤖</span> <span title="基础建设">🛰</span> <span title="维护文档">📚</span></div></td>
+    <td align="center"><a href="https://github.com/Deja-vuuu" target="_blank"><img width="50px" src="https://avatars.githubusercontent.com/u/27748682"></a><div><span title="核心开发">🤖</span> <span title="基础建设">🛰</span></div></td>
     <td align="center"><a href="https://github.com/yushen7" target="_blank"><img width="50px" src="https://avatars.githubusercontent.com/u/35678187"></a><div><span title="核心开发">🤖</span></div></td>
-    <td align="center"><a href="https://github.com/qingtiantongxie" target="_blank"><img width="50px" src="https://avatars.githubusercontent.com/u/24731632"></a><div><span title="逻辑优化">🦄</span><span title="修复bug">🚧</span></div></td>
-    <td align="center"><a href="https://github.com/dora1995" target="_blank"><img width="50px" src="https://avatars.githubusercontent.com/u/53267289"></a><div><span title="修复bug">🚧</span></div></td>
-    <td align="center"><a href="https://github.com/Deja-vuuu" target="_blank"><img width="50px" src="https://avatars.githubusercontent.com/u/27748682"></a><div><span title="核心开发">🤖</span></div></td>
+    <td align="center"><a href="https://github.com/qingtiantongxie" target="_blank"><img width="50px" src="https://avatars.githubusercontent.com/u/24731632"></a><div><span title="逻辑优化">🦄</span> <span title="需求功能">🚧</span></div></td>
+    <td align="center"><a href="https://github.com/dora1995" target="_blank"><img width="50px" src="https://avatars.githubusercontent.com/u/53267289"></a><div><span title="修复bug">🛠</span></div></td>
   </tr>
 </table>
 
@@ -330,20 +332,18 @@ export default {
 ## 需求计划
 
 - `📆 进行中`
-  - [x] ~搭建官网文档详细描述插件如何引入和使用~
   - [ ] 增加初始化高级配置, 可以设置一些全局的选项, 以及菜单创建的生命周期
   - [ ] 增加icon选项, 可以使用一些内置图标, 图片待定
   - [ ] 自适应系统的主题色 (mac的暗黑模式) - **`rollup里使用require有问题`**
 
 - `💡 待认领`
   - [ ] 🛠 [**在mac系统下, 第二次点击控制台时 blur 事件没有触发**](https://github.com/buuing/vue-right-menu/issues/10)
-  - [ ] 🥉 增加 XP / win7 两种经典菜单主题样式
-  - [ ] 🥈 浏览器放大之后, 看看能否保持跟系统菜单同样的大小
-  - [ ] 🥈 后续也可以继续优化一下三级菜单的方向
-  - [ ] 🥇 看看能否对外暴露一个作用域插槽或者是render函数, 来渲染jsx?
-  - [ ] 🥇 **目前`core`源码包无法使用`require`动态引入css样式**
-  - [ ] 🥉 补全文档中`react`的`hooks`使用方式
-    - 文档连接: https://buuing.github.io/right-menu/usage/react.html
+  - [ ] 🚧 增加 XP / win7 两种经典菜单主题样式
+  - [ ] 🚧 浏览器放大之后, 看看能否保持跟系统菜单同样的大小
+  - [ ] 🚧 后续也可以继续优化一下三级菜单的方向
+  - [ ] 🤖 看看能否对外暴露一个作用域插槽或者是render函数, 来渲染jsx?
+  - [ ] 🛰 **目前`core`源码包无法使用`require`动态引入css样式**
+  - [ ] 📚 补全文档中`react`的`hooks`使用方式 https://buuing.github.io/right-menu/usage/react.html
 
 <br />
 
