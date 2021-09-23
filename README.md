@@ -1,5 +1,6 @@
 
 <div align="center">
+  <img src="https://raw.githubusercontent.com/buuing/right-menu/master/packages/docs/.vuepress/public/logo.png" width="180" />
   <h1>right-menu</h1>
   <p>一个基于vue的右键菜单插件, 通过添加指令的方式可以展示不同的菜单内容</p>
   <p>
