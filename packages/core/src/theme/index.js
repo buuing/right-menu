@@ -1,8 +1,9 @@
 
 import { systemDarkTheme, systemLightTheme } from '../config/index'
 import { getOperatSystem } from '../utils/system'
+
 import './index.less'
-import './theme-mac.less'
+// import './theme-mac.less'
 
 const systemTheme = window.matchMedia('(prefers-color-scheme: dark)')
 
@@ -15,10 +16,10 @@ watchSystemThemeChange()
 
 systemTheme.addEventListener('change', watchSystemThemeChange)
 
-// 添加的主题都按照theme-mac.less theme-win10.less theme-win8.less 的方式来命名
-// [TODO:] 还有一些主题样式暂时缺失，所以这里 try catch 下
-// try {
-//   require('./theme-' + getOperatSystem().toLowerCase().replace(/is/, '') + '.less')
-// } catch (e) {
-//   require('./theme-mac.less')
-// }
+// // 添加的主题都按照theme-mac.less theme-win10.less theme-win8.less 的方式来命名
+// // [TODO:] 还有一些主题样式暂时缺失，所以这里 try catch 下
+try {
+  require('./theme-' + getOperatSystem().toLowerCase().replace(/is/, '') + '.less')
+} catch (e) {
+  require('./theme-mac.less')
+}

@@ -1,12 +1,16 @@
 import path from 'path'
+
 import ts from 'rollup-plugin-typescript2'
 import json from '@rollup/plugin-json'
+
+import babel from 'rollup-plugin-babel'
 import resolve from '@rollup/plugin-node-resolve'
 import commonjs from '@rollup/plugin-commonjs'
-import babel from 'rollup-plugin-babel'
+import styles from 'rollup-plugin-styles';
+
 import livereload from 'rollup-plugin-livereload'
 import serve from 'rollup-plugin-serve'
-import styles from 'rollup-plugin-styles';
+
 // import eslint from '@rollup/plugin-eslint'
 import pkg from './package.json'
 
@@ -27,23 +31,20 @@ export default {
   ],
   plugins: [
     styles(),
-    ts({
-      tsconfig: path.resolve(__dirname, './tsconfig.json'),
-      extensions: ['.js', '.ts']
+    commonjs({ 
+      transformMixedEsModules: true,
     }),
     resolve({
       jsnext: true, 
       main: true 
     }),
-    commonjs(),
+    babel({exclude: 'node_modules/**' }),
     json(),
-    // eslint({
-    //   throwOnError: true,
-    //   throwOnWarning: true,
-    //   include: ['src/**'],
-    //   exclude: ['node_modules/**']
-    // }),
-    babel({ exclude: 'node_modules/**' }),
+    ts({
+      tsconfig: path.resolve(__dirname, './tsconfig.json'),
+      extensions: ['.js', '.ts']
+    }),
+    
     livereload(),
     serve({
       open: true,
