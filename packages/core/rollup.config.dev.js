@@ -6,6 +6,7 @@ import json from '@rollup/plugin-json'
 import babel from 'rollup-plugin-babel'
 import resolve from '@rollup/plugin-node-resolve'
 import commonjs from '@rollup/plugin-commonjs'
+
 import styles from 'rollup-plugin-styles';
 
 import livereload from 'rollup-plugin-livereload'
@@ -31,20 +32,19 @@ export default {
   ],
   plugins: [
     styles(),
-    commonjs({ 
-      transformMixedEsModules: true,
-    }),
-    resolve({
-      jsnext: true, 
-      main: true 
-    }),
-    babel({exclude: 'node_modules/**' }),
-    json(),
     ts({
       tsconfig: path.resolve(__dirname, './tsconfig.json'),
       extensions: ['.js', '.ts']
     }),
-    
+    json(),
+    babel({exclude: 'node_modules/**' }),
+    resolve({
+      jsnext: true, 
+      main: true 
+    }),
+    commonjs({ 
+      transformMixedEsModules: true,
+    }),
     livereload(),
     serve({
       open: true,
