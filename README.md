@@ -10,17 +10,6 @@
     <a href="https://github.com/buuing/right-menu/network/members" target="_black">
       <img src="https://img.shields.io/github/forks/buuing/right-menu?color=%23807bef&logo=github&style=flat-square" alt="forks" />
     </a>
-    <a href="https://www.npmjs.com/package/vue-right-menu" target="_black">
-      <img src="https://img.shields.io/npm/v/vue-right-menu?color=%23807bef&logo=npm&style=flat-square" alt="version" />
-    </a>
-    <a href="https://www.npmjs.com/package/vue-right-menu" target="_black">
-      <img src="https://img.shields.io/npm/dm/vue-right-menu?color=%23807bef&logo=npm&style=flat-square" alt="downloads" />
-    </a>
-    <a href="https://www.jsdelivr.com/package/npm/vue-right-menu" target="_black">
-      <img src="https://data.jsdelivr.com/v1/package/npm/vue-right-menu/badge" alt="downloads" />
-    </a>
-  </p>
-  <p>
     <a href="https://github.com/buuing" target="_black">
       <img src="https://img.shields.io/badge/Author-%20buuing%20-4195a5.svg?&logo=github&style=flat-square" alt="author" />
     </a>
@@ -29,6 +18,72 @@
     </a>
   </p>
 </div>
+
+  <table align="center">
+    <thead align="center">
+      <tr>
+        <th>适配框架</th>
+        <th>npm包</th>
+        <th>最新版本</th>
+        <th>npm下载量</th>
+        <th>CDN使用量</th>
+      </tr>
+    </thead>
+    <tbody align="center">
+      <tr>
+        <td>
+          <b>JS / TS</b>
+        </td>
+        <td>
+          <a href="https://buuing.github.io/right-menu/usage/js.html" target="_black">@right-menu/core</a>
+        </td>
+        <td>
+          <img src="https://img.shields.io/npm/v/@right-menu/core?color=%23ffba15&logo=npm&style=flat-square" alt="version" />
+        </td>
+        <td>
+          <a href="https://www.npmjs.com/package/@right-menu/core" target="_black"><img src="https://img.shields.io/npm/dm/@right-menu/core?color=%23ffba15&logo=npm&style=flat-square" alt="downloads" /></a>
+        </td>
+        <td>
+          <a href="https://www.jsdelivr.com/package/npm/@right-menu/core" target="_black"><img src="https://data.jsdelivr.com/v1/package/npm/@right-menu/core/badge" alt="downloads" /></a>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <b>Vue</b>
+        </td>
+        <td>
+          <a href="https://buuing.github.io/right-menu/usage/vue.html" target="_black">@right-menu/vue</a>
+        </td>
+        <td>
+          <img src="https://img.shields.io/npm/v/@right-menu/vue?color=%23ffba15&logo=npm&style=flat-square" alt="version" />
+        </td>
+        <td>
+          <a href="https://www.npmjs.com/package/@right-menu/vue" target="_black"><img src="https://img.shields.io/npm/dm/@right-menu/vue?color=%23ffba15&logo=npm&style=flat-square" alt="downloads" /></a>
+        </td>
+        <td>
+          <a href="https://www.jsdelivr.com/package/npm/@right-menu/vue" target="_black"><img src="https://data.jsdelivr.com/v1/package/npm/@right-menu/vue/badge" alt="downloads" /></a>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <b>React</b>
+        </td>
+        <td>
+          <a href="https://buuing.github.io/right-menu/usage/react.html" target="_black">@right-menu/react</a>
+        </td>
+        <td>
+          <img src="https://img.shields.io/npm/v/@right-menu/react?color=%23ffba15&logo=npm&style=flat-square" alt="version" />
+        </td>
+        <td>
+          <a href="https://www.npmjs.com/package/@right-menu/react" target="_black"><img src="https://img.shields.io/npm/dm/@right-menu/react?color=%23ffba15&logo=npm&style=flat-square" alt="downloads" /></a>
+        </td>
+        <td>
+          <a href="https://www.jsdelivr.com/package/npm/@right-menu/react" target="_black"><img src="https://data.jsdelivr.com/v1/package/npm/@right-menu/react/badge" alt="downloads" /></a>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
 
 <br />
 
