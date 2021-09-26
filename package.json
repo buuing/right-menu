@@ -1,6 +1,8 @@
 {
   "name": "root",
   "devDependencies": {
+    "gulp": "^4.0.2",
+    "gulp-less": "^5.0.0",
     "lerna": "^4.0.0"
   },
   "scripts": {

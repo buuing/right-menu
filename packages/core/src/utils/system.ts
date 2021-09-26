@@ -16,7 +16,7 @@ export const isWin8 = userAgent.indexOf('Windows NT 8') > -1 || userAgent.indexO
 export const isWin10 = userAgent.indexOf('Windows NT 10') > -1 || userAgent.indexOf('Windows 10') > -1
 
 export const getOperatSystem = () => {
-  const osList = { isWin, isWin10, isMac, isWin7, isWin8, isUnix, isLinux, isWin2000, isWinXP, isWin2003, isWinVista }
+  const osList = { isWin10, isMac, isWin7, isWin8, isWin2003, isWin2000, isWinXP, isWinVista, isWin, isUnix, isLinux }
   for (const key in osList) {
     if (osList[key]) { return key }
   }
