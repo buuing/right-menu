@@ -1,6 +1,6 @@
 
 <div align="center">
-  <img src="https://raw.githubusercontent.com/buuing/right-menu/master/packages/docs/.vuepress/public/logo.png" width="180" />
+  <img src="https://cdn.jsdelivr.net/gh/buuing/cdn/imgs/right-menu.png" width="128" />
   <h1>right-menu</h1>
   <p>一个基于vue的右键菜单插件, 通过添加指令的方式可以展示不同的菜单内容</p>
   <p>
@@ -333,18 +333,17 @@ export default {
 ## 需求计划
 
 - `📆 进行中`
-  - [ ] 增加初始化高级配置, 可以设置一些全局的选项, 以及菜单创建的生命周期
-  - [ ] 增加icon选项, 可以使用一些内置图标, 图片待定
-  - [ ] 自适应系统的主题色 (mac的暗黑模式) - **`rollup里使用require有问题`**
+  - [ ] 🤖 增加初始化高级配置, 可以设置一些全局的选项, 以及菜单创建的生命周期
+  - [ ] 🚧 增加icon选项, 可以使用一些内置图标, 图片待定
+  - [ ] 🛰 **目前`core`源码包无法使用`require`动态引入css样式** - `晴天`
+  - [ ] 🚧 后续也可以继续优化一下三级菜单的方向 - `yox`
+  - [ ] 📚 [补全文档中`react`的`hooks`使用方式](https://buuing.github.io/right-menu/usage/react.html) - `yox`
 
 - `💡 待认领`
   - [ ] 🛠 [**在mac系统下, 第二次点击控制台时 blur 事件没有触发**](https://github.com/buuing/vue-right-menu/issues/10)
   - [ ] 🚧 增加 XP / win7 两种经典菜单主题样式
   - [ ] 🚧 浏览器放大之后, 看看能否保持跟系统菜单同样的大小
-  - [ ] 🚧 后续也可以继续优化一下三级菜单的方向
   - [ ] 🤖 看看能否对外暴露一个作用域插槽或者是render函数, 来渲染jsx?
-  - [ ] 🛰 **目前`core`源码包无法使用`require`动态引入css样式**
-  - [ ] 📚 补全文档中`react`的`hooks`使用方式 https://buuing.github.io/right-menu/usage/react.html
 
 <br />
 
@@ -367,6 +366,8 @@ export default {
   - [x] ~目前最多支持二级菜单, 后续增加三级菜单 / 多级菜单的逻辑~
   - [x] ~增加class和style选项, 可以给当前标签添加样式~
   - [x] ~修复了异步渲染菜单时, 无法完全清除历史组件的问题~
+
+<!-- - 自适应系统的主题色 (mac的暗黑模式)  -->
 
 <br />
 
