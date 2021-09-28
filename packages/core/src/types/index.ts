@@ -25,3 +25,20 @@ export interface AttrsType {
 export type ItemType = AttrsType & (
   HrType | LiType | UlType
 )
+
+export type ConfigType = {
+  el: string
+  theme?: string // 主题样式, 默认为auto
+  beforeInit?: Function // 初始化前
+  afterInit?: Function // 初始化后
+  beforeShow?: Function // 显示菜单前
+  afterShow?: Function // 显示菜单后
+  beforeHide?: Function // 隐藏菜单前
+  afterHide?: Function // 隐藏菜单后
+}
+
+type RequireKeys = 'el'
+
+export type HTMLListElement = HTMLElement & {
+  _state: { menu?: HTMLElement }
+}
