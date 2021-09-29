@@ -1,6 +1,7 @@
 import './theme/index.js'
 import { ConfigType, ItemType, LiType, AttrsType, HTMLListElement } from './types'
 import { preventDefault, layoutMenuPositionEffect, filterAttrs } from './utils'
+import { getOperatSystem } from './utils/system'
 
 export default class RightMenu {
   private menu: HTMLElement | null = null
@@ -10,10 +11,11 @@ export default class RightMenu {
   constructor (el: string | ConfigType, options: ItemType[]) {
     const config = this.config = typeof el === 'string' ? { el } : el
     // 设置主题
-    if (!config.theme) {
+    // if (!config.theme) {
       // 根据系统去添加主题
-      config.theme = 'mac'
-    }
+      // config.theme = 'mac'
+      config.theme = config.theme || getOperatSystem().toLowerCase().replace(/is/, '') || 'mac'
+    // }
     // 如果用户输入的主题名称里包含了'theme-'则删除
     if (config.theme.indexOf('theme-') === 0) {
       config.theme = config.theme.slice(6)
@@ -35,17 +37,21 @@ export default class RightMenu {
     e: MouseEvent,
     thenable: Promise<ItemType[]> | ItemType[]
   ): Promise<void> {
+    // [TODO:] await 完全可以阻止后面的代码执行
     // 统计异步创建前, 有没有点击事件
     let flag = false
     const countClick = () => (flag = true)
-    document.addEventListener('mousedown', countClick)
+    document.addEventListener('mouseup', countClick)
     // 异步获取到菜单配置项 options
     const options = await Promise.resolve(thenable)
+    
     // 清除异步前创建的事件
-    document.removeEventListener('mousedown', countClick)
+    // document.removeEventListener('mouseup', countClick)
     // 如果异步前有点击次数, 则打断逻辑, 不创建菜单
     if (flag) return
     // 先移除之前的菜单（若有）
+    console.log(options)
+
     this.destroyMenu()
   
     // 开始创建菜单栏

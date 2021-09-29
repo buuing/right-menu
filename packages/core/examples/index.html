@@ -10,13 +10,22 @@
   <div class="box" style="height: 300px; background: #ccc"></div>
   <script src="../dist/right-menu.umd.js"></script>
   <script>
+    document.addEventListener('mousedown', function(){
+      console.log('this msg coming from user')
+    })
 
-    new RightMenu('.box', [
-      {
-        type: 'li',
-        text: '哈哈哈'
-      }
-    ])
+    new RightMenu({
+      el: '.box'
+    }, new Promise((resolve, reject)=>{
+      console.log('loading option.... ')
+      setTimeout(()=>{
+        resolve([{
+          type: 'li',
+          text: '哈哈哈'
+        }])
+        console.log('option is ready ')
+      }, 5000)
+    }))
 
   </script>
 </body>
