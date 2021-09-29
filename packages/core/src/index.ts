@@ -41,12 +41,12 @@ export default class RightMenu {
     // 统计异步创建前, 有没有点击事件
     let flag = false
     const countClick = () => (flag = true)
-    document.addEventListener('mouseup', countClick)
+    document.addEventListener('mousedown', countClick)
     // 异步获取到菜单配置项 options
     const options = await Promise.resolve(thenable)
     
     // 清除异步前创建的事件
-    // document.removeEventListener('mouseup', countClick)
+    document.removeEventListener('mousedown', countClick)
     // 如果异步前有点击次数, 则打断逻辑, 不创建菜单
     if (flag) return
     // 先移除之前的菜单（若有）
