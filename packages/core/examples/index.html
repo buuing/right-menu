@@ -5,38 +5,66 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
-  <style>.box{
-    height: 300px; background: #ccc;
-  }
-    </style>
 </head>
 <body>
-  <div class="box" style=""></div>
+  <div class="box1" style="height: 300px; background: #ccc;"></div>
+  <div class="box2" style="height: 300px; background: pink;"></div>
+  <div class="box3" style="height: 300px; background: greenyellow;"></div>
   <script src="../dist/right-menu.umd.js"></script>
   <script>
-    document.addEventListener('mousedown', function(){
-      console.log('this msg coming from user')
-    })
-   
-    new RightMenu(
+
+    const base = [
+      { type: 'hr' },
       {
-        el: '.box',
-        theme: 'win10'
-      }, 
-      function fetchOpt(){ 
-        return new Promise(
-        (resolve,reject) => {
-          console.log('loading options ...')
-          setTimeout(()=>{
-            resolve([{
+        type: 'ul',
+        text: '关于',
+        children: [
+          {
+            type: 'li',
+            text: 'version 2.0.2'
+          }
+        ]
+      },
+    ]
+
+    // 同步
+    new RightMenu({
+      el: '.box1'
+    }, [
+      {
+        type: 'li',
+        text: '同步'
+      },
+      ...base
+    ])
+
+    // 异步 0ms
+    new RightMenu({
+      el: '.box2'
+    }, async () => [
+      {
+        type: 'li',
+        text: '异步 0ms'
+      },
+      ...base
+    ])
+
+    // 异步 300ms
+    new RightMenu({
+      el: '.box3'
+    }, () => {
+      return new Promise(resolve => {
+        setTimeout(() => {
+          resolve([
+            {
               type: 'li',
-              text: '哈哈哈'
-            }])
-            console.log('options is ready')
-          }, 500)
-        }
-      )}
-    )
+              text: '异步 300ms'
+            },
+            ...base
+          ])
+        }, 300)
+      })
+    })
 
   </script>
 </body>

@@ -37,14 +37,9 @@ export default {
       extensions: ['.js', '.ts']
     }),
     json(),
-    babel({exclude: 'node_modules/**' }),
-    resolve({
-      jsnext: true, 
-      main: true 
-    }),
-    commonjs({ 
-      transformMixedEsModules: true,
-    }),
+    babel({ exclude: 'node_modules/**' }),
+    resolve(),
+    commonjs(),
     livereload(),
     serve({
       open: true,

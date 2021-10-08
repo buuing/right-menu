@@ -7,8 +7,6 @@
   "module": "dist/right-menu.esm",
   "types": "dist/index.d.ts",
   "scripts": {
-    "start": "concurrently \"gulp\" \"rollup --config rollup.config.dev.js -w\"",
-    "gulp": "gulp",
     "dev": "rollup --config rollup.config.dev.js -w",
     "build": "rollup --config rollup.config.build.js",
     "postinstall": "node ./postinstall.js"

@@ -22,16 +22,16 @@ export const getY: (node: HTMLElement) => number = node => node.getBoundingClien
  * 获取元素在窗口中的几何属性
  * bottom = y + height = top + height
  * right = x + width = left + width
- * @param { HTMLElement } node 元素
+ * @param { HTMLElement | MouseEvent } node 元素
  * @returns { width, height, left, right, top, bottom, x, y }
  */
-export const computeRectPosition: (node: HTMLElement) => {
-  width: number,
-  height: number,
-  left: number,
-  right: number,
-  top: number,
-  bottom: number,
+export const computeRectPosition: (node: HTMLElement | MouseEvent) => {
   x: number,
   y: number,
-} = node => node.getBoundingClientRect()
+  width: number,
+  height: number,
+  left?: number,
+  right?: number,
+  top?: number,
+  bottom?: number,
+} = node => node['getBoundingClientRect']?.() || node

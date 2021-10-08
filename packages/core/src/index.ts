@@ -8,39 +8,37 @@ export default class RightMenu {
   private config: ConfigType
   private eventList: Array<[Window | Document, string, LiType['callback']]> = []
 
-  constructor (el: string | ConfigType, options: ItemType[] | Promise<ItemType[]> | Function) {
+  constructor (
+    el: string | ConfigType,
+    options: ItemType[] | ((e: Event) => ItemType[] | Promise<ItemType[]>)
+  ) {
     const config = this.config = typeof el === 'string' ? { el } : el
     // 设置主题
-    // if (!config.theme) {
-      // 根据系统去添加主题
-      // config.theme = 'mac'
-      config.theme = config.theme || getOperatSystem().toLowerCase().replace(/is/, '') || 'mac'
-    // }
-    // 如果用户输入的主题名称里包含了'theme-'则删除
+    config.theme = config.theme || getOperatSystem().toLowerCase().replace(/is/, '') || 'mac'
+    // 如果用户输入的主题名称里包含了 'theme-' 则删除
     if (config.theme.indexOf('theme-') === 0) {
       config.theme = config.theme.slice(6)
     }
     // 获取dom并绑定事件
     const dom = document.querySelector(config.el)
     dom?.addEventListener('contextmenu', e => {
-      const a = typeof options === 'function' ? options(e): options ;
-      (dom as HTMLElement).className = (dom as HTMLElement).classList + ' style-wait'
-      this.initMenu(e as MouseEvent, a )
+      const res = typeof options === 'function' ? options(e): options ;
+      this.initMenu(e as MouseEvent, res)
     })
   }
 
   /**
    * 初始化菜单栏
    * @param { Event } e 事件参数
-   * @param { Promise<object[]> | object[]} thenable 菜单列表
+   * @param { object[] | Promise<object[]> } thenable 菜单列表
    * @returns { void }
    */
    async initMenu(
     e: MouseEvent,
-    thenable: Promise<ItemType[]> | ItemType[]
+    thenable: ItemType[] | Promise<ItemType[]>
   ): Promise<void> {
-     // 开始就要阻止本身的默认事件
-     preventDefault(e)
+    // 开始就要阻止本身的默认事件
+    preventDefault(e)
 
     // 统计异步创建前, 有没有点击事件
     let flag = false
@@ -52,29 +50,16 @@ export default class RightMenu {
     document.removeEventListener('mousedown', countClick)
     // 如果异步前有点击次数, 则打断逻辑, 不创建菜单
     if (flag) return
-    // 先移除之前的菜单（若有）
-    
-    const dom = document.querySelector(this.config.el);
-    (dom as HTMLElement).className = (dom as HTMLElement).classList.value.replace(' style-wait', '')
 
+    // 先移除之前的菜单（若有）
     this.destroyMenu()
-  
     // 开始创建菜单栏
-    const menu = this.renderMenu(options)
+    const menu = this.menu = this.renderMenu(options)
+    // 添加到页面上
     document.body.appendChild(menu)
-  
     // 计算一级菜单栏的位置
-    let x = e.clientX
-    let y = e.clientY
-    if (window.innerWidth - x < menu.offsetWidth) {
-      x -= menu.offsetWidth
-    }
-    if (window.innerHeight - y < menu.offsetHeight) {
-      y -= menu.offsetHeight
-    }
-    menu.style.left = x + 'px'
-    menu.style.top = y + 'px'
-  
+    layoutMenuPositionEffect(e, menu)
+
     // 防止菜单组件里点出系统菜单
     menu.addEventListener('contextmenu', preventDefault)
     // 窗口 blur 时销毁菜单栏
@@ -86,8 +71,6 @@ export default class RightMenu {
       const hasMenu = e['path']?.some((node: HTMLDivElement) => node === this.menu)
       if (!hasMenu) this.destroyMenu()
     })
-
-    this.menu = menu
   }
 
   /**
@@ -96,16 +79,15 @@ export default class RightMenu {
    * @returns { HTMLElement }
    */
   renderMenu(options: ItemType[]): HTMLElement {
-    const _state: { menu?: HTMLElement } = {}
     const children = options.map(item => {
       switch (item.type) {
         case 'hr': return this.createHr(item)
         case 'li': return this.createLi(item)
-        case 'ul': return this.createUl(item, _state)
+        case 'ul': return this.createUl(item)
         default: throw new Error('未知的 type 类型 => ' + item['type'])
       }
     })
-    return (_state.menu = this.createDom('ul', { class: `right-menu-list theme-${this.config.theme}` }, children))
+    return this.createDom('ul', { class: `right-menu-list theme-${this.config.theme}` }, children)
   }
 
   /**
@@ -197,14 +179,10 @@ export default class RightMenu {
     return li
   }
 
-  createUl<T extends ItemType & { type: 'ul' }>(
-    opt: T,
-    state: HTMLListElement['_state']
-  ): HTMLElement {
+  createUl<T extends ItemType & { type: 'ul' }>(opt: T): HTMLElement {
     const span = this.createDom('span', {}, [opt.text])
     const attrs = { class: 'menu-ul' + (opt.disabled ? ' menu-disabled' : '') }
     const li: HTMLListElement = this.createDom('li', filterAttrs(opt, attrs), [span]) as HTMLListElement
-    li._state = state
     // 添加二级菜单
     if (opt.children && opt.children.length) {
       const ul = this.renderMenu(opt.children)

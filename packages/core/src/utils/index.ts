@@ -1,5 +1,5 @@
-import { ATTR_LIST, SPLIT_SYMBOL, ConnectOffset } from '../config'
-import { AttrsType, HTMLListElement } from '../types'
+import { ATTR_LIST, SPLIT_SYMBOL } from '../config'
+import { AttrsType } from '../types'
 import { computeRectPosition } from './getInfo'
 
 /**
@@ -40,28 +40,23 @@ export const filterAttrs = (
 }
 
 export const layoutMenuPositionEffect = (
-  baseEl: HTMLListElement,
+  base: HTMLElement | MouseEvent,
   menu: HTMLElement
 ): void => {
-  const { menu: baseMenu } = baseEl['_state']
-  if (!baseMenu) return
-  menu.style.position = 'fixed'
   // 计算位置
-  const { x: baseX, width: baseW } = computeRectPosition(baseMenu)
-  const { y: baseElY, bottom: baseElBot } = computeRectPosition(baseEl)
-  const { height: menuH, width: menuW } = computeRectPosition(menu)
+  const { width, height } = computeRectPosition(menu)
+  const { x: baseX, y: baseY, width: baseW, height: baseH } = computeRectPosition(base)
   let x = baseX + baseW
-  let y = baseElY
+  let y = baseY
+  console.log(baseX, baseY, baseW, baseH)
+  console.log(menu, width, height)
+
   if (window.innerWidth < menu.offsetWidth + x) {
-    x = baseX - menuW + ConnectOffset
-  } else {
-    x -= ConnectOffset
+    x = baseX - width
   }
   if (window.innerHeight < menu.offsetHeight + y) {
-    y = baseElBot - menuH + ConnectOffset
-  } else {
-    y -= ConnectOffset
+    y = baseY + baseH - height
   }
-  menu.style.top = y + 'px'
   menu.style.left = x + 'px'
+  menu.style.top = y + 'px'
 }

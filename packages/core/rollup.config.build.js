@@ -14,16 +14,6 @@ export default [
     input: 'src/index.ts',
     output: [
       {
-        file: `${pkg.main}.js`,
-        format: 'cjs',
-      },
-      {
-        file: `${pkg.main}.min.js`,
-        format: 'cjs',
-        plugins: [terser()],
-        sourcemap: true,
-      },
-      {
         file: `${pkg.browser}.js`,
         format: 'umd',
         name: 'RightMenu',
