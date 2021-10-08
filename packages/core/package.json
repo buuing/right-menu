@@ -1,6 +1,6 @@
 {
   "name": "@right-menu/core",
-  "version": "0.0.1",
+  "version": "0.0.3",
   "description": "",
   "main": "dist/right-menu.cjs",
   "browser": "dist/right-menu.umd",
@@ -8,8 +8,7 @@
   "types": "dist/index.d.ts",
   "scripts": {
     "dev": "rollup --config rollup.config.dev.js -w",
-    "build": "rollup --config rollup.config.build.js",
-    "postinstall": "node ./postinstall.js"
+    "build": "rollup --config rollup.config.build.js"
   },
   "homepage": "https://buuing.github.io/right-menu",
   "bugs": "https://github.com/buuing/right-menu/issues",
@@ -22,12 +21,7 @@
   "license": "MIT",
   "files": [
     "dist",
-    "types",
-    "index.js",
-    "LICENSE",
-    "README.md",
-    "package.json",
-    "postinstall.js"
+    "types"
   ],
   "keywords": [
     "vue右键菜单插件"
@@ -46,9 +40,6 @@
     "concurrently": "^6.2.1",
     "eslint": "^7.18.0",
     "eslint-plugin-prettier": "^3.3.1",
-    "gulp": "^4.0.2",
-    "gulp-clean-css": "^4.3.0",
-    "gulp-less": "^5.0.0",
     "less": "^4.1.1",
     "prettier": "^2.2.1",
     "rollup": "^2.33.1",

@@ -8,7 +8,7 @@ import babel from 'rollup-plugin-babel'
 import { terser } from 'rollup-plugin-terser'
 // import del from 'rollup-plugin-delete'
 import pkg from './package.json'
-
+import styles from 'rollup-plugin-styles';
 export default [
   {
     input: 'src/index.ts',
@@ -35,6 +35,7 @@ export default [
       },
     ],
     plugins: [
+      styles(),
       ts({
         tsconfig: path.resolve(__dirname, './tsconfig.json'),
         extensions: ['.js', '.ts'],
@@ -45,5 +46,21 @@ export default [
       commonjs(),
       babel({ exclude: 'node_modules/**' }),
     ]
+  },
+  {
+    input: "dist/index.d.ts",
+    output: [
+      {
+        file: "types/index.d.ts",
+        format: "es"
+      }
+    ],
+    plugins: [
+      dts(),
+      // del({
+      //   targets: ['dist/src'],
+      //   hook: 'buildEnd'
+      // })
+    ],
   },
 ]

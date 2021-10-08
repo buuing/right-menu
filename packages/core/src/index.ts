@@ -1,5 +1,5 @@
 import './theme/index.js'
-import { ConfigType, ItemType, LiType, AttrsType, HTMLListElement } from './types'
+import { ConfigType, ItemType, LiType, AttrsType } from './types'
 import { preventDefault, layoutMenuPositionEffect, filterAttrs } from './utils'
 import { getOperatSystem } from './utils/system'
 
@@ -9,10 +9,12 @@ export default class RightMenu {
   private eventList: Array<[Window | Document, string, LiType['callback']]> = []
 
   constructor (
-    el: string | ConfigType,
-    options: ItemType[] | ((e: Event) => ItemType[] | Promise<ItemType[]>)
+    config: ConfigType,
+    options: ItemType[] | (
+      (e: Event, config: ConfigType) => ItemType[] | Promise<ItemType[]>
+    )
   ) {
-    const config = this.config = typeof el === 'string' ? { el } : el
+    this.config = config
     // 设置主题
     config.theme = config.theme || getOperatSystem().toLowerCase().replace(/is/, '') || 'mac'
     // 如果用户输入的主题名称里包含了 'theme-' 则删除
@@ -20,9 +22,9 @@ export default class RightMenu {
       config.theme = config.theme.slice(6)
     }
     // 获取dom并绑定事件
-    const dom = document.querySelector(config.el)
+    const dom = typeof config.el === 'string' ? document.querySelector(config.el) : config.el
     dom?.addEventListener('contextmenu', e => {
-      const res = typeof options === 'function' ? options(e): options ;
+      const res = typeof options === 'function' ? options(e, config) : options
       this.initMenu(e as MouseEvent, res)
     })
   }
@@ -182,7 +184,7 @@ export default class RightMenu {
   createUl<T extends ItemType & { type: 'ul' }>(opt: T): HTMLElement {
     const span = this.createDom('span', {}, [opt.text])
     const attrs = { class: 'menu-ul' + (opt.disabled ? ' menu-disabled' : '') }
-    const li: HTMLListElement = this.createDom('li', filterAttrs(opt, attrs), [span]) as HTMLListElement
+    const li: HTMLElement  = this.createDom('li', filterAttrs(opt, attrs), [span])
     // 添加二级菜单
     if (opt.children && opt.children.length) {
       const ul = this.renderMenu(opt.children)

@@ -38,7 +38,3 @@ export type ConfigType = {
 }
 
 type RequireKeys = 'el'
-
-export type HTMLListElement = HTMLElement & {
-  _state: { menu?: HTMLElement }
-}
