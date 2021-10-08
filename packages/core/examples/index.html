@@ -5,18 +5,38 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
+  <style>.box{
+    height: 300px; background: #ccc;
+  }
+    </style>
 </head>
 <body>
-  <div class="box" style="height: 300px; background: #ccc"></div>
+  <div class="box" style=""></div>
   <script src="../dist/right-menu.umd.js"></script>
   <script>
-
-    new RightMenu('.box', [
+    document.addEventListener('mousedown', function(){
+      console.log('this msg coming from user')
+    })
+   
+    new RightMenu(
       {
-        type: 'li',
-        text: '哈哈哈'
-      }
-    ])
+        el: '.box',
+        theme: 'win10'
+      }, 
+      function fetchOpt(){ 
+        return new Promise(
+        (resolve,reject) => {
+          console.log('loading options ...')
+          setTimeout(()=>{
+            resolve([{
+              type: 'li',
+              text: '哈哈哈'
+            }])
+            console.log('options is ready')
+          }, 500)
+        }
+      )}
+    )
 
   </script>
 </body>

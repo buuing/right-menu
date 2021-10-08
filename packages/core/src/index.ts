@@ -1,19 +1,21 @@
 import './theme/index.js'
 import { ConfigType, ItemType, LiType, AttrsType, HTMLListElement } from './types'
 import { preventDefault, layoutMenuPositionEffect, filterAttrs } from './utils'
+import { getOperatSystem } from './utils/system'
 
 export default class RightMenu {
   private menu: HTMLElement | null = null
   private config: ConfigType
   private eventList: Array<[Window | Document, string, LiType['callback']]> = []
 
-  constructor (el: string | ConfigType, options: ItemType[]) {
+  constructor (el: string | ConfigType, options: ItemType[] | Promise<ItemType[]> | Function) {
     const config = this.config = typeof el === 'string' ? { el } : el
     // 设置主题
-    if (!config.theme) {
+    // if (!config.theme) {
       // 根据系统去添加主题
-      config.theme = 'mac'
-    }
+      // config.theme = 'mac'
+      config.theme = config.theme || getOperatSystem().toLowerCase().replace(/is/, '') || 'mac'
+    // }
     // 如果用户输入的主题名称里包含了'theme-'则删除
     if (config.theme.indexOf('theme-') === 0) {
       config.theme = config.theme.slice(6)
@@ -21,7 +23,9 @@ export default class RightMenu {
     // 获取dom并绑定事件
     const dom = document.querySelector(config.el)
     dom?.addEventListener('contextmenu', e => {
-      this.initMenu(e as MouseEvent, options)
+      const a = typeof options === 'function' ? options(e): options ;
+      (dom as HTMLElement).className = (dom as HTMLElement).classList + ' style-wait'
+      this.initMenu(e as MouseEvent, a )
     })
   }
 
@@ -35,6 +39,9 @@ export default class RightMenu {
     e: MouseEvent,
     thenable: Promise<ItemType[]> | ItemType[]
   ): Promise<void> {
+     // 开始就要阻止本身的默认事件
+     preventDefault(e)
+
     // 统计异步创建前, 有没有点击事件
     let flag = false
     const countClick = () => (flag = true)
@@ -46,11 +53,14 @@ export default class RightMenu {
     // 如果异步前有点击次数, 则打断逻辑, 不创建菜单
     if (flag) return
     // 先移除之前的菜单（若有）
+    
+    const dom = document.querySelector(this.config.el);
+    (dom as HTMLElement).className = (dom as HTMLElement).classList.value.replace(' style-wait', '')
+
     this.destroyMenu()
   
     // 开始创建菜单栏
     const menu = this.renderMenu(options)
-    this.menu = menu
     document.body.appendChild(menu)
   
     // 计算一级菜单栏的位置
@@ -65,8 +75,6 @@ export default class RightMenu {
     menu.style.left = x + 'px'
     menu.style.top = y + 'px'
   
-    // 阻止本身的默认事件
-    preventDefault(e)
     // 防止菜单组件里点出系统菜单
     menu.addEventListener('contextmenu', preventDefault)
     // 窗口 blur 时销毁菜单栏
@@ -78,6 +86,8 @@ export default class RightMenu {
       const hasMenu = e['path']?.some((node: HTMLDivElement) => node === this.menu)
       if (!hasMenu) this.destroyMenu()
     })
+
+    this.menu = menu
   }
 
   /**
