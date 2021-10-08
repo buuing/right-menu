@@ -48,9 +48,6 @@ export const layoutMenuPositionEffect = (
   const { x: baseX, y: baseY, width: baseW, height: baseH } = computeRectPosition(base)
   let x = baseX + baseW
   let y = baseY
-  console.log(baseX, baseY, baseW, baseH)
-  console.log(menu, width, height)
-
   if (window.innerWidth < menu.offsetWidth + x) {
     x = baseX - width
   }

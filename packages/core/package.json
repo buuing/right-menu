@@ -1,8 +1,7 @@
 {
   "name": "@right-menu/core",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "",
-  "main": "dist/right-menu.cjs",
   "browser": "dist/right-menu.umd",
   "module": "dist/right-menu.esm",
   "types": "dist/index.d.ts",
@@ -24,7 +23,7 @@
     "types"
   ],
   "keywords": [
-    "vue右键菜单插件"
+    "js右键菜单插件"
   ],
   "devDependencies": {
     "@babel/core": "^7.15.5",
