@@ -378,7 +378,7 @@ export default {
     <td align="center"><a href="https://github.com/buuing" target="_blank"><img width="50px" src="https://avatars.githubusercontent.com/u/36689704"></a><div><span title="核心开发">🤖</span> <span title="基础建设">🛰</span> <span title="维护文档">📚</span></div></td>
     <td align="center"><a href="https://github.com/Deja-vuuu" target="_blank"><img width="50px" src="https://avatars.githubusercontent.com/u/27748682"></a><div><span title="核心开发">🤖</span> <span title="基础建设">🛰</span></div></td>
     <td align="center"><a href="https://github.com/yushen7" target="_blank"><img width="50px" src="https://avatars.githubusercontent.com/u/35678187"></a><div><span title="核心开发">🤖</span></div></td>
-    <td align="center"><a href="https://github.com/qingtiantongxie" target="_blank"><img width="50px" src="https://avatars.githubusercontent.com/u/24731632"></a><div><span title="逻辑优化">🦄</span> <span title="需求功能">🚧</span></div></td>
+    <td align="center"><a href="https://github.com/qingtiantongxie" target="_blank"><img width="50px" src="https://avatars.githubusercontent.com/u/24731632"></a><div><span title="基础建设">🛰</span> <span title="需求功能">🚧</span></div></td>
     <td align="center"><a href="https://github.com/dora1995" target="_blank"><img width="50px" src="https://avatars.githubusercontent.com/u/53267289"></a><div><span title="修复bug">🛠</span></div></td>
   </tr>
 </table>
@@ -388,9 +388,8 @@ export default {
 ## 需求计划
 
 - `📆 进行中`
-  - [ ] 🤖 增加初始化高级配置, 可以设置一些全局的选项, 以及菜单创建的生命周期
-  - [ ] 🚧 增加icon选项, 可以使用一些内置图标, 图片待定
-  - [ ] 🛰 **目前`core`源码包无法使用`require`动态引入css样式** - `晴天`
+  - [ ] 🤖 增加初始化高级配置, 可以设置一些全局的选项, 以及菜单创建的生命周期 - buuing
+  - [ ] 🚧 增加icon选项, 可以使用一些内置图标, 想法可以让用户自由使用外部的svg图标
   - [ ] 🚧 后续也可以继续优化一下三级菜单的方向 - `yox`
   - [ ] 📚 [补全文档中`react`的`hooks`使用方式](https://buuing.github.io/right-menu/usage/react.html) - `yox`
 
@@ -398,6 +397,7 @@ export default {
   - [ ] 🛠 [**在mac系统下, 第二次点击控制台时 blur 事件没有触发**](https://github.com/buuing/vue-right-menu/issues/10)
   - [ ] 🚧 增加 XP / win7 两种经典菜单主题样式
   - [ ] 🚧 浏览器放大之后, 看看能否保持跟系统菜单同样的大小
+  - [ ] 🛰 给core包增加eslint-standard规范, 保存时校验
   - [ ] 🤖 看看能否对外暴露一个作用域插槽或者是render函数, 来渲染jsx?
 
 <br />
