@@ -1,8 +1,7 @@
 import { skeletonColor } from '../theme/index'
 
 export const calculate = (element:HTMLElement) => {
-  const { lineHeight, padding } = window.getComputedStyle(element)
-  const [ paddingTop ] = padding.split(' ')
+  const { lineHeight, paddingTop } = window.getComputedStyle(element)
   const height = parseFloat(lineHeight)  + parseFloat(paddingTop) * 2
   return `
     height: ${height}px;

@@ -46,13 +46,14 @@ export const layoutMenuPositionEffect = (
   // 计算位置
   const { width, height } = computeRectPosition(menu)
   const { x: baseX, y: baseY, width: baseW, height: baseH } = computeRectPosition(base)
-  let x = baseX + baseW
+  
+  let x = baseX + (baseW || 0)
   let y = baseY
   if (window.innerWidth < menu.offsetWidth + x) {
     x = baseX - width
   }
   if (window.innerHeight < menu.offsetHeight + y) {
-    y = baseY + baseH - height
+    y = baseY + (baseH || 0) - height
   }
   menu.style.left = x + 'px'
   menu.style.top = y + 'px'
