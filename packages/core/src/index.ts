@@ -2,7 +2,7 @@ import './theme/index.js'
 import { ConfigType, ItemType, LiType, AttrsType } from './types'
 import { preventDefault, layoutMenuPositionEffect, filterAttrs } from './utils'
 import { getOperatSystem } from './utils/system'
-
+import { calculate }from './utils/skeleton'
 export default class RightMenu {
   private menu: HTMLElement | null = null
   private config: ConfigType
@@ -42,7 +42,22 @@ export default class RightMenu {
     // 开始就要阻止本身的默认事件
     preventDefault(e)
 
-    // 统计异步创建前, 有没有点击事件
+     // 先移除之前的菜单（若有）及骨架屏
+     this.destroyMenu()
+
+    // 显示骨架屏
+    const li = [1,2,3].map(() => document.createElement('li'));
+    const skeleton = this.createDom('ul', { class: `right-menu-list theme-${this.config.theme}` }, li)
+    
+    layoutMenuPositionEffect(e, skeleton)
+    document.body.appendChild(skeleton)
+
+    li.forEach(i=>{
+      i.setAttribute('class','skeleton')
+      i.setAttribute('style',calculate(i))
+    })
+
+    // // 统计异步创建前, 有没有点击事件
     let flag = false
     const countClick = () => (flag = true)
     document.addEventListener('mousedown', countClick)
@@ -50,13 +65,15 @@ export default class RightMenu {
     const options = await Promise.resolve(thenable)
     // 清除异步前创建的事件
     document.removeEventListener('mousedown', countClick)
-    // 如果异步前有点击次数, 则打断逻辑, 不创建菜单
+    // // 如果异步前有点击次数, 则打断逻辑, 不创建菜单
     if (flag) return
 
-    // 先移除之前的菜单（若有）
+    // 先移除之前的菜单（若有）及骨架屏
     this.destroyMenu()
+
     // 开始创建菜单栏
     const menu = this.menu = this.renderMenu(options)
+
     // 添加到页面上
     document.body.appendChild(menu)
     // 计算一级菜单栏的位置
