@@ -33,6 +33,7 @@ export const systemDarkTheme = `--shadow-color: #040405;
 
 --split-boder-color: #494a4c;`
 
+
 export const systemLightTheme = `--shadow-color: rgba(0,0,0,.1);
 --active-shadow-color: rgba(0,0,0,.1);
 
@@ -52,3 +53,7 @@ export const systemLightTheme = `--shadow-color: rgba(0,0,0,.1);
 --active-disabled-bg-color: #eae8e9;
 
 --split-boder-color: #d0cecf;`
+
+export const skeletonColorLight = ['#f5f5f5', '#fff']
+
+export const skeletonColorDark = ['#4c4c4f', '#444']
