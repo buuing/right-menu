@@ -376,9 +376,9 @@ export default {
 <table>
   <tr>
     <td align="center"><a href="https://github.com/buuing" target="_blank"><img width="50px" src="https://avatars.githubusercontent.com/u/36689704"></a><div><span title="核心开发">🤖</span> <span title="基础建设">🛰</span> <span title="维护文档">📚</span></div></td>
+    <td align="center"><a href="https://github.com/qingtiantongxie" target="_blank"><img width="50px" src="https://avatars.githubusercontent.com/u/24731632"></a><div><span title="核心开发">🤖</span> <span title="基础建设">🛰</span> <span title="需求功能">🚧</span></div></td>
     <td align="center"><a href="https://github.com/Deja-vuuu" target="_blank"><img width="50px" src="https://avatars.githubusercontent.com/u/27748682"></a><div><span title="核心开发">🤖</span> <span title="基础建设">🛰</span></div></td>
     <td align="center"><a href="https://github.com/yushen7" target="_blank"><img width="50px" src="https://avatars.githubusercontent.com/u/35678187"></a><div><span title="核心开发">🤖</span></div></td>
-    <td align="center"><a href="https://github.com/qingtiantongxie" target="_blank"><img width="50px" src="https://avatars.githubusercontent.com/u/24731632"></a><div><span title="基础建设">🛰</span> <span title="需求功能">🚧</span></div></td>
     <td align="center"><a href="https://github.com/dora1995" target="_blank"><img width="50px" src="https://avatars.githubusercontent.com/u/53267289"></a><div><span title="修复bug">🛠</span></div></td>
   </tr>
 </table>
