@@ -188,11 +188,11 @@ export default class RightMenu {
     // 添加二级菜单
     if (opt.children && opt.children.length) {
       const ul = this.renderMenu(opt.children)
-      li.addEventListener('mouseover', e => {
+      li.addEventListener('mouseenter', e => {
         li.appendChild(ul)
         layoutMenuPositionEffect(li, ul)
       })
-      li.addEventListener('mouseout', (e: MouseEvent) => {
+      li.addEventListener('mouseleave', (e: MouseEvent) => {
         if (!e['toElement']) return
         let curr = e['toElement']
         while (curr) {

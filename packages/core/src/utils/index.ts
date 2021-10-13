@@ -81,10 +81,6 @@ export const layoutMenuPositionEffect = (
     return y;
   }
 
-  const updatePosition = (x: number, y: number) => {
-    menu.style.left = x + 'px'
-    menu.style.top = y + 'px'
-  }
   let x, y;
   switch (currentLayoutDirection) {
     case LayoutMenuDirection.Left:
@@ -97,6 +93,10 @@ export const layoutMenuPositionEffect = (
       throw new Error(`Unsupported direction: ${currentLayoutDirection}`)
   }
   y = layoutToTop()
+  updatePosition(menu, x, y)
+}
 
-  updatePosition(x, y)
+const updatePosition = (el: HTMLElement, x: number, y: number) => {
+  el.style.left = x + 'px'
+  el.style.top = y + 'px'
 }
