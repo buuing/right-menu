@@ -396,7 +396,7 @@ export default {
 - `💡 待认领`
   - [ ] 🛠 [**在mac系统下, 第二次点击控制台时 blur 事件没有触发**](https://github.com/buuing/vue-right-menu/issues/10)
   - [ ] 🚧 增加 XP / win7 两种经典菜单主题样式
-  - [ ] 🚧 浏览器放大之后, 看看能否保持跟系统菜单同样的大小
+  - [ ] 🚧 随着浏览器放大/缩小时, 将菜单组件尽可能的维持在同一个大小
   - [ ] 🛰 给core包增加eslint-standard规范, 保存时校验
   - [ ] 🤖 看看能否对外暴露一个作用域插槽或者是render函数, 来渲染jsx?
 
