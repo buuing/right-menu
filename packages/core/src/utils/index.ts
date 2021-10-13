@@ -1,6 +1,8 @@
 import { ATTR_LIST, SPLIT_SYMBOL } from '../config'
-import { AttrsType } from '../types'
+import { AttrsType, LayoutMenuDirection } from '../types'
 import { computeRectPosition } from './getInfo'
+
+let currentLayoutDirection = LayoutMenuDirection.Right;
 
 /**
  * 阻止默认事件和冒泡
@@ -41,19 +43,60 @@ export const filterAttrs = (
 
 export const layoutMenuPositionEffect = (
   base: HTMLElement | MouseEvent,
-  menu: HTMLElement
+  menu: HTMLElement,
+  direction: LayoutMenuDirection = currentLayoutDirection
 ): void => {
   // 计算位置
   const { width, height } = computeRectPosition(menu)
   const { x: baseX, y: baseY, width: baseW, height: baseH } = computeRectPosition(base)
-  let x = baseX + baseW
-  let y = baseY
-  if (window.innerWidth < menu.offsetWidth + x) {
-    x = baseX - width
+
+  currentLayoutDirection = direction;
+
+  const layoutToRight = () => {
+    let x = baseX + baseW
+    // 尝试向右布局，判断菜单最右端是否超出屏幕右边缘（视窗宽度）
+    if (menu.offsetWidth + x > window.innerWidth) {
+      x = baseX - width
+      // 右 -> 左
+      currentLayoutDirection = LayoutMenuDirection.Left
+    }
+    return x;
   }
-  if (window.innerHeight < menu.offsetHeight + y) {
-    y = baseY + baseH - height
+  const layoutToLeft = () => {
+    let x = baseX - width;
+    // 尝试向左布局，判断菜单最左端是否超出屏幕左边缘（0）
+    if (x < 0) {
+      x =  baseX + baseW
+      // 左 -> 右
+      currentLayoutDirection = LayoutMenuDirection.Right;
+    }
+    return x
   }
-  menu.style.left = x + 'px'
-  menu.style.top = y + 'px'
+  const layoutToTop = () => {
+    let y = baseY
+    // 尝试向上布局，判断菜单最顶端是否超出屏幕上边缘（视窗高度）
+    if  (menu.offsetHeight + y > window.innerHeight) {
+      y = baseY + baseH - height
+    }
+    return y;
+  }
+
+  const updatePosition = (x: number, y: number) => {
+    menu.style.left = x + 'px'
+    menu.style.top = y + 'px'
+  }
+  let x, y;
+  switch (currentLayoutDirection) {
+    case LayoutMenuDirection.Left:
+      x = layoutToLeft()
+      break
+    case LayoutMenuDirection.Right:
+      x = layoutToRight()
+      break
+    default:
+      throw new Error(`Unsupported direction: ${currentLayoutDirection}`)
+  }
+  y = layoutToTop()
+
+  updatePosition(x, y)
 }

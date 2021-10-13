@@ -1,5 +1,5 @@
 import './theme/index.js'
-import { ConfigType, ItemType, LiType, AttrsType } from './types'
+import { ConfigType, ItemType, LiType, AttrsType, LayoutMenuDirection } from './types'
 import { preventDefault, layoutMenuPositionEffect, filterAttrs } from './utils'
 import { getOperatSystem } from './utils/system'
 
@@ -60,7 +60,7 @@ export default class RightMenu {
     // 添加到页面上
     document.body.appendChild(menu)
     // 计算一级菜单栏的位置
-    layoutMenuPositionEffect(e, menu)
+    layoutMenuPositionEffect(e, menu, LayoutMenuDirection.Right)
 
     // 防止菜单组件里点出系统菜单
     menu.addEventListener('contextmenu', preventDefault)
