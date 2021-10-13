@@ -19,6 +19,14 @@
       color: var(--active-font-color);
       background-color: var(--active-bg-color);
     }
+    &.skeleton::before {
+      background-image: linear-gradient(
+        -45deg,
+        var(--menu-skeleton-color) 40%,
+        var(--menu-skeleton-acitve-color) 55%,
+        var(--menu-skeleton-color) 63%
+      );
+    }
     &.menu-hr {
       border-bottom: 1px solid var(--split-boder-color);
       padding: 0;

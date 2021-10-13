@@ -1,8 +1,7 @@
-import './theme/index.js'
+import { OperatSystem } from './theme/index'
 import { ConfigType, ItemType, LiType, AttrsType } from './types'
 import { preventDefault, layoutMenuPositionEffect, filterAttrs } from './utils'
-import { getOperatSystem } from './utils/system'
-import { calculate }from './utils/skeleton'
+
 export default class RightMenu {
   private menu: HTMLElement | null = null
   private config: ConfigType
@@ -16,7 +15,7 @@ export default class RightMenu {
   ) {
     this.config = config
     // 设置主题
-    config.theme = config.theme || getOperatSystem().toLowerCase().replace(/is/, '') || 'mac'
+    config.theme = config.theme || OperatSystem.toLowerCase().replace(/is/, '') || 'mac'
     // 如果用户输入的主题名称里包含了 'theme-' 则删除
     if (config.theme.indexOf('theme-') === 0) {
       config.theme = config.theme.slice(6)
@@ -25,37 +24,28 @@ export default class RightMenu {
     const dom = typeof config.el === 'string' ? document.querySelector(config.el) : config.el
     dom?.addEventListener('contextmenu', e => {
       const res = typeof options === 'function' ? options(e, config) : options
-      this.initMenu(e as MouseEvent, res)
+      this.init(e as MouseEvent, res)
     })
   }
 
   /**
-   * 初始化菜单栏
-   * @param { Event } e 事件参数
-   * @param { object[] | Promise<object[]> } thenable 菜单列表
-   * @returns { void }
+   * 组件初始化
+   * @param e 鼠标事件参数
+   * @param thenable 菜单列表
+   * @returns { Promise<void> }
    */
-   async initMenu(
+  async init(
     e: MouseEvent,
     thenable: ItemType[] | Promise<ItemType[]>
   ): Promise<void> {
     // 开始就要阻止本身的默认事件
     preventDefault(e)
 
-     // 先移除之前的菜单（若有）及骨架屏
-     this.destroyMenu()
+    // 先移除之前的菜单
+    this.destroyMenu()
 
-    // 显示骨架屏
-    const li = [1,2,3].map(() => document.createElement('li'));
-    const skeleton = this.createDom('ul', { class: `right-menu-list theme-${this.config.theme}` }, li)
-    
-    layoutMenuPositionEffect(e, skeleton)
-    document.body.appendChild(skeleton)
-
-    li.forEach(i=>{
-      i.setAttribute('class','skeleton')
-      i.setAttribute('style',calculate(i))
-    })
+    // 创建菜单骨架
+    this.initSkeleton(e)
 
     // // 统计异步创建前, 有没有点击事件
     let flag = false
@@ -68,12 +58,21 @@ export default class RightMenu {
     // // 如果异步前有点击次数, 则打断逻辑, 不创建菜单
     if (flag) return
 
-    // 先移除之前的菜单（若有）及骨架屏
+    // 再次移除骨架屏
     this.destroyMenu()
 
     // 开始创建菜单栏
-    const menu = this.menu = this.renderMenu(options)
+    this.menu = this.renderMenu(options)
+    this.initMenu(e, this.menu)
+  }
 
+  /**
+   * 初始化菜单栏
+   * @param { Event } e 事件参数
+   * @param menu { HTMLElement } 菜单标签
+   * @returns { void }
+   */
+  initMenu(e: MouseEvent, menu: HTMLElement): void {
     // 添加到页面上
     document.body.appendChild(menu)
     // 计算一级菜单栏的位置
@@ -87,30 +86,29 @@ export default class RightMenu {
     this.addEvent(window, 'resize', this.destroyMenu.bind(this))
     // 页面点击时销毁菜单栏
     this.addEvent(document, 'mousedown', e => {
-      const hasMenu = e['path']?.some((node: HTMLDivElement) => node === this.menu)
+      const hasMenu = e['path']?.some((node: HTMLDivElement) => node === menu)
       if (!hasMenu) this.destroyMenu()
     })
   }
 
   /**
-   * 渲染菜单栏
-   * @param { object[] } options
-   * @returns { HTMLElement }
+   * 创建菜单骨架
+   * @param e 鼠标点击事件
    */
-  renderMenu(options: ItemType[]): HTMLElement {
-    const children = options.map(item => {
-      switch (item.type) {
-        case 'hr': return this.createHr(item)
-        case 'li': return this.createLi(item)
-        case 'ul': return this.createUl(item)
-        default: throw new Error('未知的 type 类型 => ' + item['type'])
-      }
+  initSkeleton(e: MouseEvent): void {
+    // 创建 dom 元素
+    const children = new Array(3).fill(null).map(() => {
+      return this.createDom('li', { class: 'skeleton' })
     })
-    return this.createDom('ul', { class: `right-menu-list theme-${this.config.theme}` }, children)
+    const skeleton = this.createDom('ul', {
+      class: `right-menu-list theme-${this.config.theme}`
+    }, children)
+    // 初始化菜单骨架
+    this.initMenu(e, skeleton)
   }
 
   /**
-   * 销毁菜单栏
+   * 销毁菜单栏/骨架屏
    * @returns { void }
    */
   destroyMenu(): void {
@@ -149,6 +147,23 @@ export default class RightMenu {
       const [target, eventName, callback] = this.eventList.shift()!
       target.removeEventListener(eventName, callback)
     }
+  }
+
+  /**
+   * 渲染菜单栏
+   * @param { object[] } options
+   * @returns { HTMLElement }
+   */
+  renderMenu(options: ItemType[]): HTMLElement {
+    const children = options.map(item => {
+      switch (item.type) {
+        case 'hr': return this.createHr(item)
+        case 'li': return this.createLi(item)
+        case 'ul': return this.createUl(item)
+        default: throw new Error('未知的 type 类型 => ' + item['type'])
+      }
+    })
+    return this.createDom('ul', { class: `right-menu-list theme-${this.config.theme}` }, children)
   }
 
   /**
