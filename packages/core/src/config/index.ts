@@ -31,7 +31,11 @@ export const systemDarkTheme = `--shadow-color: #040405;
 --disabled-bg-color: #262628;
 --active-disabled-bg-color: #262628;
 
---split-boder-color: #494a4c;`
+--split-boder-color: #494a4c;
+
+--menu-skeleton-color: #4c4c4f;
+--menu-skeleton-acitve-color: #444;`
+
 
 export const systemLightTheme = `--shadow-color: rgba(0,0,0,.1);
 --active-shadow-color: rgba(0,0,0,.1);
@@ -51,4 +55,8 @@ export const systemLightTheme = `--shadow-color: rgba(0,0,0,.1);
 --disabled-bg-color: #eae8e9;
 --active-disabled-bg-color: #eae8e9;
 
---split-boder-color: #d0cecf;`
+--split-boder-color: #d0cecf;
+
+--menu-skeleton-color: #f5f5f5;
+--menu-skeleton-acitve-color: #fff;
+`

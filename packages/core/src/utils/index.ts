@@ -48,7 +48,7 @@ export const layoutMenuPositionEffect = (
 ): void => {
   // 计算位置
   const { width, height } = computeRectPosition(menu)
-  const { x: baseX, y: baseY, width: baseW, height: baseH } = computeRectPosition(base)
+  const { x: baseX, y: baseY, width: baseW = 0, height: baseH = 0} = computeRectPosition(base)
 
   currentLayoutDirection = direction;
 

@@ -18,6 +18,24 @@
     overflow: hidden;
     text-overflow:ellipsis;
     white-space: nowrap;
+    &.skeleton {
+      &::before {
+        content: '.';
+        display: inline-block;
+        width: 100%;
+        border-radius: 3px;
+        background-image: linear-gradient(-45deg, #ccc 40%, #fff 55%, #ccc 63%);
+        background-size: 400% auto;
+        background-repeat: no-repeat;
+        position: relative;
+        color: transparent;
+        animation: skeleton-animation 2s ease infinite;
+      }
+      &:hover {
+        color: transparent;
+        background-color: transparent;
+      }
+    }
     &.menu-hr {
       height: 0;
       border-bottom: 1px solid #ccc;
@@ -37,6 +55,11 @@
   }
 }
 
-.style-wait {
-  cursor: wait !important;
+@keyframes skeleton-animation {
+  0% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0 50%;
+  }
 }
