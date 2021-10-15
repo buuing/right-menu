@@ -38,3 +38,8 @@ export type ConfigType = {
 }
 
 type RequireKeys = 'el'
+
+export enum LayoutMenuDirection {
+  Left = -1,
+  Right = 1
+}

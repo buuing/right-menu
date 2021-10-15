@@ -1,5 +1,5 @@
 import { OperatSystem } from './theme/index'
-import { ConfigType, ItemType, LiType, AttrsType } from './types'
+import { ConfigType, ItemType, LiType, AttrsType, LayoutMenuDirection } from './types'
 import { preventDefault, layoutMenuPositionEffect, filterAttrs } from './utils'
 
 export default class RightMenu {
@@ -76,7 +76,7 @@ export default class RightMenu {
     // 添加到页面上
     document.body.appendChild(menu)
     // 计算一级菜单栏的位置
-    layoutMenuPositionEffect(e, menu)
+    layoutMenuPositionEffect(e, menu, LayoutMenuDirection.Right)
 
     // 防止菜单组件里点出系统菜单
     menu.addEventListener('contextmenu', preventDefault)
@@ -220,11 +220,11 @@ export default class RightMenu {
     // 添加二级菜单
     if (opt.children && opt.children.length) {
       const ul = this.renderMenu(opt.children)
-      li.addEventListener('mouseover', e => {
+      li.addEventListener('mouseenter', e => {
         li.appendChild(ul)
         layoutMenuPositionEffect(li, ul)
       })
-      li.addEventListener('mouseout', (e: MouseEvent) => {
+      li.addEventListener('mouseleave', (e: MouseEvent) => {
         if (!e['toElement']) return
         let curr = e['toElement']
         while (curr) {
