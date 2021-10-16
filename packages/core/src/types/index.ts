@@ -1,3 +1,4 @@
+import { LayoutMenuDirection } from "../config"
 
 export type HrType = {
   type: 'hr'
@@ -37,9 +38,9 @@ export type ConfigType = {
   afterHide?: Function // 隐藏菜单后
 }
 
+export interface MenuElement extends HTMLElement {
+  direction?: LayoutMenuDirection;
+}
+
 type RequireKeys = 'el'
 
-export enum LayoutMenuDirection {
-  Left = -1,
-  Right = 1
-}
