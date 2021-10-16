@@ -8,7 +8,7 @@ export default ({ Vue, options, router, siteData, isServer }) => {
       }
     },
     mounted() {
-      import('vue-right-menu').then(module => {
+      import('@right-menu/vue').then(module => {
         this.show = true
         Vue.use(module.default, (...arg) => RightMenuConfig(...arg, router))
       })

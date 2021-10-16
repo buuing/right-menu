@@ -16,12 +16,12 @@
     "vuepress": "^1.8.2"
   },
   "dependencies": {
+    "@right-menu/vue": "^0.0.1",
     "@icon-park/vue": "^1.3.0",
     "axios": "^0.21.1",
     "element-ui": "^2.15.0",
     "pubsub-js": "^1.9.3",
     "view-design": "^4.5.0",
-    "vue-right-menu": "^2.0.3",
     "vuex": "^3.6.2"
   }
 }

@@ -9,6 +9,79 @@
             <h1>right-menu</h1>
             <p>一个右键菜单插件</p>
           </div>
+          <table align="center" style="display: inline-block">
+            <thead>
+              <tr>
+                <th>适配框架</th>
+                <th>npm包</th>
+                <th>最新版本</th>
+                <th>npm下载量</th>
+                <th>CDN使用量</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+                  <b>JS / TS</b>
+                </td>
+                <td>
+                  <a href="https://buuing.github.io/right-menu/usage/js.html" target="_black">@right-menu/core</a>
+                </td>
+                <td>
+                  <img src="https://img.shields.io/npm/v/@right-menu/core?color=%23ffba15&logo=npm&style=flat-square" alt="version" />
+                </td>
+                <td>
+                  <a href="https://www.npmjs.com/package/@right-menu/core" target="_black"><img src="https://img.shields.io/npm/dm/@right-menu/core?color=%23ffba15&logo=npm&style=flat-square" alt="downloads" /></a>
+                </td>
+                <td>
+                  <a href="https://www.jsdelivr.com/package/npm/@right-menu/core" target="_black"><img src="https://data.jsdelivr.com/v1/package/npm/@right-menu/core/badge" alt="downloads" /></a>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <b>Vue</b>
+                </td>
+                <td>
+                  <a href="https://buuing.github.io/right-menu/usage/vue.html" target="_black">@right-menu/vue</a>
+                </td>
+                <td>
+                  <img src="https://img.shields.io/npm/v/@right-menu/vue?color=%23ffba15&logo=npm&style=flat-square" alt="version" />
+                </td>
+                <td>
+                  <a href="https://www.npmjs.com/package/@right-menu/vue" target="_black"><img src="https://img.shields.io/npm/dm/@right-menu/vue?color=%23ffba15&logo=npm&style=flat-square" alt="downloads" /></a>
+                </td>
+                <td>
+                  <a href="https://www.jsdelivr.com/package/npm/@right-menu/vue" target="_black"><img src="https://data.jsdelivr.com/v1/package/npm/@right-menu/vue/badge" alt="downloads" /></a>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <b>React</b>
+                </td>
+                <td>
+                  暂无
+                  <!-- <a href="https://buuing.github.io/right-menu/usage/react.html" target="_black">@right-menu/react</a> -->
+                </td>
+                <td>
+                  <img src="https://img.shields.io/npm/v/@right-menu/react?color=%23ffba15&logo=npm&style=flat-square" alt="version" />
+                </td>
+                <td>
+                  <a href="https://www.npmjs.com/package/@right-menu/react" target="_black"><img src="https://img.shields.io/npm/dm/@right-menu/react?color=%23ffba15&logo=npm&style=flat-square" alt="downloads" /></a>
+                </td>
+                <td>
+                  -
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <b>Electron</b>
+                </td>
+                <td>
+                  暂无
+                </td>
+              </tr>
+            </tbody>
+          </table>
         </el-main>
       </el-container>
     </div>
@@ -41,10 +114,11 @@
           <h1>贡献者</h1>
           <table>
             <tr>
-              <td align="center"><a href="https://github.com/buuing" target="_blank"><img width="60px" src="https://avatars.githubusercontent.com/u/36689704"></a><div><span title="核心开发">🤖</span> <span title="修复bug">🚧</span> <span title="维护文档">📚</span></div></td>
-              <td align="center"><a href="https://github.com/yushen7" target="_blank"><img width="60px" src="https://avatars.githubusercontent.com/u/35678187"></a><div><span title="核心开发">🤖</span></div></td>
-              <td align="center"><a href="https://github.com/qingtiantongxie" target="_blank"><img width="60px" src="https://avatars.githubusercontent.com/u/24731632"></a><div><span title="逻辑优化">🦄</span><span title="修复bug">🚧</span></div></td>
-              <td align="center"><a href="https://github.com/dora1995" target="_blank"><img width="60px" src="https://avatars.githubusercontent.com/u/53267289"></a><div><span title="修复bug">🚧</span></div></td>
+              <td align="center"><a href="https://github.com/buuing" target="_blank"><img width="50px" src="https://avatars.githubusercontent.com/u/36689704"></a><div><span title="核心开发">🤖</span> <span title="基础建设">🛰</span> <span title="维护文档">📚</span></div></td>
+              <td align="center"><a href="https://github.com/qingtiantongxie" target="_blank"><img width="50px" src="https://avatars.githubusercontent.com/u/24731632"></a><div><span title="核心开发">🤖</span> <span title="基础建设">🛰</span> <span title="需求功能">🚧</span></div></td>
+              <td align="center"><a href="https://github.com/Deja-vuuu" target="_blank"><img width="50px" src="https://avatars.githubusercontent.com/u/27748682"></a><div><span title="核心开发">🤖</span> <span title="基础建设">🛰</span></div></td>
+              <td align="center"><a href="https://github.com/yushen7" target="_blank"><img width="50px" src="https://avatars.githubusercontent.com/u/35678187"></a><div><span title="核心开发">🤖</span></div></td>
+              <td align="center"><a href="https://github.com/dora1995" target="_blank"><img width="50px" src="https://avatars.githubusercontent.com/u/53267289"></a><div><span title="修复bug">🛠</span></div></td>
             </tr>
           </table>
         </div>

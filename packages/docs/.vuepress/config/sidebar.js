@@ -11,17 +11,17 @@ module.exports = {
         ]
       }
     ],
-    '/docs/': [
-      {
-        title: '文档',
-        path: '/docs',
-        collapsable: false,
-        children: [
-          { title: '入门教程', path: '/docs' },
-          { title: '高级配置', path: '/docs' },
-        ]
-      },
-    ],
+    // '/docs/': [
+    //   {
+    //     title: '文档',
+    //     path: '/docs',
+    //     collapsable: false,
+    //     children: [
+    //       { title: '入门教程', path: '/docs' },
+    //       { title: '高级配置', path: '/docs' },
+    //     ]
+    //   },
+    // ],
   },
   sidebarEn: {}
 }

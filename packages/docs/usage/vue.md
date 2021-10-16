@@ -33,10 +33,12 @@ yarn add @right-menu/vue
   <template slot="code-指令组件">
     <<< @/usage/vue/directive.vue
   </template>
-  <template slot="code-普通组件">
-    <<< @/usage/vue/abstract.vue
-  </template>
 </RecoDemo>
+
+
+  <!-- <template slot="code-普通组件">
+    @/usage/vue/abstract.vue
+  </template> -->
 
 <br />
 
