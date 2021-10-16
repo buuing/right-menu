@@ -35,20 +35,26 @@ declare class RightMenu {
     private eventList;
     constructor(config: ConfigType, options: ItemType[] | ((e: Event, config: ConfigType) => ItemType[] | Promise<ItemType[]>));
     /**
+     * 组件初始化
+     * @param e 鼠标事件参数
+     * @param thenable 菜单列表
+     * @returns { Promise<void> }
+     */
+    init(e: MouseEvent, thenable: ItemType[] | Promise<ItemType[]>): Promise<void>;
+    /**
      * 初始化菜单栏
      * @param { Event } e 事件参数
-     * @param { object[] | Promise<object[]> } thenable 菜单列表
+     * @param menu { HTMLElement } 菜单标签
      * @returns { void }
      */
-    initMenu(e: MouseEvent, thenable: ItemType[] | Promise<ItemType[]>): Promise<void>;
+    initMenu(e: MouseEvent, menu: HTMLElement): void;
     /**
-     * 渲染菜单栏
-     * @param { object[] } options
-     * @returns { HTMLElement }
+     * 创建菜单骨架
+     * @param e 鼠标点击事件
      */
-    renderMenu(options: ItemType[]): HTMLElement;
+    initSkeleton(e: MouseEvent): void;
     /**
-     * 销毁菜单栏
+     * 销毁菜单栏/骨架屏
      * @returns { void }
      */
     destroyMenu(): void;
@@ -66,6 +72,12 @@ declare class RightMenu {
      */
     removeEvent(): void;
     /**
+     * 渲染菜单栏
+     * @param { object[] } options
+     * @returns { HTMLElement }
+     */
+    renderMenu(options: ItemType[]): HTMLElement;
+    /**
      * 渲染dom
      * @param { String } [ tagName = 'ul' ] 元素名称
      * @param { Object } [ attrs = {} ] 元素属性对象
@@ -77,7 +89,7 @@ declare class RightMenu {
         type: 'hr';
     }>(opt: T): HTMLElement;
     createLi<T extends ItemType & {
-        type: 'li';
+        type: 'li' | 'ul';
     }>(opt: T): HTMLElement;
     createUl<T extends ItemType & {
         type: 'ul';

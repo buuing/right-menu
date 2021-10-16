@@ -1,6 +1,6 @@
 {
   "name": "@right-menu/core",
-  "version": "0.0.4",
+  "version": "0.0.6",
   "description": "",
   "browser": "dist/right-menu.umd",
   "module": "dist/right-menu.esm",

@@ -2,7 +2,6 @@ import { ATTR_LIST, SPLIT_SYMBOL, LayoutMenuDirection } from '../config'
 import { AttrsType, MenuElement } from '../types'
 import { computeRectPosition } from './getInfo'
 
-
 /**
  * 阻止默认事件和冒泡
  * @param { Event } e 事件参数
@@ -55,7 +54,7 @@ export const layoutMenuPositionEffect = (
   if ('parentElement' in base && base.parentElement) {
     currentDirection  = menu.direction = (base.parentElement as MenuElement).direction || currentDirection
   }
-  
+
   const layoutToRight = () => {
     let x = baseX + baseW
     // 尝试向右布局，判断菜单最右端是否超出屏幕右边缘（视窗宽度）
@@ -66,6 +65,7 @@ export const layoutMenuPositionEffect = (
     }
     return x;
   }
+
   const layoutToLeft = () => {
     let x = baseX - width;
     // 尝试向左布局，判断菜单最左端是否超出屏幕左边缘（0）
@@ -76,6 +76,7 @@ export const layoutMenuPositionEffect = (
     }
     return x
   }
+
   const layoutToTop = () => {
     let y = baseY
     // 尝试向上布局，判断菜单最顶端是否超出屏幕上边缘（视窗高度）

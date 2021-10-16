@@ -164,7 +164,9 @@ export default class RightMenu {
         default: throw new Error('未知的 type 类型 => ' + item['type'])
       }
     })
-    return this.createDom('ul', { class: `right-menu-list theme-${this.config.theme}` }, children)
+    return this.createDom('ul', {
+      class: `right-menu-list theme-${this.config.theme}`
+    }, children)
   }
 
   /**
@@ -201,11 +203,16 @@ export default class RightMenu {
     return this.createDom('li', filterAttrs(opt, attrs))
   }
 
-  createLi<T extends ItemType & { type: 'li' }>(opt: T): HTMLElement {
-    const span = this.createDom('span', {}, [opt.text])
-    const attrs = { class: opt.disabled ? 'menu-disabled' : '' }
+  createLi<T extends ItemType & { type: 'li' | 'ul' }>(opt: T): HTMLElement {
+    const span = this.createDom('span', {}, [String(opt.text)])
+    const attrs = {
+      class: [
+        opt.disabled ? 'menu-disabled' : '',
+        opt.type === 'ul' ? 'menu-ul' : ''
+      ].join(' ')
+    }
     const li = this.createDom('li', filterAttrs(opt, attrs), [span])
-    if (!opt.disabled && opt.callback) {
+    if (!opt.disabled && opt.type === 'li' && opt.callback) {
       li.addEventListener('mousedown', e => {
         opt.callback(e)
         this.destroyMenu()
@@ -215,9 +222,7 @@ export default class RightMenu {
   }
 
   createUl<T extends ItemType & { type: 'ul' }>(opt: T): HTMLElement {
-    const span = this.createDom('span', {}, [opt.text])
-    const attrs = { class: 'menu-ul' + (opt.disabled ? ' menu-disabled' : '') }
-    const li: HTMLElement  = this.createDom('li', filterAttrs(opt, attrs), [span])
+    const li = this.createLi(opt)
     // 添加二级菜单
     if (opt.children && opt.children.length) {
       const ul = this.renderMenu(opt.children)

@@ -7,12 +7,20 @@
   <title>Document</title>
 </head>
 <body>
-  <div class="box1" style="height: 300px; background: #ccc;"></div>
-  <div class="box2" style="height: 300px; background: pink;"></div>
-  <div class="box3" style="height: 300px; background: greenyellow;"></div>
+  <div class="box1" style="background: #6F69AC;"><span>同步</span></div>
+  <div class="box2" style="background: #95DAC1;"><span>异步 0ms</span></div>
+  <div class="box3" style="background: #FFEBA1;"><span>异步 3000ms</span></div>
+  <div class="box4" style="background: #FD6F96;"><span>暂无</span></div>
   <script src="../dist/right-menu.umd.js"></script>
   <script>
-
+    function dfs (max) {
+      if (max === 0) return null
+      return [{
+        text: max,
+        type: 'ul',
+        children: dfs(max - 1)
+      }]
+    }
     const base = [
       { type: 'hr' },
       {
@@ -32,8 +40,9 @@
       el: '.box1'
     }, [
       {
-        type: 'li',
-        text: '同步'
+        type: 'ul',
+        text: '100',
+        children: dfs(99)
       },
       ...base
     ])
@@ -69,3 +78,35 @@
   </script>
 </body>
 </html>
+<style>
+  body>div {
+    height: 300px;
+    text-align: center;
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+  }
+  body>div::before {
+    content: '';
+    display: block;
+    height: 100%;
+    border-left: 2px dashed rgba(0, 0, 0, 0.5);
+    position: absolute;
+    left: 33.33%;
+  }
+  body>div::after {
+    content: '';
+    display: block;
+    height: 100%;
+    position: absolute;
+    border-left: 2px dashed rgba(0, 0, 0, 0.5);
+    right: 33.33%;
+  }
+  div>span {
+    background: rgba(0, 0, 0, 0.3);
+    padding: 3px 10px;
+    border-radius: 5px;
+  }
+</style> 
