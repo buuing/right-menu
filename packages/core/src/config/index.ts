@@ -60,3 +60,9 @@ export const systemLightTheme = `--shadow-color: rgba(0,0,0,.1);
 --menu-skeleton-color: #f5f5f5;
 --menu-skeleton-acitve-color: #fff;
 `
+
+
+export const enum LayoutMenuDirection {
+  Left = -1,
+  Right = 1
+}

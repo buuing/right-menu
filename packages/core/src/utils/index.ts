@@ -1,8 +1,7 @@
-import { ATTR_LIST, SPLIT_SYMBOL } from '../config'
-import { AttrsType, LayoutMenuDirection } from '../types'
+import { ATTR_LIST, SPLIT_SYMBOL, LayoutMenuDirection } from '../config'
+import { AttrsType, MenuElement } from '../types'
 import { computeRectPosition } from './getInfo'
 
-let currentLayoutDirection = LayoutMenuDirection.Right;
 
 /**
  * 阻止默认事件和冒泡
@@ -43,22 +42,27 @@ export const filterAttrs = (
 
 export const layoutMenuPositionEffect = (
   base: HTMLElement | MouseEvent,
-  menu: HTMLElement,
-  direction: LayoutMenuDirection = currentLayoutDirection
+  menu: MenuElement,
+  direction: LayoutMenuDirection = LayoutMenuDirection.Right
 ): void => {
   // 计算位置
   const { width, height } = computeRectPosition(menu)
   const { x: baseX, y: baseY, width: baseW = 0, height: baseH = 0} = computeRectPosition(base)
 
-  currentLayoutDirection = direction;
+  let currentDirection = direction
 
+  // 从 base:li 的 parentElement:ul（上一级menu）继承 direction
+  if ('parentElement' in base && base.parentElement) {
+    currentDirection  = menu.direction = (base.parentElement as MenuElement).direction || currentDirection
+  }
+  
   const layoutToRight = () => {
     let x = baseX + baseW
     // 尝试向右布局，判断菜单最右端是否超出屏幕右边缘（视窗宽度）
     if (menu.offsetWidth + x > window.innerWidth) {
       x = baseX - width
       // 右 -> 左
-      currentLayoutDirection = LayoutMenuDirection.Left
+      menu.direction = LayoutMenuDirection.Left
     }
     return x;
   }
@@ -68,7 +72,7 @@ export const layoutMenuPositionEffect = (
     if (x < 0) {
       x =  baseX + baseW
       // 左 -> 右
-      currentLayoutDirection = LayoutMenuDirection.Right;
+      menu.direction = LayoutMenuDirection.Right;
     }
     return x
   }
@@ -82,7 +86,7 @@ export const layoutMenuPositionEffect = (
   }
 
   let x, y;
-  switch (currentLayoutDirection) {
+  switch (currentDirection) {
     case LayoutMenuDirection.Left:
       x = layoutToLeft()
       break
@@ -90,7 +94,7 @@ export const layoutMenuPositionEffect = (
       x = layoutToRight()
       break
     default:
-      throw new Error(`Unsupported direction: ${currentLayoutDirection}`)
+      throw new Error(`Unsupported direction: ${direction}`)
   }
   y = layoutToTop()
   updatePosition(menu, x, y)

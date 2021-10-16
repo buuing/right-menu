@@ -1,5 +1,6 @@
+import { LayoutMenuDirection } from './config'
 import { OperatSystem } from './theme/index'
-import { ConfigType, ItemType, LiType, AttrsType, LayoutMenuDirection } from './types'
+import { ConfigType, ItemType, LiType, AttrsType } from './types'
 import { preventDefault, layoutMenuPositionEffect, filterAttrs } from './utils'
 
 export default class RightMenu {
