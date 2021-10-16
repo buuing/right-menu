@@ -96,16 +96,84 @@ https://buuing.github.io/right-menu/
 
 ## 使用 Usage
 
-### 通过 `import` 使用
+<details open>
+<summary>
+在 <code>JS / TS</code> 中使用
+</summary>
+
+<br />
+
+
+### 通过 `import` 使用 (JS)
 
 1. 安装插件
 
 ```shell
 # 通过 npm 安装
-npm install vue-right-menu
+npm install @right-menu/core
 
 # 通过 yarn 安装
-yarn add vue-right-menu
+yarn add @right-menu/core
+```
+
+2. 使用插件
+
+```js
+import RightMenu from '@right-menu/core'
+
+new RightMenu('#box', [
+  {
+    type: 'li', // type为li是普通按钮
+    text: '复制(C)', // 按钮的名称
+    callback: () => alert('点击了复制') // 回调函数
+  }
+])
+```
+
+<br />
+
+### 通过 `script` 标签使用 (JS)
+
+- `CDN链接`: https://cdn.jsdelivr.net/npm/@right-menu/core/dist/right-menu.umd.min.js
+
+```html
+<div id="box" style="height: 300px; background: #ccc"></div>
+
+<script src="https://cdn.jsdelivr.net/npm/@right-menu/core/dist/right-menu.umd.min.js"></script>
+<script>
+  new RightMenu('#box', [
+    {
+      type: 'li', // type为li是普通按钮
+      text: '复制(C)', // 按钮的名称
+      callback: () => alert('点击了复制') // 回调函数
+    }
+  ])
+</script>
+```
+
+
+</details>
+
+<br />
+
+<details>
+<summary>
+在 <code>Vue</code> 中使用
+</summary>
+
+<br />
+
+
+### 通过 `import` 使用 (Vue)
+
+1. 安装插件
+
+```shell
+# 通过 npm 安装
+npm install @right-menu/vue
+
+# 通过 yarn 安装
+yarn add @right-menu/vue
 ```
 
 2. 使用插件
@@ -113,7 +181,7 @@ yarn add vue-right-menu
 在 `main.js` 入口文件中添加代码
 
 ```js
-import rightMenu from 'vue-right-menu'
+import rightMenu from '@right-menu/vue'
 
 Vue.use(rightMenu)
 ```
@@ -143,9 +211,9 @@ export default {
 
 <br />
 
-### 通过 `script` 标签使用
+### 通过 `script` 标签使用 (Vue)
 
-- `CDN链接`: https://cdn.jsdelivr.net/npm/vue-right-menu/dist/rightMenu.umd.min.js
+- `CDN链接`: https://cdn.jsdelivr.net/npm/@right-menu/vue/dist/rightMenu.umd.min.js
 
 ```html
 <div id="app">
@@ -153,7 +221,7 @@ export default {
 </div>
 
 <script src="https://cdn.bootcdn.net/ajax/libs/vue/2.6.9/vue.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/vue-right-menu/dist/rightMenu.umd.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@right-menu/vue/dist/rightMenu.umd.min.js"></script>
 <script>
   new Vue({
     el: '#app',
@@ -171,194 +239,18 @@ export default {
 ```
 
 
-<br />
-
-## 插件选项
-
-给对应的元素添加`v-menu`的指令, 菜单栏的内容以及回调函数可以自定义
-
-<details>
-<summary>
-<code>vue-right-menu@1.x</code> 旧版本选项
-</summary>
-
-<br />
-
-| 参数选项  | a链接 | 普通按钮 | 二级菜单 | 分割线
-|  :-:     | :-:   | :-:     | :-: | :-:
-| type     |  a   |   li    |  ul  | hr 
-| title    |  √   |   √     |  √   | × 
-| href     |  √   |   ×     |  ×   | × 
-| func     |  ×   |   √     |  ×   | × 
-| disabled |  √   |   √     |  √   | × 
-| children |  ×   |   ×     |  √   | × 
-
-</details>
-
-<br />
-
-<details open>
-<summary>
-<code>vue-right-menu@2.x</code> 新版本选项
-</summary>
-
-<br />
-
-| 参数选项  | type | text | href | callback | disabled | children | class | icon |
-| :-:      | :-:  | :-:  | :-:  |    :-:   |   :-:    |    :-:   |  :-:  | :-:  |
-| 普通按钮   |  li  |  √   |  ×   |    ×     |   √      |    ×     |   -   |  -   |
-| 二级菜单   |  ul  |  √   |  ×   |    √     |   √      |    √     |   -   |  -   |
-| 分割线     |  hr  |  ×   |  ×   |    ×     |   ×      |    ×     |   -   |  -   |
-
-</details>
-
-<br />
-
-## 完整示例
-
-<details>
-<summary>
-<code>vue-right-menu@1.x</code> 旧版本完整示例
-</summary>
-
-<br />
-
-```html
-<template>
-  <div v-menu="options" style="height: 300px; background-color: #82acff"></div>
-</template>
-
-<script>
-export default {
-  data () {
-    return {
-      options: [
-        {
-          type: 'li', // type为li是普通按钮
-          title: '复制(C)', // 按钮的名称
-          func: () => alert('点击了复制') // 回调函数
-        }, {
-          type: 'li',
-          title: '粘贴(V)',
-          disabled: true, // 不可点击状态, 回调函数自然无法触发
-          func: () => alert('点击了粘贴')
-        }, {
-          type: 'hr' // 分割线, 无需其他参数
-        }, {
-          type: 'ul', // type为ul是二级菜单
-          title: '新建(W)',
-          children: [ // children里面配置二级菜单列表, 不支持三级菜单
-            {
-              type: 'li',
-              title: '文件夹(F)',
-              func: () => alert('新建了文件夹')
-            }, {
-              type: 'li',
-              title: '快捷方式(S)',
-              func: () => alert('新建了快捷方式')
-            }, {
-              type: 'hr'
-            }, {
-              type: 'li',
-              title: '文本文档'
-            }, {
-              type: 'li',
-              title: 'Work 文档'
-            }, {
-              type: 'li',
-              title: 'Excel 表格'
-            }, {
-              type: 'li',
-              title: 'WinRAR 压缩文件'
-            }
-          ]
-        }, {
-          type: 'hr'
-        }, {
-          type: 'li',
-          title: '属性(R)',
-          func: () => alert('点击了属性')
-        }
-      ]
-    }
-  }
-}
-</script>
-```
-
 </details>
 
 <br />
 
 <details>
 <summary>
-<code>vue-right-menu@2.x</code> 新版本完整示例
+在 <code>React</code> 中使用
 </summary>
 
 <br />
 
-```html
-<template>
-  <div v-menu="options" style="height: 300px; background-color: #82acff"></div>
-</template>
-
-<script>
-export default {
-  data () {
-    return {
-      options: [
-        {
-          type: 'li', // type为li是普通按钮
-          text: '复制(C)', // 按钮的名称
-          callback: () => alert('点击了复制') // 回调函数
-        }, {
-          type: 'li',
-          text: '粘贴(V)',
-          disabled: true, // 不可点击状态, 回调函数自然无法触发
-          callback: () => alert('点击了粘贴')
-        }, {
-          type: 'hr' // 分割线, 无需其他参数
-        }, {
-          type: 'ul', // type为ul是二级菜单
-          text: '新建(W)',
-          children: [ // children里面配置二级菜单列表, 不支持三级菜单
-            {
-              type: 'li',
-              text: '文件夹(F)',
-              callback: () => alert('新建了文件夹')
-            }, {
-              type: 'li',
-              text: '快捷方式(S)',
-              callback: () => alert('新建了快捷方式')
-            }, {
-              type: 'hr'
-            }, {
-              type: 'li',
-              text: '文本文档'
-            }, {
-              type: 'li',
-              text: 'Work 文档'
-            }, {
-              type: 'li',
-              text: 'Excel 表格'
-            }, {
-              type: 'li',
-              text: 'WinRAR 压缩文件'
-            }
-          ]
-        }, {
-          type: 'hr'
-        }, {
-          type: 'li',
-          text: '属性(R)',
-          callback: () => alert('点击了属性')
-        }
-      ]
-    }
-  }
-}
-</script>
-```
+暂无
 
 </details>
 
