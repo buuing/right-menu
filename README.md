@@ -243,7 +243,7 @@ export default {
 
 <br />
 
-<details>
+<details open>
 <summary>
 在 <code>React</code> 中使用
 </summary>
@@ -270,7 +270,7 @@ export default {
     <td align="center"><a href="https://github.com/buuing" target="_blank"><img width="50px" src="https://avatars.githubusercontent.com/u/36689704"></a><div><span title="核心开发">🤖</span> <span title="基础建设">🛰</span> <span title="维护文档">📚</span></div></td>
     <td align="center"><a href="https://github.com/qingtiantongxie" target="_blank"><img width="50px" src="https://avatars.githubusercontent.com/u/24731632"></a><div><span title="核心开发">🤖</span> <span title="基础建设">🛰</span> <span title="需求功能">🚧</span></div></td>
     <td align="center"><a href="https://github.com/Deja-vuuu" target="_blank"><img width="50px" src="https://avatars.githubusercontent.com/u/27748682"></a><div><span title="核心开发">🤖</span> <span title="基础建设">🛰</span></div></td>
-    <td align="center"><a href="https://github.com/yushen7" target="_blank"><img width="50px" src="https://avatars.githubusercontent.com/u/35678187"></a><div><span title="核心开发">🤖</span></div></td>
+    <td align="center"><a href="https://github.com/yushen7" target="_blank"><img width="50px" src="https://avatars.githubusercontent.com/u/35678187"></a><div><span title="核心开发">🤖</span> <span title="修复bug">🛠</span></div></td>
     <td align="center"><a href="https://github.com/dora1995" target="_blank"><img width="50px" src="https://avatars.githubusercontent.com/u/53267289"></a><div><span title="修复bug">🛠</span></div></td>
   </tr>
 </table>
@@ -282,39 +282,28 @@ export default {
 - `📆 进行中`
   - [ ] 🤖 增加初始化高级配置, 可以设置一些全局的选项, 以及菜单创建的生命周期 - buuing
   - [ ] 🚧 增加icon选项, 可以使用一些内置图标, 想法可以让用户自由使用外部的svg图标
-  - [ ] 🚧 后续也可以继续优化一下三级菜单的方向 - `yox`
   - [ ] 📚 [补全文档中`react`的`hooks`使用方式](https://buuing.github.io/right-menu/usage/react.html) - `yox`
 
 - `💡 待认领`
   - [ ] 🛠 [**在mac系统下, 第二次点击控制台时 blur 事件没有触发**](https://github.com/buuing/vue-right-menu/issues/10)
   - [ ] 🚧 增加 XP / win7 两种经典菜单主题样式
   - [ ] 🚧 随着浏览器放大/缩小时, 将菜单组件尽可能的维持在同一个大小
-  - [ ] 🛰 给core包增加eslint-standard规范, 保存时校验
+  - [ ] 🛰 给`core`包增加`eslint-standard`规范, 保存时校验
   - [ ] 🤖 看看能否对外暴露一个作用域插槽或者是render函数, 来渲染jsx?
 
 <br />
 
-## 历时更新记录
+## 历史功能更新记录
 
-- `🎯 v2.0.0`
-  - [x] ~当前组件增加对vue3的支持~
-  - [x] ~把css样式和js逻辑打包到一个umd包里面, 以便于`script`标签引入~
-
-- `🎯 v2.0.1`
-  - [x] ~点击非窗口区域时, 看看能不能监听到然后关闭菜单~
-  - [x] ~尝试支持`Vue.use(rightMenu, async () => [])`异步返回~
-
-- `🎯 v2.0.2`
-  - [x] ~菜单的宽度根据文字长度做到自适应~
-  - [x] ~增加不同的主题样式: mac / win10, 看看能不能根据系统自动切换主题~
-  - [x] ~修复了安装缺少脚本报错的问题~
-
-- `🎯 v2.0.3`
-  - [x] ~目前最多支持二级菜单, 后续增加三级菜单 / 多级菜单的逻辑~
-  - [x] ~增加class和style选项, 可以给当前标签添加样式~
-  - [x] ~修复了异步渲染菜单时, 无法完全清除历史组件的问题~
-
-<!-- - 自适应系统的主题色 (mac的暗黑模式)  -->
+  - [x] 增加`@right-menu/vue`的包, 并支持`vue2/3` - *buuing*
+  - [x] 点击非窗口区域时, 看看能不能监听到然后关闭菜单 - *buuing*
+  - [x] 支持`new RightMenu('#box', async () => [])`异步返回菜单数据 - *buuing*
+  - [x] 菜单的宽度根据文字长度做到自适应 - *buuing*
+  - [x] 增加`class`和`style`选项, 可以给当前标签添加类和样式 - *buuing*
+  - [x] 增加不同的主题样式: mac / win10 - *buuing*
+  - [x] 自动根据操作系统切换主题, 并做到自适应`mac`的白天/黑夜模式 - *qingtiantongxie*
+  - [x] 异步等待期间增加菜单骨架来作为缓冲, 减少用户等待的焦虑 - *qingtiantongxie*
+  - [x] 增加了三级菜单 / 多级菜单的逻辑处理, 并自动计算剩余位置来切换渲染方向 - *yushen7*
 
 <br />
 
