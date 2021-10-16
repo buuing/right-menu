@@ -1,9 +1,5 @@
 <template>
   <div v-menu="options" style="height: 50vh; background-color: #ccc">
-    <p v-menu="[{ type: 'li', text: '这是一个p标签' }]">这是一个p标签</p>
-    <div v-menu="[{ type: 'li', text: '这是一个div标签' }]">这是一个div标签</div>
-    <span>span</span>
-    <input type="text" v-menu="[{ type: 'li', text: '这是一个input输入框' }]">
   </div>
 </template>
 

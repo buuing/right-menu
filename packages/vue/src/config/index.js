@@ -1,54 +1,46 @@
-/**
- * 默认配置文件
- */
-export const ConnectOffset = 5
 
-export const attrList = [
-  'class',
-  'style'
-]
-
-export const splitSymbol = {
-  class: ' ',
-  style: ';'
-}
-
-export const systemDarkTheme = `--shadow-color: #040405;
---active-shadow-color: #040405;
-
---border-color: #525253;
---active-border-color: #525253;
-
---font-color: #eaeaea;
---active-font-color: #fff;
-
---bg-color: #262628;
---active-bg-color: #68a1f9;
-
---disabled-font-color: #656668;
---active-disabled-font-color:#656668;
-
---disabled-bg-color: #262628;
---active-disabled-bg-color: #262628;
-
---split-boder-color: #494a4c;`
-
-export const systemLightTheme = `--shadow-color: rgba(0,0,0,.1);
---active-shadow-color: rgba(0,0,0,.1);
-
---border-color: #cdcdcd;
---active-border-color: #cdcdcd;
-
---font-color: #222;
---active-font-color: #fff;
-
---bg-color: #eae8e9;
---active-bg-color: #68a1f9;
-
---disabled-font-color: #a8a8a8;
---active-disabled-font-color:#a8a8a8;
-
---disabled-bg-color: #eae8e9;
---active-disabled-bg-color: #eae8e9;
-
---split-boder-color: #d0cecf;`
+export const defaultOptions = [{
+  type: 'ul',
+  text: '关于 ${}',
+  children: [
+    {
+      type: 'li',
+      text: 'version ${}',
+      disabled: true
+    },
+    { type: 'hr' },
+    {
+      type: 'li',
+      text: 'Github 仓库',
+      callback: async () => window.open('https://github.com/buuing/vue-right-menu')
+    },
+    {
+      type: 'li',
+      text: 'Bug 反馈',
+      callback: () => window.open('https://github.com/buuing/vue-right-menu/issues/new')
+    },
+    { type: 'hr' },
+    {
+      type: 'li',
+      text: '入门教程',
+      disabled: true
+    },
+    {
+      type: 'li',
+      text: '高级配置',
+      disabled: true
+    },
+    { type: 'hr' },
+    {
+      type: 'li',
+      text: '查看历史更新',
+      disabled: true
+    },
+    { type: 'hr' },
+    {
+      type: 'li',
+      text: '📋 开源协议 License MIT',
+      callback: () => window.open('https://github.com/buuing/vue-right-menu/blob/master/LICENSE')
+    }
+  ]
+}]

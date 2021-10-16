@@ -1,15 +1,16 @@
 {
-  "name": "vue-right-menu",
-  "version": "2.0.3",
+  "name": "@right-menu/vue",
+  "version": "0.0.1",
   "description": "一个基于vue2和vue3的右键菜单插件",
-  "main": "dist/rightMenu.common.js",
+  "browser": "dist/rightMenu.umd.js",
+  "module": "dist/rightMenu.common.js",
+  "types": "",
   "scripts": {
     "dev": "vue-cli-service serve",
     "pkg": "vue-cli-service build --target lib --name rightMenu --dest ./dist/ ./src/index.js",
     "docs": "vuepress dev docs",
     "build": "npm run pkg",
-    "lint": "vue-cli-service lint",
-    "postinstall": "node ./postinstall.js"
+    "lint": "vue-cli-service lint"
   },
   "keywords": [
     "vue右键菜单插件"
@@ -18,11 +19,7 @@
   "license": "MIT",
   "files": [
     "dist",
-    "index.js",
-    "postinstall.js",
-    "LICENSE",
-    "README.md",
-    "package.json"
+    "index.js"
   ],
   "devDependencies": {
     "@vue/cli-plugin-babel": "~4.5.0",
@@ -43,6 +40,6 @@
     "vue-template-compiler": "^2.6.11"
   },
   "dependencies": {
-    "@right-menu/core": "^0.0.1"
+    "@right-menu/core": "^0.0.5"
   }
 }
