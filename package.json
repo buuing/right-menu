@@ -8,6 +8,7 @@
   "scripts": {
     "bootstrap": "lerna bootstrap",
     "vue": "lerna run --scope @right-menu/core --scope vue-right-menu dev --parallel",
+    "react": "lerna run --scope @right-menu/core --scope @right-menu/react dev --parallel",
     "build": "lerna run build --sort --stream",
     "update-version": "lerna version --conventional-commits --no-push --no-changelog --no-git-tag-version",
     "publish-to-npm": "lerna publish from-package",
