@@ -23,13 +23,25 @@ export interface AttrsType {
   style?: string
 }
 
-export type ItemType = AttrsType & (
-  HrType | LiType | UlType
-)
+export type ElementType = HrType | LiType | UlType
+
+export type ItemType = AttrsType & ElementType
+
+type GetKeysType<T> = T extends ElementType ? keyof T : never
+
+type ElementKeysType = GetKeysType<ElementType>
 
 export type ConfigType = {
   el: string
+  mode: 'context-menu' | 'nav-menu' // 模式, 默认为context-menu
   theme?: string // 主题样式, 默认为auto
+  minWidth: string | number // 最小宽度
+  maxWidth: string | number // 最大宽度
+  include?: string[] | RegExp // 包含的元素
+  exclude?: string[] | RegExp // 排除的元素
+  defaultProps?: { // 默认参数配置项
+    [key in ElementKeysType]?: string
+  }
   beforeInit?: Function // 初始化前
   afterInit?: Function // 初始化后
   beforeShow?: Function // 显示菜单前
