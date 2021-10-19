@@ -2,9 +2,33 @@
   "name": "@right-menu/react",
   "version": "0.0.1",
   "description": "",
-  "main": "index.js",
+  "main": "dist/react-right-menu.cjs.js",
+  "module": "dist/react-right-menu.esm.js",
+  "browser": "dist/react-right-menu.umd.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "rollup --config rollup.config.dev.js --watch",
+    "build": "rollup --config "
+  },
+  "dependencies": {
+    "@right-menu/core": "^0.0.4"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.12.10",
+    "@babel/preset-env": "^7.15.8",
+    "@babel/preset-react": "^7.14.5",
+    "@babel/preset-typescript": "^7.15.0",
+    "@rollup/plugin-commonjs": "^17.0.0",
+    "@rollup/plugin-json": "^4.1.0",
+    "@rollup/plugin-node-resolve": "^11.1.0",
+    "@types/react": "^17.0.30",
+    "rollup": "^2.38.0",
+    "rollup-plugin-babel": "^4.4.0",
+    "rollup-plugin-livereload": "^2.0.5",
+    "rollup-plugin-serve": "^1.1.0",
+    "rollup-plugin-terser": "^7.0.2",
+    "rollup-plugin-typescript2": "^0.30.0",
+    "tslib": "^2.3.1",
+    "typescript": "^4.4.4"
   },
   "keywords": [],
   "author": "",
