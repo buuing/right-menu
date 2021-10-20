@@ -1,4 +1,4 @@
-import { LayoutMenuDirection } from "../config"
+import { LayoutMenuDirection } from '../config'
 
 export type HrType = {
   type: 'hr'
@@ -19,7 +19,7 @@ export type UlType = {
 }
 
 export interface AttrsType {
-  class?: string,
+  class?: string
   style?: string | { [key: string]: string }
 }
 
@@ -39,7 +39,8 @@ export type ConfigType = {
   maxWidth: string | number // 最大宽度
   include?: string[] | RegExp // 包含的元素
   exclude?: string[] | RegExp // 排除的元素
-  defaultProps?: { // 默认参数配置项
+  defaultProps?: {
+    // 默认参数配置项
     [key in ElementKeysType]?: string
   }
   beforeInit?: Function // 初始化前
@@ -51,8 +52,7 @@ export type ConfigType = {
 }
 
 export interface MenuElement extends HTMLElement {
-  direction?: LayoutMenuDirection;
+  direction?: LayoutMenuDirection
 }
 
 type RequireKeys = 'el'
-

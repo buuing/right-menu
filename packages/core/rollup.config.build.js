@@ -8,7 +8,7 @@ import babel from 'rollup-plugin-babel'
 import { terser } from 'rollup-plugin-terser'
 // import del from 'rollup-plugin-delete'
 import pkg from './package.json'
-import styles from 'rollup-plugin-styles';
+import styles from 'rollup-plugin-styles'
 export default [
   {
     input: 'src/index.ts',
@@ -22,7 +22,7 @@ export default [
         file: `${pkg.browser}.min.js`,
         format: 'umd',
         name: 'RightMenu',
-        plugins: [terser()]
+        plugins: [terser()],
       },
       {
         file: `${pkg.module}.js`,
@@ -31,7 +31,7 @@ export default [
       {
         file: `${pkg.module}.min.js`,
         format: 'es',
-        plugins: [terser()]
+        plugins: [terser()],
       },
     ],
     plugins: [
@@ -39,21 +39,21 @@ export default [
       ts({
         tsconfig: path.resolve(__dirname, './tsconfig.json'),
         extensions: ['.js', '.ts'],
-        "declaration": true,
+        declaration: true,
       }),
       json(),
       resolve(),
       commonjs(),
       babel({ exclude: 'node_modules/**' }),
-    ]
+    ],
   },
   {
-    input: "dist/index.d.ts",
+    input: 'dist/index.d.ts',
     output: [
       {
-        file: "types/index.d.ts",
-        format: "es"
-      }
+        file: 'types/index.d.ts',
+        format: 'es',
+      },
     ],
     plugins: [
       dts(),

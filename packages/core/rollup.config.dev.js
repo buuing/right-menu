@@ -7,7 +7,7 @@ import babel from 'rollup-plugin-babel'
 import resolve from '@rollup/plugin-node-resolve'
 import commonjs from '@rollup/plugin-commonjs'
 
-import styles from 'rollup-plugin-styles';
+import styles from 'rollup-plugin-styles'
 
 import livereload from 'rollup-plugin-livereload'
 import serve from 'rollup-plugin-serve'
@@ -34,7 +34,7 @@ export default {
     styles(),
     ts({
       tsconfig: path.resolve(__dirname, './tsconfig.json'),
-      extensions: ['.js', '.ts']
+      extensions: ['.js', '.ts'],
     }),
     json(),
     babel({ exclude: 'node_modules/**' }),
@@ -44,7 +44,7 @@ export default {
     serve({
       open: true,
       openPage: '/examples/index.html',
-      contentBase: './'
+      contentBase: './',
     }),
-  ]
+  ],
 }

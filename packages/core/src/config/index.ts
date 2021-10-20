@@ -3,14 +3,11 @@
  */
 export const ConnectOffset = 5
 
-export const ATTR_LIST = [
-  'class',
-  'style'
-]
+export const ATTR_LIST = ['class', 'style']
 
 export const SPLIT_SYMBOL = {
   class: ' ',
-  style: ';'
+  style: ';',
 }
 
 export const systemDarkTheme = `--shadow-color: #040405;
@@ -36,7 +33,6 @@ export const systemDarkTheme = `--shadow-color: #040405;
 --menu-skeleton-color: #4c4c4f;
 --menu-skeleton-acitve-color: #444;`
 
-
 export const systemLightTheme = `--shadow-color: rgba(0,0,0,.1);
 --active-shadow-color: rgba(0,0,0,.1);
 
@@ -61,8 +57,7 @@ export const systemLightTheme = `--shadow-color: rgba(0,0,0,.1);
 --menu-skeleton-acitve-color: #fff;
 `
 
-
 export const enum LayoutMenuDirection {
   Left = -1,
-  Right = 1
+  Right = 1,
 }
