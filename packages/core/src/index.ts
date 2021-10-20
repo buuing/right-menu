@@ -1,12 +1,22 @@
 import { LayoutMenuDirection } from './config'
 import { OperatSystem } from './theme/index'
 import { ConfigType, ItemType, LiType, AttrsType } from './types'
-import { preventDefault, layoutMenuPositionEffect, filterAttrs } from './utils'
+import {
+  preventDefault,
+  layoutMenuPositionEffect,
+  filterAttrs,
+  handleStyle,
+  getValue
+} from './utils'
 
 export default class RightMenu {
   private menu: HTMLElement | null = null
   private config: ConfigType
   private eventList: Array<[Window | Document, string, LiType['callback']]> = []
+  private menuStyle = {
+    'min-width': '',
+    'max-width': ''
+  }
 
   constructor (
     config: ConfigType,
@@ -21,6 +31,9 @@ export default class RightMenu {
     if (config.theme.indexOf('theme-') === 0) {
       config.theme = config.theme.slice(6)
     }
+    // 设置菜单最大/最小宽度
+    if (config.minWidth) this.menuStyle['min-width'] = getValue(config.minWidth)
+    if (config.maxWidth) this.menuStyle['max-width'] = getValue(config.maxWidth)
     // 获取dom并绑定事件
     const dom = typeof config.el === 'string' ? document.querySelector(config.el) : config.el
     dom?.addEventListener('contextmenu', e => {
@@ -102,7 +115,8 @@ export default class RightMenu {
       return this.createDom('li', { class: 'skeleton' })
     })
     const skeleton = this.createDom('ul', {
-      class: `right-menu-list theme-${this.config.theme}`
+      class: `right-menu-list theme-${this.config.theme}`,
+      style: this.menuStyle
     }, children)
     // 初始化菜单骨架
     this.initMenu(e, skeleton)
@@ -165,7 +179,8 @@ export default class RightMenu {
       }
     })
     return this.createDom('ul', {
-      class: `right-menu-list theme-${this.config.theme}`
+      class: `right-menu-list theme-${this.config.theme}`,
+      style: this.menuStyle
     }, children)
   }
 
@@ -183,8 +198,16 @@ export default class RightMenu {
   ): HTMLElement {
     const dom = document.createElement(tagName)
     // 循环添加属性
-    Object.keys(attrs).forEach(key => {
-      dom.setAttribute(key, attrs[key])
+    ;(Object.keys(attrs) as (keyof AttrsType)[]).forEach(key => {
+      const value = attrs[key]
+      if (!value) return
+      let res = ''
+      switch (key) {
+        case 'style': res = handleStyle(value); break;
+        // [TODO:] 这里很奇怪, 按理说 key=class 的时候只剩 string 类型了
+        case 'class': res = value as string; break;
+      }
+      dom.setAttribute(key, res)
     })
     // append所有子元素
     // [TODO:]bug here  innerHTML 会清除之前 append 的所有 child

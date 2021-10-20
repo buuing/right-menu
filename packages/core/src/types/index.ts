@@ -20,7 +20,7 @@ export type UlType = {
 
 export interface AttrsType {
   class?: string,
-  style?: string
+  style?: string | { [key: string]: string }
 }
 
 export type ElementType = HrType | LiType | UlType

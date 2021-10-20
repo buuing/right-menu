@@ -39,6 +39,22 @@ export const filterAttrs = (
   return res
 }
 
+export const handleCamelCase = (arg: string): string => {
+  return arg.replace(/[A-Z]/g, (res, index) => `${index ? '-' : ''}${res.toLowerCase()}`)
+}
+
+export const handleStyle = (
+  params: string | { [key: string]: string }
+): string => {
+  if (typeof params === 'string') return params
+  const res: string[] = []
+  Object.keys(params).forEach(key => {
+    if (!params[key]) return
+    res.push(`${handleCamelCase(key)}: ${params[key]}`)
+  })
+  return res.join('; ')
+}
+
 export const layoutMenuPositionEffect = (
   base: HTMLElement | MouseEvent,
   menu: MenuElement,
@@ -104,4 +120,12 @@ export const layoutMenuPositionEffect = (
 const updatePosition = (el: HTMLElement, x: number, y: number) => {
   el.style.left = x + 'px'
   el.style.top = y + 'px'
+}
+
+export const getValue = (val: string | number): string => {
+  if (typeof val === 'string') {
+    return val
+  } else {
+    return val + 'px'
+  }
 }

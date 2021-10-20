@@ -7,10 +7,11 @@
   <title>Document</title>
 </head>
 <body>
-  <div class="box1" style="background: #6F69AC;"><span>同步</span></div>
+  <div class="box0" style="background: #ccc;"><span>Win10</span></div>
+  <div class="box1" style="background: #6F69AC;"><span>Mac</span></div>
   <div class="box2" style="background: #95DAC1;"><span>异步 0ms</span></div>
   <div class="box3" style="background: #FFEBA1;"><span>异步 3000ms</span></div>
-  <div class="box4" style="background: #FD6F96;"><span>暂无</span></div>
+  <div class="box4" style="background: #FD6F96;"><span>限制菜单最大/最小宽度</span></div>
   <script src="../dist/right-menu.umd.js"></script>
   <script>
     function dfs (max) {
@@ -35,13 +36,26 @@
       },
     ]
 
-    // 同步
+    // win10
     new RightMenu({
-      el: '.box1'
+      el: '.box0',
+      theme: 'win10'
+    }, [
+      {
+        type: 'li',
+        text: 'win10',
+      },
+      ...base
+    ])
+
+    // mac
+    new RightMenu({
+      el: '.box1',
+      theme: 'mac'
     }, [
       {
         type: 'ul',
-        text: '100',
+        text: 'mac',
         children: dfs(99)
       },
       ...base
@@ -71,16 +85,42 @@
             },
             ...base
           ])
-        }, 3000)
+        }, 300000)
       })
     })
+
+
+    new RightMenu({
+      el: '.box4',
+      theme: 'mac',
+      minWidth: '0px',
+      maxWidth: '300px'
+    }, [
+      {
+        type: 'li',
+        text: '这是一段文字',
+      },
+      {
+        type: 'li',
+        text: '这是一段很长很长很长很长很长很长很长很长的文字',
+      },
+      {
+        type: 'ul',
+        text: '这是一个列表',
+        children: [
+          { type: 'li', text: '复制' },
+          { type: 'li', text: '粘贴' }
+        ]
+      },
+      ...base
+    ])
 
   </script>
 </body>
 </html>
 <style>
   body>div {
-    height: 300px;
+    height: 200px;
     text-align: center;
     color: #fff;
     display: flex;
