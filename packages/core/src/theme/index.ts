@@ -12,7 +12,7 @@ const watchSystemThemeChange = () => {
   rootElement &&
     rootElement.setAttribute(
       'style',
-      systemTheme.matches ? systemDarkTheme : systemLightTheme
+      systemTheme.matches ? systemDarkTheme : systemLightTheme,
     )
 }
 

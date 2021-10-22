@@ -13,6 +13,7 @@ export default class RightMenu {
   private menu: HTMLElement | null = null
   private config: ConfigType
   private eventList: Array<[Window | Document, string, LiType['callback']]> = []
+
   private menuStyle = {
     'min-width': '',
     'max-width': '',
@@ -22,7 +23,7 @@ export default class RightMenu {
     config: ConfigType,
     options:
       | ItemType[]
-      | ((e: Event, config: ConfigType) => ItemType[] | Promise<ItemType[]>)
+      | ((e: Event, config: ConfigType) => ItemType[] | Promise<ItemType[]>),
   ) {
     this.config = config
     // 设置主题
@@ -33,8 +34,12 @@ export default class RightMenu {
       config.theme = config.theme.slice(6)
     }
     // 设置菜单最大/最小宽度
-    if (config.minWidth) this.menuStyle['min-width'] = getValue(config.minWidth)
-    if (config.maxWidth) this.menuStyle['max-width'] = getValue(config.maxWidth)
+    if (config.minWidth) {
+      this.menuStyle['min-width'] = getValue(config.minWidth)
+    }
+    if (config.maxWidth) {
+      this.menuStyle['max-width'] = getValue(config.maxWidth)
+    }
     // 获取dom并绑定事件
     const dom =
       typeof config.el === 'string'
@@ -54,7 +59,7 @@ export default class RightMenu {
    */
   async init(
     e: MouseEvent,
-    thenable: ItemType[] | Promise<ItemType[]>
+    thenable: ItemType[] | Promise<ItemType[]>,
   ): Promise<void> {
     // 开始就要阻止本身的默认事件
     preventDefault(e)
@@ -104,7 +109,7 @@ export default class RightMenu {
     this.addEvent(window, 'resize', this.destroyMenu.bind(this))
     // 页面点击时销毁菜单栏
     this.addEvent(document, 'mousedown', (e) => {
-      const hasMenu = e['path']?.some((node: HTMLDivElement) => node === menu)
+      const hasMenu = e.path?.some((node: HTMLDivElement) => node === menu)
       if (!hasMenu) this.destroyMenu()
     })
   }
@@ -124,7 +129,7 @@ export default class RightMenu {
         class: `right-menu-list theme-${this.config.theme}`,
         style: this.menuStyle,
       },
-      children
+      children,
     )
     // 初始化菜单骨架
     this.initMenu(e, skeleton)
@@ -139,7 +144,7 @@ export default class RightMenu {
     // 清除所有菜单栏, 有多少清多少
     menuList &&
       menuList.forEach((item) => {
-        item['parentNode']?.removeChild(item)
+        item.parentNode?.removeChild(item)
       })
     // 移除所有事件
     this.removeEvent()
@@ -156,7 +161,7 @@ export default class RightMenu {
   addEvent(
     target: Window | Document,
     eventName: string,
-    callback: LiType['callback']
+    callback: LiType['callback'],
   ): void {
     target.addEventListener(eventName, callback)
     this.eventList.push([target, eventName, callback])
@@ -188,7 +193,7 @@ export default class RightMenu {
         case 'ul':
           return this.createUl(item)
         default:
-          throw new Error('未知的 type 类型 => ' + item['type'])
+          throw new Error('未知的 type 类型 => ' + item.type)
       }
     })
     return this.createDom(
@@ -197,7 +202,7 @@ export default class RightMenu {
         class: `right-menu-list theme-${this.config.theme}`,
         style: this.menuStyle,
       },
-      children
+      children,
     )
   }
 
@@ -211,7 +216,7 @@ export default class RightMenu {
   createDom(
     tagName = 'ul',
     attrs: AttrsType = {},
-    children: Array<HTMLElement | string> = []
+    children: Array<HTMLElement | string> = [],
   ): HTMLElement {
     const dom = document.createElement(tagName)
     // 循环添加属性
@@ -275,8 +280,8 @@ export default class RightMenu {
         layoutMenuPositionEffect(li, ul)
       })
       li.addEventListener('mouseleave', (e: MouseEvent) => {
-        if (!e['toElement']) return
-        let curr = e['toElement']
+        if (!e.toElement) return
+        let curr = e.toElement
         while (curr) {
           // 如果路径里存在 ul 标签, 就不需要销毁
           if (curr === ul) return

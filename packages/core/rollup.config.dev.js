@@ -12,7 +12,7 @@ import styles from 'rollup-plugin-styles'
 import livereload from 'rollup-plugin-livereload'
 import serve from 'rollup-plugin-serve'
 
-// import eslint from '@rollup/plugin-eslint'
+import eslint from '@rollup/plugin-eslint'
 import pkg from './package.json'
 
 export default {
@@ -31,6 +31,9 @@ export default {
     },
   ],
   plugins: [
+    eslint({
+      include: ['src/**/*.js', 'src/**/*.ts'],
+    }),
     styles(),
     ts({
       tsconfig: path.resolve(__dirname, './tsconfig.json'),

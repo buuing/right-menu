@@ -11,21 +11,20 @@ export type LiType = {
   callback: EventListener
 }
 
+export interface AttrsType {
+  class?: string
+  style?: string | { [key: string]: string }
+}
+
+export type ItemType = AttrsType & ElementType
+
 export type UlType = {
   type: 'ul'
   text: string
   disabled?: boolean
   children: ItemType[]
 }
-
-export interface AttrsType {
-  class?: string
-  style?: string | { [key: string]: string }
-}
-
 export type ElementType = HrType | LiType | UlType
-
-export type ItemType = AttrsType & ElementType
 
 type GetKeysType<T> = T extends ElementType ? keyof T : never
 
@@ -55,4 +54,4 @@ export interface MenuElement extends HTMLElement {
   direction?: LayoutMenuDirection
 }
 
-type RequireKeys = 'el'
+// type RequireKeys = 'el'

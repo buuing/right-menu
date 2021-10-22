@@ -15,6 +15,10 @@ export const preventDefault = (e: Event) => {
     ? e.preventDefault()
     : ((window as any).event.returnValue = false)
 }
+const updatePosition = (el: HTMLElement, x: number, y: number) => {
+  el.style.left = x + 'px'
+  el.style.top = y + 'px'
+}
 
 /**
  * 过滤合法的 dom 属性
@@ -23,7 +27,7 @@ export const preventDefault = (e: Event) => {
  */
 export const filterAttrs = (
   options: AttrsType,
-  params: AttrsType & { [key: string]: any }
+  params: AttrsType & { [key: string]: any },
 ): AttrsType => {
   const res = {}
   ATTR_LIST.forEach((key) => {
@@ -44,12 +48,12 @@ export const filterAttrs = (
 export const handleCamelCase = (arg: string): string => {
   return arg.replace(
     /[A-Z]/g,
-    (res, index) => `${index ? '-' : ''}${res.toLowerCase()}`
+    (res, index) => `${index ? '-' : ''}${res.toLowerCase()}`,
   )
 }
 
 export const handleStyle = (
-  params: string | { [key: string]: string }
+  params: string | { [key: string]: string },
 ): string => {
   if (typeof params === 'string') return params
   const res: string[] = []
@@ -63,7 +67,7 @@ export const handleStyle = (
 export const layoutMenuPositionEffect = (
   base: HTMLElement | MouseEvent,
   menu: MenuElement,
-  direction: LayoutMenuDirection = LayoutMenuDirection.Right
+  direction: LayoutMenuDirection = LayoutMenuDirection.Right,
 ): void => {
   // 计算位置
   const { width, height } = computeRectPosition(menu)
@@ -113,7 +117,7 @@ export const layoutMenuPositionEffect = (
     return y
   }
 
-  let x, y
+  let x
   switch (currentDirection) {
     case LayoutMenuDirection.Left:
       x = layoutToLeft()
@@ -124,13 +128,8 @@ export const layoutMenuPositionEffect = (
     default:
       throw new Error(`Unsupported direction: ${direction}`)
   }
-  y = layoutToTop()
+  const y = layoutToTop()
   updatePosition(menu, x, y)
-}
-
-const updatePosition = (el: HTMLElement, x: number, y: number) => {
-  el.style.left = x + 'px'
-  el.style.top = y + 'px'
 }
 
 export const getValue = (val: string | number): string => {
