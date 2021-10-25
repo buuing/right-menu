@@ -109,7 +109,7 @@ export default class RightMenu {
     this.addEvent(window, 'resize', this.destroyMenu.bind(this))
     // 页面点击时销毁菜单栏
     this.addEvent(document, 'mousedown', (e) => {
-      const hasMenu = e.path?.some((node: HTMLDivElement) => node === menu)
+      const hasMenu = e['path']?.some((node: HTMLDivElement) => node === menu)
       if (!hasMenu) this.destroyMenu()
     })
   }
@@ -193,7 +193,7 @@ export default class RightMenu {
         case 'ul':
           return this.createUl(item)
         default:
-          throw new Error('未知的 type 类型 => ' + item.type)
+          throw new Error('未知的 type 类型 => ' + item['type'])
       }
     })
     return this.createDom(
@@ -280,8 +280,8 @@ export default class RightMenu {
         layoutMenuPositionEffect(li, ul)
       })
       li.addEventListener('mouseleave', (e: MouseEvent) => {
-        if (!e.toElement) return
-        let curr = e.toElement
+        if (!e['toElement']) return
+        let curr = e['toElement']
         while (curr) {
           // 如果路径里存在 ul 标签, 就不需要销毁
           if (curr === ul) return

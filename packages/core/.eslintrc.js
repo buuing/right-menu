@@ -19,5 +19,6 @@ module.exports = {
     // 'no-unused-vars': ['error', { args: 'none', argsIgnorePattern: '^_' }],
     'no-unused-vars': 'off',
     'no-use-before-define': ['error', { functions: false, classes: true, variables: true }],
+    'dot-notation': 'off',
   },
 }

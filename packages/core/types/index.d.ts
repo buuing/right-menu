@@ -39,6 +39,7 @@ declare class RightMenu {
       | ItemType[]
       | ((e: Event, config: ConfigType) => ItemType[] | Promise<ItemType[]>)
   )
+
   /**
    * 组件初始化
    * @param e 鼠标事件参数
@@ -75,6 +76,7 @@ declare class RightMenu {
     eventName: string,
     callback: LiType['callback']
   ): void
+
   /**
    * 移除所有事件
    * @returns { void }
@@ -98,16 +100,19 @@ declare class RightMenu {
     attrs?: AttrsType,
     children?: Array<HTMLElement | string>
   ): HTMLElement
+
   createHr<
     T extends ItemType & {
       type: 'hr'
     }
   >(opt: T): HTMLElement
+
   createLi<
     T extends ItemType & {
       type: 'li' | 'ul'
     }
   >(opt: T): HTMLElement
+
   createUl<
     T extends ItemType & {
       type: 'ul'
