@@ -280,15 +280,17 @@ export default {
 ## 需求计划
 
 - `📆 进行中`
-  - [ ] 🤖 增加初始化高级配置, 可以设置一些全局的选项, 以及菜单创建的生命周期 - buuing
   - [ ] 🚧 增加icon选项, 可以使用一些内置图标, 想法可以让用户自由使用外部的svg图标
-  - [ ] 📚 [补全文档中`react`的`hooks`使用方式](https://buuing.github.io/right-menu/usage/react.html) - `yox`
 
 - `💡 待认领`
+  - [ ] 📚 [补全文档中`react`的`hooks`使用方式](https://buuing.github.io/right-menu/usage/react.html)
   - [ ] 🛠 [**在mac系统下, 第二次点击控制台时 blur 事件没有触发**](https://github.com/buuing/vue-right-menu/issues/10)
-  - [ ] 🚧 增加 XP / win7 两种经典菜单主题样式
+  - [ ] 🚧 [增加 XP / win7 两种经典菜单主题样式](https://github.com/buuing/right-menu/discussions/31)
   - [ ] 🚧 随着浏览器放大/缩小时, 将菜单组件尽可能的维持在同一个大小
-  - [ ] 🛰 给`core`包增加`eslint-standard`规范, 保存时校验
+  - [ ] 🚧 [增加导航栏模式](https://github.com/buuing/right-menu/discussions/26)
+  - [ ] 🚧 [增加 defaultProps 属性](https://github.com/buuing/right-menu/discussions/23)
+  - [ ] 🛰 [给`core`包增加`eslint-standard`规范, 保存时校验](https://github.com/buuing/right-menu/discussions/29)
+  - [ ] 🤖 [增加 include 和 exclude 属性](https://github.com/buuing/right-menu/discussions/25)
   - [ ] 🤖 看看能否对外暴露一个作用域插槽或者是render函数, 来渲染jsx?
 
 <br />
@@ -304,6 +306,7 @@ export default {
   - [x] 自动根据操作系统切换主题, 并做到自适应`mac`的白天/黑夜模式 - *qingtiantongxie*
   - [x] 异步等待期间增加菜单骨架来作为缓冲, 减少用户等待的焦虑 - *qingtiantongxie*
   - [x] 增加了三级菜单 / 多级菜单的逻辑处理, 并自动计算剩余位置来切换渲染方向 - *yushen7*
+  - [x] 增加了 minWidth / maxWidth 最大最小宽度的配置 - *buuing*
 
 <br />
 
