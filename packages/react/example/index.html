@@ -9,9 +9,9 @@
     <!-- <script src="https://cdn.staticfile.org/react/16.4.0/umd/react.development.js"></script>
     <script src="https://cdn.staticfile.org/react-dom/16.4.0/umd/react-dom.development.js"></script> -->
 
-    <script src="https://unpkg.com/react@17/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react@17/umd/react.development.js" ></script>
     <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
-    <!-- <script src="https://cdn.staticfile.org/babel-standalone/6.26.0/babel.min.js"></script> -->
+     <script src="https://cdn.staticfile.org/babel-standalone/6.26.0/babel.min.js"></script>
 </head>
 
 <body>
@@ -21,11 +21,26 @@
     <div id="root"></div>
 </body>
 <!-- TODO -->
-<script src="../dist/react-right-menu.esm.js"></script>
-<script type="text/babel">
+<script src="../dist/react-right-menu.umd.js"></script>
+<script type="text/babel" defer>
+    const base = [
+        { type: 'hr' },
+        {
+            type: 'ul',
+            text: '关于',
+            children: [
+                {
+                    type: 'li',
+                    text: 'version 2.0.2'
+                }
+            ]
+        },
+    ]
     ReactDOM.render(
       <React.StrictMode>
-         <div>hello, this file lalala</div>
+          <ReactRightMenu options={[ ...base]}>
+            <div>测试</div>
+          </ReactRightMenu>
       </React.StrictMode>,
       document.getElementById('root')
     )

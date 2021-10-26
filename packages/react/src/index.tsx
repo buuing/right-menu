@@ -10,7 +10,7 @@ const ReactRightMenu = memo((props:IReactRightMenuProps)=> {
   const myRef = useRef<HTMLElement>()
   useEffect(()=>{
     new RightMenu({
-      el: myRef.current
+      el: myRef.current as HTMLElement
     }, props.options)
   },[myRef])
   return (
