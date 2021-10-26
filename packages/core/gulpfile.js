@@ -11,9 +11,9 @@ const less2css = () =>
     .pipe(clean())
     .pipe(gulp.dest('dist/theme'))
 
-const done = async () =>
+const done = async() =>
   await console.log(
-    `\u001B[93m successfully transferred .less into .css\u001B[0m`
+    '\u001B[93m successfully transferred .less into .css\u001B[0m',
   )
 
 const taskChain = series(less2css, done)
