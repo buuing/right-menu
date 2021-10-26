@@ -44,4 +44,4 @@ export const computeRectPosition: (node: HTMLElement | MouseEvent) => {
   right?: number
   top?: number
   bottom?: number
-} = (node) => node.getBoundingClientRect?.() || node
+} = (node) => (node as HTMLElement).getBoundingClientRect?.() || node

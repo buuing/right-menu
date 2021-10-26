@@ -8,6 +8,7 @@ export type LiType = {
   type: 'li'
   text: string
   disabled?: boolean
+  // eslint-disable-next-line no-undef
   callback: EventListener
 }
 
@@ -16,6 +17,7 @@ export interface AttrsType {
   style?: string | { [key: string]: string }
 }
 
+// eslint-disable-next-line no-use-before-define
 export type ItemType = AttrsType & ElementType
 
 export type UlType = {
