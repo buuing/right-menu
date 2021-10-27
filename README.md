@@ -271,7 +271,7 @@ export default {
     <td align="center"><a href="https://github.com/qingtiantongxie" target="_blank"><img width="50px" src="https://avatars.githubusercontent.com/u/24731632"></a><div><span title="核心开发">🤖</span> <span title="基础建设">🛰</span> <span title="需求功能">🚧</span></div></td>
     <td align="center"><a href="https://github.com/Deja-vuuu" target="_blank"><img width="50px" src="https://avatars.githubusercontent.com/u/27748682"></a><div><span title="核心开发">🤖</span> <span title="基础建设">🛰</span></div></td>
     <td align="center"><a href="https://github.com/yushen7" target="_blank"><img width="50px" src="https://avatars.githubusercontent.com/u/35678187"></a><div><span title="核心开发">🤖</span> <span title="修复bug">🛠</span></div></td>
-    <td align="center"><a href="https://github.com/dora1995" target="_blank"><img width="50px" src="https://avatars.githubusercontent.com/u/53267289"></a><div><span title="修复bug">🛠</span></div></td>
+    <td align="center"><a href="https://github.com/dora1995" target="_blank"><img width="50px" src="https://avatars.githubusercontent.com/u/53267289"></a><div><span title="基础建设">🛰</span> <span title="修复bug">🛠</span></div></td>
   </tr>
 </table>
 
@@ -289,7 +289,6 @@ export default {
   - [ ] 🚧 随着浏览器放大/缩小时, 将菜单组件尽可能的维持在同一个大小
   - [ ] 🚧 [增加导航栏模式](https://github.com/buuing/right-menu/discussions/26)
   - [ ] 🚧 [增加 defaultProps 属性](https://github.com/buuing/right-menu/discussions/23)
-  - [ ] 🛰 [给`core`包增加`eslint-standard`规范, 保存时校验](https://github.com/buuing/right-menu/discussions/29)
   - [ ] 🤖 [增加 include 和 exclude 属性](https://github.com/buuing/right-menu/discussions/25)
   - [ ] 🤖 看看能否对外暴露一个作用域插槽或者是render函数, 来渲染jsx?
 
@@ -307,6 +306,7 @@ export default {
   - [x] 异步等待期间增加菜单骨架来作为缓冲, 减少用户等待的焦虑 - *qingtiantongxie*
   - [x] 增加了三级菜单 / 多级菜单的逻辑处理, 并自动计算剩余位置来切换渲染方向 - *yushen7*
   - [x] 增加了 minWidth / maxWidth 最大最小宽度的配置 - *buuing*
+  - [x] `core`包增加`eslint-standard`规范, 保存时校验 - dora1995
 
 <br />
 

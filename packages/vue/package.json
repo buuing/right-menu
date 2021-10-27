@@ -1,6 +1,6 @@
 {
   "name": "@right-menu/vue",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "一个基于vue2和vue3的右键菜单插件",
   "browser": "dist/rightMenu.umd.js",
   "module": "dist/rightMenu.common.js",
@@ -40,6 +40,6 @@
     "vue-template-compiler": "^2.6.11"
   },
   "dependencies": {
-    "@right-menu/core": "^0.0.5"
+    "@right-menu/core": "0.0.6"
   }
 }

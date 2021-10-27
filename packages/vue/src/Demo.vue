@@ -10,8 +10,7 @@ export default {
       options: [
         {
           type: 'li',
-          text: '查看网页源代码',
-          disabled: true
+          text: '查看网页源代码'
         },
         {
           type: 'li',

@@ -60,7 +60,5 @@
     "eslint-plugin-promise": "^4.3.1",
     "rollup-plugin-eslint": "^7.0.0"
   },
-  "dependencies": {
-    
-  }
+  "dependencies": {}
 }
