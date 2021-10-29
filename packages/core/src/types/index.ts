@@ -33,11 +33,11 @@ type GetKeysType<T> = T extends ElementType ? keyof T : never
 type ElementKeysType = GetKeysType<ElementType>
 
 export type ConfigType = {
-  el: string
-  mode: 'context-menu' | 'nav-menu' // 模式, 默认为context-menu
+  el: string | HTMLElement
+  mode?: 'context-menu' | 'nav-menu' // 模式, 默认为context-menu
   theme?: string // 主题样式, 默认为auto
-  minWidth: string | number // 最小宽度
-  maxWidth: string | number // 最大宽度
+  minWidth?: string | number // 最小宽度
+  maxWidth?: string | number // 最大宽度
   include?: string[] | RegExp // 包含的元素
   exclude?: string[] | RegExp // 排除的元素
   defaultProps?: {
@@ -52,6 +52,7 @@ export type ConfigType = {
   afterHide?: Function // 隐藏菜单后
 }
 
+export type OptionsType = ItemType[] | ((e: Event, config: ConfigType) => ItemType[] | Promise<ItemType[]>)
 export interface MenuElement extends HTMLElement {
   direction?: LayoutMenuDirection
 }
