@@ -22,8 +22,19 @@
         children: dfs(max - 1)
       }]
     }
-
-
+    const base = [
+        { type: 'hr' },
+        {
+            type: 'ul',
+            text: '关于',
+            children: [
+                {
+                    type: 'li',
+                    text: 'version 2.0.2'
+                }
+            ]
+        },
+    ]
     // win10
     new RightMenu({
       el: '.box0',

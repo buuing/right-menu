@@ -41,10 +41,10 @@ export default {
     resolve(),
     commonjs(),
     livereload(),
-    // serve({
-    //   open: true,
-    //   openPage: '/examples/index.html',
-    //   contentBase: './'
-    // }),
+    serve({
+      open: true,
+      openPage: '/examples/index.html',
+      contentBase: './'
+    }),
   ]
 }

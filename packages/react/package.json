@@ -10,7 +10,7 @@
     "build": "rollup --config "
   },
   "dependencies": {
-    "@right-menu/core": "^0.0.4"
+    "@right-menu/core": "^0.0.6"
   },
   "devDependencies": {
     "@babel/core": "^7.12.10",

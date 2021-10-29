@@ -1,12 +1,14 @@
 import React, { memo, useEffect,useRef } from 'react'
 import type {ReactElement} from 'react'
 import RightMenu from '@right-menu/core'
-
+import { ConfigType,  OptionsType} from "@right-menu/core/src/types";
 type IReactRightMenuProps = {
-  options: any,// TODO 引入core包type
-  children: ReactElement
+  options: OptionsType,
+  config: ConfigType
+  children: ReactElement,
 }
 const ReactRightMenu = memo((props:IReactRightMenuProps)=> {
+  const {options,config,children,...otherProps} = props;
   const myRef = useRef<HTMLElement>()
   useEffect(()=>{
     new RightMenu({
@@ -16,8 +18,8 @@ const ReactRightMenu = memo((props:IReactRightMenuProps)=> {
   return (
     <>
       {
-        React.Children.map(props.children, (element:any) => {
-          return (React.createElement('div', { className: 'container', ref: myRef }, element))
+        React.Children.map(children, (element:any) => {
+          return (React.createElement('div', { ref: myRef, ...otherProps }, element))
         })
       }
     </>

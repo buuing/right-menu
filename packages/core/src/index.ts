@@ -1,6 +1,6 @@
 import { LayoutMenuDirection } from './config'
 import { OperatSystem } from './theme/index'
-import { ConfigType, ItemType, LiType, AttrsType } from './types'
+import {ConfigType, ItemType, LiType, AttrsType, OptionsType} from './types'
 import {
   preventDefault,
   layoutMenuPositionEffect,
@@ -20,9 +20,7 @@ export default class RightMenu {
 
   constructor (
     config: ConfigType,
-    options: ItemType[] | (
-      (e: Event, config: ConfigType) => ItemType[] | Promise<ItemType[]>
-    )
+    options: OptionsType
   ) {
     this.config = config
     // 设置主题
@@ -67,6 +65,7 @@ export default class RightMenu {
     document.addEventListener('mousedown', countClick)
     // 异步获取到菜单配置项 options
     const options = await Promise.resolve(thenable)
+    console.log('options',options)
     // 清除异步前创建的事件
     document.removeEventListener('mousedown', countClick)
     // // 如果异步前有点击次数, 则打断逻辑, 不创建菜单

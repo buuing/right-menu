@@ -2096,11 +2096,6 @@
   dependencies:
     "@octokit/openapi-types" "^10.2.2"
 
-"@right-menu/core@^0.0.4":
-  version "0.0.4"
-  resolved "https://registry.yarnpkg.com/@right-menu/core/-/core-0.0.4.tgz#a682307fca2489996d956667990a86b49442b41a"
-  integrity sha512-QxAT8Yr5oeKuidYX/WIrmyKtq5ajG8OJVTtU4e0aBPZJIquHWnIfCHdGx/DiP+1txlGDtkwQkbAVp5oKBGHu5A==
-
 "@right-menu/core@^0.0.5":
   version "0.0.5"
   resolved "https://registry.yarnpkg.com/@right-menu/core/-/core-0.0.5.tgz#ed142e324c5ea2a3580f56c2905188af8dac46ec"
