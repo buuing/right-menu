@@ -9,9 +9,15 @@ import { computeRectPosition } from './getInfo'
  */
 export const preventDefault = (e: Event) => {
   // 阻止冒泡
-  window.event ? window.event.cancelBubble = true : e.stopPropagation()
+  window.event ? (window.event.cancelBubble = true) : e.stopPropagation()
   // 阻止默认事件
-  e.preventDefault ? e.preventDefault() : (window as any).event.returnValue = false
+  e.preventDefault
+    ? e.preventDefault()
+    : ((window as any).event.returnValue = false)
+}
+const updatePosition = (el: HTMLElement, x: number, y: number) => {
+  el.style.left = x + 'px'
+  el.style.top = y + 'px'
 }
 
 /**
@@ -21,16 +27,16 @@ export const preventDefault = (e: Event) => {
  */
 export const filterAttrs = (
   options: AttrsType,
-  params: AttrsType & { [key: string]: any }
+  params: AttrsType & { [key: string]: any },
 ): AttrsType => {
   const res = {}
-  ATTR_LIST.forEach(key => {
+  ATTR_LIST.forEach((key) => {
     if (options[key]) {
       res[key] = options[key]
     }
     if (params[key]) {
       if (res[key]) {
-        res[key] += (SPLIT_SYMBOL[key] + params[key])
+        res[key] += SPLIT_SYMBOL[key] + params[key]
       } else {
         res[key] = params[key]
       }
@@ -40,15 +46,18 @@ export const filterAttrs = (
 }
 
 export const handleCamelCase = (arg: string): string => {
-  return arg.replace(/[A-Z]/g, (res, index) => `${index ? '-' : ''}${res.toLowerCase()}`)
+  return arg.replace(
+    /[A-Z]/g,
+    (res, index) => `${index ? '-' : ''}${res.toLowerCase()}`,
+  )
 }
 
 export const handleStyle = (
-  params: string | { [key: string]: string }
+  params: string | { [key: string]: string },
 ): string => {
   if (typeof params === 'string') return params
   const res: string[] = []
-  Object.keys(params).forEach(key => {
+  Object.keys(params).forEach((key) => {
     if (!params[key]) return
     res.push(`${handleCamelCase(key)}: ${params[key]}`)
   })
@@ -58,17 +67,23 @@ export const handleStyle = (
 export const layoutMenuPositionEffect = (
   base: HTMLElement | MouseEvent,
   menu: MenuElement,
-  direction: LayoutMenuDirection = LayoutMenuDirection.Right
+  direction: LayoutMenuDirection = LayoutMenuDirection.Right,
 ): void => {
   // 计算位置
   const { width, height } = computeRectPosition(menu)
-  const { x: baseX, y: baseY, width: baseW = 0, height: baseH = 0} = computeRectPosition(base)
+  const {
+    x: baseX,
+    y: baseY,
+    width: baseW = 0,
+    height: baseH = 0,
+  } = computeRectPosition(base)
 
   let currentDirection = direction
 
   // 从 base:li 的 parentElement:ul（上一级menu）继承 direction
   if ('parentElement' in base && base.parentElement) {
-    currentDirection  = menu.direction = (base.parentElement as MenuElement).direction || currentDirection
+    currentDirection = menu.direction =
+      (base.parentElement as MenuElement).direction || currentDirection
   }
 
   const layoutToRight = () => {
@@ -79,16 +94,16 @@ export const layoutMenuPositionEffect = (
       // 右 -> 左
       menu.direction = LayoutMenuDirection.Left
     }
-    return x;
+    return x
   }
 
   const layoutToLeft = () => {
-    let x = baseX - width;
+    let x = baseX - width
     // 尝试向左布局，判断菜单最左端是否超出屏幕左边缘（0）
     if (x < 0) {
-      x =  baseX + baseW
+      x = baseX + baseW
       // 左 -> 右
-      menu.direction = LayoutMenuDirection.Right;
+      menu.direction = LayoutMenuDirection.Right
     }
     return x
   }
@@ -96,13 +111,13 @@ export const layoutMenuPositionEffect = (
   const layoutToTop = () => {
     let y = baseY
     // 尝试向上布局，判断菜单最顶端是否超出屏幕上边缘（视窗高度）
-    if  (menu.offsetHeight + y > window.innerHeight) {
+    if (menu.offsetHeight + y > window.innerHeight) {
       y = baseY + baseH - height
     }
-    return y;
+    return y
   }
 
-  let x, y;
+  let x
   switch (currentDirection) {
     case LayoutMenuDirection.Left:
       x = layoutToLeft()
@@ -113,13 +128,8 @@ export const layoutMenuPositionEffect = (
     default:
       throw new Error(`Unsupported direction: ${direction}`)
   }
-  y = layoutToTop()
+  const y = layoutToTop()
   updatePosition(menu, x, y)
-}
-
-const updatePosition = (el: HTMLElement, x: number, y: number) => {
-  el.style.left = x + 'px'
-  el.style.top = y + 'px'
 }
 
 export const getValue = (val: string | number): string => {

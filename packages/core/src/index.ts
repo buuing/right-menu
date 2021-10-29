@@ -6,35 +6,50 @@ import {
   layoutMenuPositionEffect,
   filterAttrs,
   handleStyle,
-  getValue
+  getValue,
 } from './utils'
 
 export default class RightMenu {
   private menu: HTMLElement | null = null
   private config: ConfigType
   private eventList: Array<[Window | Document, string, LiType['callback']]> = []
+
   private menuStyle = {
     'min-width': '',
-    'max-width': ''
+    'max-width': '',
   }
 
-  constructor (
+  constructor(
     config: ConfigType,
+<<<<<<< HEAD
     options: OptionsType
+=======
+    options:
+      | ItemType[]
+      | ((e: Event, config: ConfigType) => ItemType[] | Promise<ItemType[]>),
+>>>>>>> b693ae610323cf438f52d269c203bedff8710b29
   ) {
     this.config = config
     // 设置主题
-    config.theme = config.theme || OperatSystem.toLowerCase().replace(/is/, '') || 'mac'
+    config.theme =
+      config.theme || OperatSystem.toLowerCase().replace(/is/, '') || 'mac'
     // 如果用户输入的主题名称里包含了 'theme-' 则删除
     if (config.theme.indexOf('theme-') === 0) {
       config.theme = config.theme.slice(6)
     }
     // 设置菜单最大/最小宽度
-    if (config.minWidth) this.menuStyle['min-width'] = getValue(config.minWidth)
-    if (config.maxWidth) this.menuStyle['max-width'] = getValue(config.maxWidth)
+    if (config.minWidth) {
+      this.menuStyle['min-width'] = getValue(config.minWidth)
+    }
+    if (config.maxWidth) {
+      this.menuStyle['max-width'] = getValue(config.maxWidth)
+    }
     // 获取dom并绑定事件
-    const dom = typeof config.el === 'string' ? document.querySelector(config.el) : config.el
-    dom?.addEventListener('contextmenu', e => {
+    const dom =
+      typeof config.el === 'string'
+        ? document.querySelector(config.el)
+        : config.el
+    dom?.addEventListener('contextmenu', (e) => {
       const res = typeof options === 'function' ? options(e, config) : options
       this.init(e as MouseEvent, res)
     })
@@ -48,7 +63,7 @@ export default class RightMenu {
    */
   async init(
     e: MouseEvent,
-    thenable: ItemType[] | Promise<ItemType[]>
+    thenable: ItemType[] | Promise<ItemType[]>,
   ): Promise<void> {
     // 开始就要阻止本身的默认事件
     preventDefault(e)
@@ -98,7 +113,7 @@ export default class RightMenu {
     // 窗口 resize 时销毁菜单栏
     this.addEvent(window, 'resize', this.destroyMenu.bind(this))
     // 页面点击时销毁菜单栏
-    this.addEvent(document, 'mousedown', e => {
+    this.addEvent(document, 'mousedown', (e) => {
       const hasMenu = e['path']?.some((node: HTMLDivElement) => node === menu)
       if (!hasMenu) this.destroyMenu()
     })
@@ -113,10 +128,14 @@ export default class RightMenu {
     const children = new Array(3).fill(null).map(() => {
       return this.createDom('li', { class: 'skeleton' })
     })
-    const skeleton = this.createDom('ul', {
-      class: `right-menu-list theme-${this.config.theme}`,
-      style: this.menuStyle
-    }, children)
+    const skeleton = this.createDom(
+      'ul',
+      {
+        class: `right-menu-list theme-${this.config.theme}`,
+        style: this.menuStyle,
+      },
+      children,
+    )
     // 初始化菜单骨架
     this.initMenu(e, skeleton)
   }
@@ -128,9 +147,10 @@ export default class RightMenu {
   destroyMenu(): void {
     const menuList = document.querySelectorAll('.right-menu-list')
     // 清除所有菜单栏, 有多少清多少
-    menuList && menuList.forEach(item => {
-      item['parentNode']?.removeChild(item)
-    })
+    menuList &&
+      menuList.forEach((item) => {
+        item.parentNode?.removeChild(item)
+      })
     // 移除所有事件
     this.removeEvent()
     this.menu = null
@@ -146,7 +166,7 @@ export default class RightMenu {
   addEvent(
     target: Window | Document,
     eventName: string,
-    callback: LiType['callback']
+    callback: LiType['callback'],
   ): void {
     target.addEventListener(eventName, callback)
     this.eventList.push([target, eventName, callback])
@@ -169,18 +189,26 @@ export default class RightMenu {
    * @returns { HTMLElement }
    */
   renderMenu(options: ItemType[]): HTMLElement {
-    const children = options.map(item => {
+    const children = options.map((item) => {
       switch (item.type) {
-        case 'hr': return this.createHr(item)
-        case 'li': return this.createLi(item)
-        case 'ul': return this.createUl(item)
-        default: throw new Error('未知的 type 类型 => ' + item['type'])
+        case 'hr':
+          return this.createHr(item)
+        case 'li':
+          return this.createLi(item)
+        case 'ul':
+          return this.createUl(item)
+        default:
+          throw new Error('未知的 type 类型 => ' + item['type'])
       }
     })
-    return this.createDom('ul', {
-      class: `right-menu-list theme-${this.config.theme}`,
-      style: this.menuStyle
-    }, children)
+    return this.createDom(
+      'ul',
+      {
+        class: `right-menu-list theme-${this.config.theme}`,
+        style: this.menuStyle,
+      },
+      children,
+    )
   }
 
   /**
@@ -193,24 +221,28 @@ export default class RightMenu {
   createDom(
     tagName = 'ul',
     attrs: AttrsType = {},
-    children: Array<HTMLElement | string> = []
+    children: Array<HTMLElement | string> = [],
   ): HTMLElement {
     const dom = document.createElement(tagName)
     // 循环添加属性
-    ;(Object.keys(attrs) as (keyof AttrsType)[]).forEach(key => {
+    ;(Object.keys(attrs) as (keyof AttrsType)[]).forEach((key) => {
       const value = attrs[key]
       if (!value) return
       let res = ''
       switch (key) {
-        case 'style': res = handleStyle(value); break;
+        case 'style':
+          res = handleStyle(value)
+          break
         // [TODO:] 这里很奇怪, 按理说 key=class 的时候只剩 string 类型了
-        case 'class': res = value as string; break;
+        case 'class':
+          res = value as string
+          break
       }
       dom.setAttribute(key, res)
     })
     // append所有子元素
     // [TODO:]bug here  innerHTML 会清除之前 append 的所有 child
-    children.forEach(child => {
+    children.forEach((child) => {
       if (typeof child === 'string') {
         dom.innerHTML += child
       } else if (child.nodeType === 1) {
@@ -230,12 +262,12 @@ export default class RightMenu {
     const attrs = {
       class: [
         opt.disabled ? 'menu-disabled' : '',
-        opt.type === 'ul' ? 'menu-ul' : ''
-      ].join(' ')
+        opt.type === 'ul' ? 'menu-ul' : '',
+      ].join(' '),
     }
     const li = this.createDom('li', filterAttrs(opt, attrs), [span])
     if (!opt.disabled && opt.type === 'li' && opt.callback) {
-      li.addEventListener('mousedown', e => {
+      li.addEventListener('mousedown', (e) => {
         opt.callback(e)
         this.destroyMenu()
       })
@@ -248,7 +280,7 @@ export default class RightMenu {
     // 添加二级菜单
     if (opt.children && opt.children.length) {
       const ul = this.renderMenu(opt.children)
-      li.addEventListener('mouseenter', e => {
+      li.addEventListener('mouseenter', (e) => {
         li.appendChild(ul)
         layoutMenuPositionEffect(li, ul)
       })

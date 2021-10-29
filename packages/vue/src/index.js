@@ -4,29 +4,41 @@ function getType (val) {
   return Object.prototype.toString.call(val).slice(8, -1).toLowerCase()
 }
 
-function init (el, binding, param) {
-  let options = []
-  // let config = {}
-  if (getType(param) === 'object') {
-    // 高级配置先放一放, 再构思一下
-    // config = param
-  } else if (getType(param) === 'function') {
-    options = param(binding.value)
-  } else if (getType(param) === 'array') {
-    options = param
+function init (el, binding, arg1, arg2) {
+  let config, options
+  // 处理config
+  if (getType(arg1) === 'object') {
+    // 高级配置
+    config = arg1
+    options = arg2
+  } else {
+    config = {}
+    options = arg1
+  }
+  // 处理options
+  if (getType(options) === 'function') {
+    // options 为函数
+    options = options(binding.value)
+  } else if (getType(options) === 'array') {
+    // options 为数组
+    options = options.slice()
+  } else if (options === undefined) {
+    // Vue.use 的时候没有传参数
+    options = binding.value
   } else {
     throw new Error('未知的类型')
   }
   /* eslint-disable no-new */
   new RightMenu({
+    ...config,
     el
   }, options)
 }
 
-const install = (Vue, param) => {
+const install = (Vue, arg1, arg2) => {
   Vue.directive('menu', {
-    bind: (el, binding, vnode) => init(el, binding, param),
-    beforeMounted: (el, binding, vnode) => init(el, binding, param)
+    bind: (el, binding, vnode) => init(el, binding, arg1, arg2),
+    beforeMounted: (el, binding, vnode) => init(el, binding, arg1, arg2)
   })
 }
 
