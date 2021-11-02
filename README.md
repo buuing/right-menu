@@ -278,6 +278,15 @@ export default class Demo extends React.Component {
 }
 ```
 
+<br />
+
+### 通过 script 标签使用 (React)
+
+```html
+<script src="https://cdn.jsdelivr.net/npm/@right-menu/react/dist/index.umd.js"></script>
+
+```
+
 </details>
 
 <br />
@@ -332,7 +341,8 @@ export default class Demo extends React.Component {
   - [x] 异步等待期间增加菜单骨架来作为缓冲, 减少用户等待的焦虑 - *qingtiantongxie*
   - [x] 增加了三级菜单 / 多级菜单的逻辑处理, 并自动计算剩余位置来切换渲染方向 - *yushen7*
   - [x] 增加了 minWidth / maxWidth 最大最小宽度的配置 - *buuing*
-  - [x] `core`包增加`eslint-standard`规范, 保存时校验 - dora1995
+  - [x] `core`包增加`eslint-standard`规范, 保存时校验 - *dora1995*
+  - [x] 增加`@right-menu/react`包, 支持`react-dom`方式使用 - *Deja-vuuu*
 
 <br />
 
