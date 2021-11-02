@@ -77,26 +77,26 @@
     }
     ReactDOM.render(
       <React.StrictMode>
-          <ReactRightMenu theme= "win10" options={[{
+          <RightMenu theme="win10" options={[{
               type: 'li',
               text: 'win10',
           }, ...base]}  style={{
               background: "#ccc"
           }}>
             <span>Win10</span>
-          </ReactRightMenu>
-          <ReactRightMenu theme= "mac" options={[
+          </RightMenu>
+          <RightMenu theme="mac" options={[
               {
                   type: 'ul',
                   text: 'mac',
-                  children: dfs(99 )
+                  children: dfs(99)
               },
               ...base]}  style={{
               background: "#6F69AC"
           }}>
               <span>Mac</span>
-          </ReactRightMenu>
-          <ReactRightMenu options={[
+          </RightMenu>
+          <RightMenu options={[
               {
                   type: 'ul',
                   text: 'mac',
@@ -106,8 +106,8 @@
               background: "#95DAC1"
           }}>
               <span>异步 0ms</span>
-          </ReactRightMenu>
-          <ReactRightMenu options={ () => {
+          </RightMenu>
+          <RightMenu options={ () => {
               return new Promise(resolve => {
                   setTimeout(() => {
                       resolve([
@@ -123,8 +123,8 @@
               background: "#FFEBA1"
           }}>
               <span>异步 3000ms</span>
-          </ReactRightMenu>
-          <ReactRightMenu
+          </RightMenu>
+          <RightMenu
               config={
                   {
                       theme: 'mac',
@@ -154,7 +154,7 @@
               background: "#FD6F96"
           }}>
               <span>限制菜单最大/最小宽度</span>
-          </ReactRightMenu>
+          </RightMenu>
       </React.StrictMode>,
       document.getElementById('root')
     )

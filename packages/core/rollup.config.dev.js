@@ -38,6 +38,7 @@ export default {
     ts({
       tsconfig: path.resolve(__dirname, './tsconfig.json'),
       extensions: ['.js', '.ts'],
+      declaration: true,
     }),
     json(),
     babel({ exclude: 'node_modules/**' }),

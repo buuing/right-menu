@@ -5,10 +5,14 @@
   "main": "dist/react-right-menu.cjs.js",
   "module": "dist/react-right-menu.esm.js",
   "browser": "dist/react-right-menu.umd.js",
+  "types": "dist/index.d.ts",
   "scripts": {
     "dev": "rollup --config rollup.config.dev.js --watch",
-    "build": "rollup --config "
+    "build": "rollup --config rollup.config.build.js"
   },
+  "files": [
+    "dist"
+  ],
   "dependencies": {
     "@right-menu/core": "^0.0.6"
   },

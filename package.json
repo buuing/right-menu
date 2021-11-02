@@ -12,7 +12,8 @@
     "build": "lerna run build --sort --stream",
     "update-version": "lerna version --conventional-commits --no-push --no-changelog --no-git-tag-version",
     "publish-to-npm": "lerna publish from-package",
-    "publish-beta": "lerna publish --no-git-tag-version --dist-tag beta"
+    "publish-beta": "lerna publish --no-git-tag-version --dist-tag beta",
+    "publish": "npm publish --access public"
   },
   "private": true,
   "workspaces": [

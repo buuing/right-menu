@@ -1,24 +1,24 @@
 import React, { memo, useEffect,useRef } from 'react'
-import type {ReactElement} from 'react'
-import RightMenu from '@right-menu/core'
-import { ConfigType,  OptionsType} from "@right-menu/core/src/types";
-type IReactRightMenuProps = {
+import type { ReactElement } from 'react'
+import { default as Menu } from '@right-menu/core'
+import { ConfigType, OptionsType } from '@right-menu/core/dist/types'
+
+const RightMenu = memo((props: {
   options: OptionsType,
   config: ConfigType
   children: ReactElement,
-}
-const ReactRightMenu = memo((props:IReactRightMenuProps)=> {
-  const {options,config,children,...otherProps} = props;
+}) => {
+  const { options, config, children, ...otherProps } = props;
   const myRef = useRef<HTMLElement>()
-  useEffect(()=>{
-    new RightMenu({
+  useEffect(() => {
+    new Menu({
       el: myRef.current as HTMLElement
     }, props.options)
-  },[myRef])
+  }, [myRef])
   return (
     <>
       {
-        React.Children.map(children, (element:any) => {
+        React.Children.map(children, (element: any) => {
           return (React.createElement('div', { ref: myRef, ...otherProps }, element))
         })
       }
@@ -26,4 +26,4 @@ const ReactRightMenu = memo((props:IReactRightMenuProps)=> {
   )
 })
 
-export default ReactRightMenu
+export default RightMenu

@@ -5,8 +5,6 @@ import resolve from '@rollup/plugin-node-resolve'
 import commonjs from '@rollup/plugin-commonjs'
 import babel from 'rollup-plugin-babel'
 import ts from 'rollup-plugin-typescript2'
-import livereload from 'rollup-plugin-livereload'
-import serve from 'rollup-plugin-serve'
 
 export default  {
   input: './src/index.tsx',
@@ -25,7 +23,7 @@ export default  {
       file: pkg.browser,
       format: 'umd',
       sourcemap: true,
-      name: 'ReactRightMenu',
+      name: 'RightMenu',
       globals: {
         "react": "React"
       }
