@@ -1,6 +1,6 @@
 import { LayoutMenuDirection } from './config'
 import { OperatSystem } from './theme/index'
-import { ConfigType, ItemType, LiType, AttrsType } from './types'
+import { ConfigType, OptionsType, ItemType, LiType, AttrsType } from './types'
 import {
   preventDefault,
   layoutMenuPositionEffect,
@@ -13,7 +13,6 @@ export default class RightMenu {
   private menu: HTMLElement | null = null
   private config: ConfigType
   private eventList: Array<[Window | Document, string, LiType['callback']]> = []
-
   private menuStyle = {
     'min-width': '',
     'max-width': '',
@@ -21,9 +20,7 @@ export default class RightMenu {
 
   constructor(
     config: ConfigType,
-    options:
-      | ItemType[]
-      | ((e: Event, config: ConfigType) => ItemType[] | Promise<ItemType[]>),
+    options: OptionsType,
   ) {
     this.config = config
     // 设置主题

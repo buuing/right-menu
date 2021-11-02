@@ -12,16 +12,20 @@ export default  {
   input: './src/index.tsx',
   output: [
     {
-      file: pkg.module,
-      format: 'es',
+      file: pkg.browser,
+      format: 'umd',
       sourcemap: true,
-    },
+      name: 'ReactRightMenu',
+      globals: {
+        "react": "React"
+      }
+    }
   ],
   plugins: [
     ts({
       include: ['src/**/*.ts', 'src/**/*.tsx'],
       exclude: ['node_modules/**', '*.js', '*.scss', '*.css'],
-      check: true,
+      check: false,
       tsconfig: path.resolve(__dirname, './tsconfig.json'),
     }),
     babel({

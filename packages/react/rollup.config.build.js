@@ -25,6 +25,7 @@ export default  {
       file: pkg.browser,
       format: 'umd',
       sourcemap: true,
+      name: 'ReactRightMenu',
       globals: {
         "react": "React"
       }
