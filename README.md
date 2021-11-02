@@ -13,8 +13,8 @@
     <a href="https://github.com/buuing" target="_black">
       <img src="https://img.shields.io/badge/Author-%20buuing%20-4195a5.svg?&logo=github&style=flat-square" alt="author" />
     </a>
-    <a href="https://github.com/buuing/vue-right-menu/blob/master/LICENSE" target="_black">
-      <img src="https://img.shields.io/github/license/buuing/vue-right-menu?color=%234195a5&logo=github&style=flat-square" alt="license" />
+    <a href="https://github.com/buuing/right-menu/blob/master/LICENSE" target="_black">
+      <img src="https://img.shields.io/github/license/buuing/right-menu?color=%234195a5&logo=github&style=flat-square" alt="license" />
     </a>
   </p>
 </div>
@@ -250,7 +250,33 @@ export default {
 
 <br />
 
-暂无
+### 通过 `import` 使用 (React)
+
+1. 安装插件
+
+```shell
+npm i @right-menu/react
+```
+
+2. 使用插件
+
+```jsx
+import React from 'react'
+import RightMenu from '@right-menu/react'
+
+export default class Demo extends React.Component {
+  render () {
+    const options = [{
+      type: 'li', // type为li是普通按钮
+      text: '复制(C)', // 按钮的名称
+      callback: () => alert('点击了复制') // 回调函数
+    }]
+    return <RightMenu options={options}>
+      <div style="height: 300px; background-color: #ccc"></div>
+    </RightMenu>
+  }
+}
+```
 
 </details>
 
