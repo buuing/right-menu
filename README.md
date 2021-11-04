@@ -1,293 +1,94 @@
 
-<div align="center">
+<div align="center" style="display: flex; flex-direction: column; align-items: center;">
   <img src="https://cdn.jsdelivr.net/gh/buuing/cdn/imgs/right-menu.png" width="128" />
-  <h1>right-menu</h1>
-  <p>一个基于vue的右键菜单插件, 通过添加指令的方式可以展示不同的菜单内容</p>
+  <h1 style="margin: 10px 0 0">@right-menu</h1>
+  <p style="margin: 10px 0">一个支持 JS / TS / Vue / React 等多端框架的右键菜单插件</p>
   <p>
     <a href="https://github.com/buuing/right-menu/stargazers" target="_black">
-      <img src="https://img.shields.io/github/stars/buuing/right-menu?color=%23807bef&logo=github&style=flat-square" alt="stars" />
+      <img src="https://img.shields.io/github/stars/buuing/right-menu?color=%236a90e1&logo=github&style=flat-square" alt="stars" />
     </a>
     <a href="https://github.com/buuing/right-menu/network/members" target="_black">
-      <img src="https://img.shields.io/github/forks/buuing/right-menu?color=%23807bef&logo=github&style=flat-square" alt="forks" />
+      <img src="https://img.shields.io/github/forks/buuing/right-menu?color=%236a90e1&logo=github&style=flat-square" alt="forks" />
     </a>
     <a href="https://github.com/buuing" target="_black">
-      <img src="https://img.shields.io/badge/Author-%20buuing%20-4195a5.svg?&logo=github&style=flat-square" alt="author" />
+      <img src="https://img.shields.io/badge/Author-%20buuing%20-6a90e1.svg?&logo=github&style=flat-square" alt="author" />
     </a>
     <a href="https://github.com/buuing/right-menu/blob/master/LICENSE" target="_black">
-      <img src="https://img.shields.io/github/license/buuing/right-menu?color=%234195a5&logo=github&style=flat-square" alt="license" />
+      <img src="https://img.shields.io/github/license/buuing/right-menu?color=%236a90e1&logo=github&style=flat-square" alt="license" />
     </a>
   </p>
+
+<table align="center" style="width: auto">
+  <thead align="center">
+    <tr>
+      <th>适配框架</th>
+      <th>最新版本</th>
+      <th>NPM 下载量</th>
+      <th>CDN 使用量</th>
+    </tr>
+  </thead>
+  <tbody align="center">
+    <tr>
+      <td>
+        <b>JS / TS</b>
+      </td>
+      <td>
+        <img src="https://img.shields.io/npm/v/@right-menu/core?color=%23ffba15&logo=npm&style=flat-square" alt="version" />
+      </td>
+      <td>
+        <a href="https://www.npmjs.com/package/@right-menu/core" target="_black"><img src="https://img.shields.io/npm/dm/@right-menu/core?color=%23ffba15&logo=npm&style=flat-square" alt="downloads" /></a>
+      </td>
+      <td>
+        <a href="https://www.jsdelivr.com/package/npm/@right-menu/core" target="_black"><img src="https://data.jsdelivr.com/v1/package/npm/@right-menu/core/badge" alt="downloads" /></a>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <b>Vue</b>
+      </td>
+      <td>
+        <img src="https://img.shields.io/npm/v/@right-menu/vue?color=%23ffba15&logo=npm&style=flat-square" alt="version" />
+      </td>
+      <td>
+        <a href="https://www.npmjs.com/package/@right-menu/vue" target="_black"><img src="https://img.shields.io/npm/dm/@right-menu/vue?color=%23ffba15&logo=npm&style=flat-square" alt="downloads" /></a>
+      </td>
+      <td>
+        <a href="https://www.jsdelivr.com/package/npm/@right-menu/vue" target="_black"><img src="https://data.jsdelivr.com/v1/package/npm/@right-menu/vue/badge" alt="downloads" /></a>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <b>React</b>
+      </td>
+      <td>
+        <img src="https://img.shields.io/npm/v/@right-menu/react?color=%23ffba15&logo=npm&style=flat-square" alt="version" />
+      </td>
+      <td>
+        <a href="https://www.npmjs.com/package/@right-menu/react" target="_black"><img src="https://img.shields.io/npm/dm/@right-menu/react?color=%23ffba15&logo=npm&style=flat-square" alt="downloads" /></a>
+      </td>
+      <td>
+        <a href="https://www.jsdelivr.com/package/npm/@right-menu/react" target="_black"><img src="https://data.jsdelivr.com/v1/package/npm/@right-menu/react/badge" alt="downloads" /></a>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
 </div>
-
-  <table align="center">
-    <thead align="center">
-      <tr>
-        <th>适配框架</th>
-        <th>npm包</th>
-        <th>最新版本</th>
-        <th>npm下载量</th>
-        <th>CDN使用量</th>
-      </tr>
-    </thead>
-    <tbody align="center">
-      <tr>
-        <td>
-          <b>JS / TS</b>
-        </td>
-        <td>
-          <a href="https://buuing.github.io/right-menu/usage/js.html" target="_black">@right-menu/core</a>
-        </td>
-        <td>
-          <img src="https://img.shields.io/npm/v/@right-menu/core?color=%23ffba15&logo=npm&style=flat-square" alt="version" />
-        </td>
-        <td>
-          <a href="https://www.npmjs.com/package/@right-menu/core" target="_black"><img src="https://img.shields.io/npm/dm/@right-menu/core?color=%23ffba15&logo=npm&style=flat-square" alt="downloads" /></a>
-        </td>
-        <td>
-          <a href="https://www.jsdelivr.com/package/npm/@right-menu/core" target="_black"><img src="https://data.jsdelivr.com/v1/package/npm/@right-menu/core/badge" alt="downloads" /></a>
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <b>Vue</b>
-        </td>
-        <td>
-          <a href="https://buuing.github.io/right-menu/usage/vue.html" target="_black">@right-menu/vue</a>
-        </td>
-        <td>
-          <img src="https://img.shields.io/npm/v/@right-menu/vue?color=%23ffba15&logo=npm&style=flat-square" alt="version" />
-        </td>
-        <td>
-          <a href="https://www.npmjs.com/package/@right-menu/vue" target="_black"><img src="https://img.shields.io/npm/dm/@right-menu/vue?color=%23ffba15&logo=npm&style=flat-square" alt="downloads" /></a>
-        </td>
-        <td>
-          <a href="https://www.jsdelivr.com/package/npm/@right-menu/vue" target="_black"><img src="https://data.jsdelivr.com/v1/package/npm/@right-menu/vue/badge" alt="downloads" /></a>
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <b>React</b>
-        </td>
-        <td>
-          <a href="https://buuing.github.io/right-menu/usage/react.html" target="_black">@right-menu/react</a>
-        </td>
-        <td>
-          <img src="https://img.shields.io/npm/v/@right-menu/react?color=%23ffba15&logo=npm&style=flat-square" alt="version" />
-        </td>
-        <td>
-          <a href="https://www.npmjs.com/package/@right-menu/react" target="_black"><img src="https://img.shields.io/npm/dm/@right-menu/react?color=%23ffba15&logo=npm&style=flat-square" alt="downloads" /></a>
-        </td>
-        <td>
-          <a href="https://www.jsdelivr.com/package/npm/@right-menu/react" target="_black"><img src="https://data.jsdelivr.com/v1/package/npm/@right-menu/react/badge" alt="downloads" /></a>
-        </td>
-      </tr>
-    </tbody>
-  </table>
-
 
 <br />
 
 
-## 演示 Demo
+## 文档 - Docs
 
-https://buuing.github.io/right-menu/
+- [官方文档 - 首页](https://buuing.github.io/right-menu/)
 
 <br />
 
 ## 使用 Usage
 
-<details open>
-<summary>
-在 <code>JS / TS</code> 中使用
-</summary>
-
-<br />
-
-
-### 通过 `import` 使用 (JS)
-
-1. 安装插件
-
-```shell
-# 通过 npm 安装
-npm install @right-menu/core
-
-# 通过 yarn 安装
-yarn add @right-menu/core
-```
-
-2. 使用插件
-
-```js
-import RightMenu from '@right-menu/core'
-
-new RightMenu('#box', [
-  {
-    type: 'li', // type为li是普通按钮
-    text: '复制(C)', // 按钮的名称
-    callback: () => alert('点击了复制') // 回调函数
-  }
-])
-```
-
-<br />
-
-### 通过 `script` 标签使用 (JS)
-
-- `CDN链接`: https://cdn.jsdelivr.net/npm/@right-menu/core/dist/right-menu.umd.min.js
-
-```html
-<div id="box" style="height: 300px; background: #ccc"></div>
-
-<script src="https://cdn.jsdelivr.net/npm/@right-menu/core/dist/right-menu.umd.min.js"></script>
-<script>
-  new RightMenu('#box', [
-    {
-      type: 'li', // type为li是普通按钮
-      text: '复制(C)', // 按钮的名称
-      callback: () => alert('点击了复制') // 回调函数
-    }
-  ])
-</script>
-```
-
-
-</details>
-
-<br />
-
-<details>
-<summary>
-在 <code>Vue</code> 中使用
-</summary>
-
-<br />
-
-
-### 通过 `import` 使用 (Vue)
-
-1. 安装插件
-
-```shell
-# 通过 npm 安装
-npm install @right-menu/vue
-
-# 通过 yarn 安装
-yarn add @right-menu/vue
-```
-
-2. 使用插件
-
-在 `main.js` 入口文件中添加代码
-
-```js
-import rightMenu from '@right-menu/vue'
-
-Vue.use(rightMenu)
-```
-
-在 `xxx.vue` 中使用
-
-```vue
-<template>
-  <div v-menu="options" style="height: 300px; background-color: #82acff"></div>
-</template>
-
-<script>
-export default {
-  data () {
-    return {
-      options: [{
-        type: 'li', // type为li是普通按钮
-        text: '复制(C)', // 按钮的名称
-        callback: () => alert('点击了复制') // 回调函数
-      }]
-    }
-  }
-}
-</script>
-```
-
-
-<br />
-
-### 通过 `script` 标签使用 (Vue)
-
-- `CDN链接`: https://cdn.jsdelivr.net/npm/@right-menu/vue/dist/rightMenu.umd.min.js
-
-```html
-<div id="app">
-  <div v-menu="options" style="height: 300px; background-color: #82acff"></div>
-</div>
-
-<script src="https://cdn.bootcdn.net/ajax/libs/vue/2.6.9/vue.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/@right-menu/vue/dist/rightMenu.umd.min.js"></script>
-<script>
-  new Vue({
-    el: '#app',
-    data () {
-      return {
-        options: [{
-          type: 'li', // type为li是普通按钮
-          text: '复制(C)', // 按钮的名称
-          callback: () => alert('点击了复制') // 回调函数
-        }]
-      }
-    }
-  })
-</script>
-```
-
-
-</details>
-
-<br />
-
-<details open>
-<summary>
-在 <code>React</code> 中使用
-</summary>
-
-<br />
-
-### 通过 `import` 使用 (React)
-
-1. 安装插件
-
-```shell
-npm i @right-menu/react
-```
-
-2. 使用插件
-
-```jsx
-import React from 'react'
-import RightMenu from '@right-menu/react'
-
-export default class Demo extends React.Component {
-  render () {
-    const options = [{
-      type: 'li', // type为li是普通按钮
-      text: '复制(C)', // 按钮的名称
-      callback: () => alert('点击了复制') // 回调函数
-    }]
-    return <RightMenu options={options}>
-      <div style="height: 300px; background-color: #ccc"></div>
-    </RightMenu>
-  }
-}
-```
-
-<br />
-
-### 通过 script 标签使用 (React)
-
-```html
-<script src="https://cdn.jsdelivr.net/npm/@right-menu/react/dist/index.umd.js"></script>
-
-```
-
-</details>
+- [在 JS / TS 中使用](https://buuing.github.io/right-menu/usage/js)
+- [在 Vue 中使用](https://buuing.github.io/right-menu/usage/vue)
+- [在 React 中使用](https://buuing.github.io/right-menu/usage/react)
 
 <br />
 

@@ -6,6 +6,7 @@
     "lerna": "^4.0.0"
   },
   "scripts": {
+    "docs": "npx docsify serve -o",
     "bootstrap": "lerna bootstrap",
     "vue": "lerna run --scope @right-menu/core --scope vue-right-menu dev --parallel",
     "react": "lerna run --scope @right-menu/core --scope @right-menu/react dev --parallel",

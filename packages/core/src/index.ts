@@ -8,8 +8,10 @@ import {
   handleStyle,
   getValue,
 } from './utils'
+import { version } from '../package.json'
 
 export default class RightMenu {
+  private version: string = version
   private menu: HTMLElement | null = null
   private config: ConfigType
   private eventList: Array<[Window | Document, string, LiType['callback']]> = []

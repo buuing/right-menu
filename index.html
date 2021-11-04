@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>right-menu 右键菜单插件</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <meta name="description" content="Description">
+  <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <link rel="stylesheet" href="./static/vue.css">
+  <link rel="stylesheet" href="./static/main.css">
+  <style>
+  </style>
+</head>
+<body>
+  <div id="app"></div>
+  <script src="https://cdn.jsdelivr.net/npm/@right-menu/core@0.0.6/dist/right-menu.umd.min.js"></script>
+  <script>
+    const rm = new RightMenu({
+      el: window
+    }, [
+      {
+        type: 'ul',
+        text: `关于 right-menu`,
+        children: [
+          {
+            type: 'li',
+            text: `version@latest`,
+            disabled: true
+          },
+          { type: 'hr' },
+          {
+            type: 'li',
+            text: 'Github 仓库',
+            callback: async () => window.open('https://github.com/buuing/right-menu')
+          },
+          {
+            type: 'li',
+            text: 'Bug 反馈',
+            callback: () => window.open('https://github.com/buuing/right-menu/issues/new')
+          },
+          { type: 'hr' },
+          {
+            type: 'li',
+            text: '入门教程',
+            disabled: true
+          },
+          {
+            type: 'li',
+            text: '高级配置',
+            disabled: true
+          },
+          { type: 'hr' },
+          {
+            type: 'li',
+            text: '查看历史更新',
+            disabled: true
+          },
+          { type: 'hr' },
+          {
+            type: 'li',
+            text: '📋 开源协议 License MIT',
+            callback: () => window.open('https://github.com/buuing/right-menu/blob/master/LICENSE')
+          }
+        ]
+      }
+    ])
+    console.log(rm)
+    window.$docsify = {
+      name: '首页',
+      nameLink: '/',
+      // 主题色
+      themeColor: '#6190e8',
+      // 入口文件
+      homepage: '../README.md',
+      // 右上方渲染github挂钟
+      repo: 'buuing/right-menu',
+      // 定制侧边栏
+      loadSidebar: true,
+      // 抓取目录渲染
+      maxLevel: 3,
+      subMaxLevel: 3,
+      // 开启封面页
+      coverpage: false,
+      // 切换页面后跳到顶部
+      auto2top: false,
+      // 小屏设备下合并导航栏到侧边栏
+      mergeNavbar: true,
+      // 开启导航栏
+      loadNavbar: false,
+      // 搜索框
+      search: {
+        // 目录
+        paths: 'auto',
+        // 默认文字
+        placeholder: '搜索',
+        // 404显示
+        noData: '找不到结果'
+      },
+      executeScript: true
+    }
+  </script>
+  <script src="./static/docsify.min.js"></script>
+  <script src="./static/search.js"></script>
+  <script src="./static/docsify-copy-code.js"></script>
+  <script src="./static/prism-bash.js"></script>
+  <script src="./static/prism-jsx.js"></script>
+  <script src="./static/prism-tsx.js"></script>
+  <script src="./static/prism-typescript.js"></script>
+</body>
+</html>
