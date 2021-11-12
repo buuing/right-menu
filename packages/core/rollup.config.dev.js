@@ -47,6 +47,7 @@ export default {
     livereload(),
     serve({
       open: true,
+      port: 11000,
       openPage: '/examples/index.html',
       contentBase: './',
     }),

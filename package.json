@@ -1,13 +1,12 @@
 {
   "name": "root",
   "devDependencies": {
-    "gulp": "^4.0.2",
-    "gulp-less": "^5.0.0",
     "lerna": "^4.0.0"
   },
   "scripts": {
     "docs": "npx docsify serve -o",
     "bootstrap": "lerna bootstrap",
+    "dev": "lerna run --scope @right-menu/core dev --parallel",
     "vue": "lerna run --scope @right-menu/core --scope vue-right-menu dev --parallel",
     "react": "lerna run --scope @right-menu/core --scope @right-menu/react dev --parallel",
     "build": "lerna run build --sort --stream",
