@@ -23,7 +23,7 @@ declare type UlType = {
 declare type ElementType = HrType | LiType | UlType;
 declare type GetKeysType<T> = T extends ElementType ? keyof T : never;
 declare type ElementKeysType = GetKeysType<ElementType>;
-declare type ConfigType = {
+export declare type ConfigType = {
     el: string | HTMLElement;
     mode?: 'context-menu' | 'nav-menu';
     theme?: string;
@@ -41,7 +41,7 @@ declare type ConfigType = {
     beforeHide?: Function;
     afterHide?: Function;
 };
-declare type OptionsType = ItemType[] | ((e: Event, config: ConfigType) => ItemType[] | Promise<ItemType[]>);
+export declare type OptionsType = ItemType[] | ((e: Event, config: ConfigType) => ItemType[] | Promise<ItemType[]>);
 
 declare class RightMenu {
     private menu;
@@ -103,12 +103,14 @@ declare class RightMenu {
     createHr<T extends ItemType & {
         type: 'hr';
     }>(opt: T): HTMLElement;
+
     createLi<T extends ItemType & {
         type: 'li' | 'ul';
     }>(opt: T): HTMLElement;
+
     createUl<T extends ItemType & {
         type: 'ul';
     }>(opt: T): HTMLElement;
 }
 
-export { RightMenu as default };
+export { RightMenu as default }
