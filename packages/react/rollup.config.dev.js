@@ -12,7 +12,7 @@ export default  {
   input: './src/index.tsx',
   output: [
     {
-      file: pkg.browser,
+      file: pkg.unpkg,
       format: 'umd',
       sourcemap: true,
       name: 'RightMenu',

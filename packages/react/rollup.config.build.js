@@ -20,7 +20,7 @@ export default  {
       sourcemap: true,
     },
     {
-      file: pkg.browser,
+      file: pkg.unpkg,
       format: 'umd',
       sourcemap: true,
       name: 'RightMenu',

@@ -108,6 +108,7 @@
     <td align="center"><a href="https://github.com/Deja-vuuu" target="_blank"><img width="50px" src="https://avatars.githubusercontent.com/u/27748682"></a><div><span title="核心开发">🤖</span> <span title="基础建设">🛰</span></div></td>
     <td align="center"><a href="https://github.com/yushen7" target="_blank"><img width="50px" src="https://avatars.githubusercontent.com/u/35678187"></a><div><span title="核心开发">🤖</span> <span title="修复bug">🛠</span></div></td>
     <td align="center"><a href="https://github.com/dora1995" target="_blank"><img width="50px" src="https://avatars.githubusercontent.com/u/53267289"></a><div><span title="基础建设">🛰</span> <span title="修复bug">🛠</span></div></td>
+    <td align="center"><a href="https://github.com/pingxinwen" target="_blank"><img width="50px" src="https://avatars.githubusercontent.com/u/60872624"></a><div><span title="需求功能">🚧</span></div></td>
   </tr>
 </table>
 
@@ -119,7 +120,6 @@
   - [ ] 🚧 增加icon选项, 可以使用一些内置图标, 想法可以让用户自由使用外部的svg图标
 
 - `💡 待认领`
-  - [ ] 📚 [补全文档中`react`的`hooks`使用方式](https://buuing.github.io/right-menu/usage/react.html)
   - [ ] 🛠 [**在mac系统下, 第二次点击控制台时 blur 事件没有触发**](https://github.com/buuing/vue-right-menu/issues/10)
   - [ ] 🚧 [增加 XP / win7 两种经典菜单主题样式](https://github.com/buuing/right-menu/discussions/31)
   - [ ] 🚧 随着浏览器放大/缩小时, 将菜单组件尽可能的维持在同一个大小
@@ -144,6 +144,7 @@
   - [x] 增加了 minWidth / maxWidth 最大最小宽度的配置 - *buuing*
   - [x] `core`包增加`eslint-standard`规范, 保存时校验 - *dora1995*
   - [x] 增加`@right-menu/react`包, 支持`react-dom`方式使用 - *Deja-vuuu*
+  - [x] 增加`@right-menu/react`的 hooks 使用方式 - *pingxinwen*
 
 <br />
 
