@@ -1,6 +1,6 @@
 import React, { memo, useEffect,useRef } from 'react'
 import type { ReactElement } from 'react'
-import {  default as Menu, ConfigType, OptionsType } from '@right-menu/core';
+import { default as Menu, ConfigType, OptionsType } from '@right-menu/core'
 
 const RightMenu = memo((props: {
   options: OptionsType,

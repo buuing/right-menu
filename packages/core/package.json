@@ -2,9 +2,10 @@
   "name": "@right-menu/core",
   "version": "0.0.6",
   "description": "",
-  "browser": "dist/right-menu.umd",
-  "module": "dist/right-menu.esm",
-  "types": "dist/index.d.ts",
+  "main": "dist/index.cjs",
+  "module": "dist/index.esm",
+  "unpkg": "dist/index.umd",
+  "types": "types/index.d.ts",
   "scripts": {
     "watch": "rollup --config rollup.config.dev.js -w",
     "dev": "rollup --config rollup.config.build.js -w",

@@ -14,23 +14,32 @@ export default [
     input: 'src/index.ts',
     output: [
       {
-        file: `${pkg.browser}.js`,
-        format: 'umd',
-        name: 'RightMenu',
+        file: `${pkg.main}.js`,
+        format: 'cjs',
       },
       {
-        file: `${pkg.browser}.min.js`,
-        format: 'umd',
-        name: 'RightMenu',
+        file: `${pkg.main}.min.js`,
+        format: 'cjs',
         plugins: [terser()],
       },
       {
         file: `${pkg.module}.js`,
-        format: 'es',
+        format: 'esm',
       },
       {
         file: `${pkg.module}.min.js`,
-        format: 'es',
+        format: 'esm',
+        plugins: [terser()],
+      },
+      {
+        file: `${pkg.unpkg}.js`,
+        format: 'umd',
+        name: 'RightMenu',
+      },
+      {
+        file: `${pkg.unpkg}.min.js`,
+        format: 'umd',
+        name: 'RightMenu',
         plugins: [terser()],
       },
     ],
@@ -57,10 +66,10 @@ export default [
     ],
     plugins: [
       dts(),
-      del({
-        targets: ['dist/src'],
-        hook: 'buildEnd',
-      }),
+      // del({
+      //   targets: ['dist/src'],
+      //   hook: 'buildEnd',
+      // }),
     ],
   },
 ]

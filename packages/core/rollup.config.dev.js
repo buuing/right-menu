@@ -19,7 +19,7 @@ export default {
   input: 'src/index.ts',
   output: [
     {
-      file: `${pkg.browser}.js`,
+      file: `${pkg.unpkg}.js`,
       format: 'umd',
       name: 'RightMenu',
       sourcemap: true,

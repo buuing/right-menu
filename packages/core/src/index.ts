@@ -10,6 +10,8 @@ import {
 } from './utils'
 import { version } from '../package.json'
 
+export { ConfigType, OptionsType }
+
 export default class RightMenu {
   private version: string = version
   private menu: HTMLElement | null = null

@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lucky-canva-react Demo</title>
+    <title>Demo</title>
     <style>
         #root>div {
             height: 200px;
@@ -95,87 +95,17 @@
             </div>
         )
     };
+    console.log(RightMenu)
     ReactDOM.render(
       <React.StrictMode>
-          <RightMenu.RightMenu theme="win10" options={[{
+          <RightMenu.default theme="win10" options={[{
               type: 'li',
               text: 'win10',
           }, ...base]}  style={{
               background: "#ccc"
           }}>
             <span>Win10</span>
-          </RightMenu.RightMenu>
-          <RightMenu.RightMenu theme="mac" options={[
-              {
-                  type: 'ul',
-                  text: 'mac',
-                  children: dfs(99)
-              },
-              ...base]}  style={{
-              background: "#6F69AC"
-          }}>
-              <span>Mac</span>
-          </RightMenu.RightMenu>
-          <RightMenu.RightMenu options={[
-              {
-                  type: 'ul',
-                  text: 'mac',
-                  children: dfs(99)
-              },
-              ...base]} style={{
-              background: "#95DAC1"
-          }}>
-              <span>异步 0ms</span>
-          </RightMenu.RightMenu>
-          <RightMenu.RightMenu options={ () => {
-              return new Promise(resolve => {
-                  setTimeout(() => {
-                      resolve([
-                          {
-                              type: 'li',
-                              text: '异步 3000ms'
-                          },
-                          ...base
-                      ])
-                  }, 300000)
-              })
-          }} style={{
-              background: "#FFEBA1"
-          }}>
-              <span>异步 3000ms</span>
-          </RightMenu.RightMenu>
-          <RightMenu.RightMenu
-              config={
-                  {
-                      theme: 'mac',
-                      minWidth: '0px',
-                      maxWidth: '300px'
-                  }
-              }
-              options={ [
-                  {
-                      type: 'li',
-                      text: '这是一段文字',
-                  },
-                  {
-                      type: 'li',
-                      text: '这是一段很长很长很长很长很长很长很长很长的文字',
-                  },
-                  {
-                      type: 'ul',
-                      text: '这是一个列表',
-                      children: [
-                          { type: 'li', text: '复制' },
-                          { type: 'li', text: '粘贴' }
-                      ]
-                  },
-                  ...base
-              ]} style={{
-              background: "#FD6F96"
-          }}>
-              <span>限制菜单最大/最小宽度</span>
-          </RightMenu.RightMenu>
-          <HookComponent />
+          </RightMenu.default>
       </React.StrictMode>,
       document.getElementById('root')
     )
