@@ -6,7 +6,7 @@ import resolve from '@rollup/plugin-node-resolve'
 import commonjs from '@rollup/plugin-commonjs'
 import babel from 'rollup-plugin-babel'
 import { terser } from 'rollup-plugin-terser'
-// import del from 'rollup-plugin-delete'
+import del from 'rollup-plugin-delete'
 import pkg from './package.json'
 import styles from 'rollup-plugin-styles'
 export default [
@@ -48,7 +48,7 @@ export default [
     ],
   },
   {
-    input: 'dist/index.d.ts',
+    input: 'dist/src/index.d.ts',
     output: [
       {
         file: 'types/index.d.ts',
@@ -57,10 +57,10 @@ export default [
     ],
     plugins: [
       dts(),
-      // del({
-      //   targets: ['dist/src'],
-      //   hook: 'buildEnd'
-      // })
+      del({
+        targets: ['dist/src'],
+        hook: 'buildEnd',
+      }),
     ],
   },
 ]

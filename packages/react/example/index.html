@@ -52,7 +52,7 @@
     </noscript>
     <div id="root"></div>
 </body>
-<script src="../dist/react-right-menu.umd.js"></script>
+<script src="../dist/index.umd.js"></script>
 <script type="text/babel">
     const base = [
         { type: 'hr' },
@@ -75,17 +75,37 @@
             children: dfs(max - 1)
         }]
     }
+    function HookComponent (){
+        const [state,setState] = React.useState(false);
+        const myRef = RightMenu.useRightMenu(
+            [
+                {
+                    type:'li',
+                    text: 'Hook',
+                    callback: () => {alert('hello!')}
+                },
+                ...base
+            ],
+            {}
+        );
+        return (
+            <div style={{background: "#6cf"}} ref={myRef}>
+                <span>Hook</span>
+                <button onClick={()=>{setState(!state)}}>update</button>
+            </div>
+        )
+    };
     ReactDOM.render(
       <React.StrictMode>
-          <RightMenu theme="win10" options={[{
+          <RightMenu.RightMenu theme="win10" options={[{
               type: 'li',
               text: 'win10',
           }, ...base]}  style={{
               background: "#ccc"
           }}>
             <span>Win10</span>
-          </RightMenu>
-          <RightMenu theme="mac" options={[
+          </RightMenu.RightMenu>
+          <RightMenu.RightMenu theme="mac" options={[
               {
                   type: 'ul',
                   text: 'mac',
@@ -95,8 +115,8 @@
               background: "#6F69AC"
           }}>
               <span>Mac</span>
-          </RightMenu>
-          <RightMenu options={[
+          </RightMenu.RightMenu>
+          <RightMenu.RightMenu options={[
               {
                   type: 'ul',
                   text: 'mac',
@@ -106,8 +126,8 @@
               background: "#95DAC1"
           }}>
               <span>异步 0ms</span>
-          </RightMenu>
-          <RightMenu options={ () => {
+          </RightMenu.RightMenu>
+          <RightMenu.RightMenu options={ () => {
               return new Promise(resolve => {
                   setTimeout(() => {
                       resolve([
@@ -123,8 +143,8 @@
               background: "#FFEBA1"
           }}>
               <span>异步 3000ms</span>
-          </RightMenu>
-          <RightMenu
+          </RightMenu.RightMenu>
+          <RightMenu.RightMenu
               config={
                   {
                       theme: 'mac',
@@ -154,7 +174,8 @@
               background: "#FD6F96"
           }}>
               <span>限制菜单最大/最小宽度</span>
-          </RightMenu>
+          </RightMenu.RightMenu>
+          <HookComponent />
       </React.StrictMode>,
       document.getElementById('root')
     )
