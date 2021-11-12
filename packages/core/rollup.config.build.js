@@ -48,10 +48,10 @@ export default [
     ],
   },
   {
-    input: 'dist/index.d.ts',
+    input: 'types/index.d.ts',
     output: [
       {
-        file: 'types/index.d.ts',
+        file: 'dist/index.d.ts',
         format: 'es',
       },
     ],
