@@ -8,11 +8,11 @@
 </head>
 <body>
   <div class="box0" style="background: #ccc;"><span>Win10</span></div>
-  <div class="box1" style="background: #6F69AC;"><span>Mac</span></div>
+  <div class="box1" style="background: #6F69AC;"><span id="text">Mac</span></div>
   <div class="box2" style="background: #95DAC1;"><span>异步 0ms</span></div>
   <div class="box3" style="background: #FFEBA1;"><span>异步 3000ms</span></div>
   <div class="box4" style="background: #FD6F96;"><span>限制菜单最大/最小宽度</span></div>
-  <script src="../dist/right-menu.umd.js"></script>
+  <script src="../dist/index.umd.js"></script>
   <script>
     function dfs (max) {
       if (max === 0) return null
@@ -48,6 +48,16 @@
       ...base
     ])
 
+    // text
+    new RightMenu({
+      el: '#text',
+      theme: 'mac'
+    }, [
+      {
+        type: 'li',
+        text: 'text',
+      },
+    ])
     // mac
     new RightMenu({
       el: '.box1',
@@ -60,6 +70,7 @@
       },
       ...base
     ])
+    
 
     // 异步 0ms
     new RightMenu({

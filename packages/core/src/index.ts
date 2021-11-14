@@ -28,8 +28,7 @@ export default class RightMenu {
   ) {
     this.config = config
     // 设置主题
-    config.theme =
-      config.theme || OperatSystem.toLowerCase().replace(/is/, '') || 'mac'
+    config.theme = config.theme || OperatSystem.toLowerCase().replace(/is/, '') || 'mac'
     // 如果用户输入的主题名称里包含了 'theme-' 则删除
     if (config.theme.indexOf('theme-') === 0) {
       config.theme = config.theme.slice(6)
