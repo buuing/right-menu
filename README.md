@@ -144,7 +144,8 @@
   - [x] 增加了 minWidth / maxWidth 最大最小宽度的配置 - *buuing*
   - [x] `core`包增加`eslint-standard`规范, 保存时校验 - *dora1995*
   - [x] 增加`@right-menu/react`包, 支持`react-dom`方式使用 - *Deja-vuuu*
-  - [x] 增加`@right-menu/react`的 hooks 使用方式 - *pingxinwen*
+  - [x] 增加`@right-menu/react`包的 hooks 使用方式 - *pingxinwen*
+  - [x] 增加`@right-menu/vue`包的 抽象组件 使用方式 - *buuing*
 
 <br />
 

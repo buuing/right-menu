@@ -14,19 +14,15 @@ yarn add @right-menu/vue
 
 #### 2. 使用插件
 
--  **Vue2.x 注册组件**
-
+>> **Vue2.x 注册组件**
 ```js
 import RightMenu from '@right-menu/vue'
-
 Vue.use(RightMenu)
 ```
 
--  **Vue3.x 注册组件**
-
+>> **Vue3.x 注册组件**
 ```js
 import RightMenu from '@right-menu/vue'
-
 createApp(App).use(RightMenu).mount('#app')
 ```
 

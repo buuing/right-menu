@@ -22,7 +22,7 @@
 
 ### 通过 import 使用 (JS)
 
-1. 安装插件
+#### 1. 安装插件
 
 ```shell
 # 通过 npm 安装
@@ -32,7 +32,7 @@ npm install @right-menu/core
 yarn add @right-menu/core
 ```
 
-2. 使用插件
+#### 2. 使用插件
 
 ```js
 import RightMenu from '@right-menu/core'

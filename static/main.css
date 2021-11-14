@@ -82,7 +82,7 @@ blockquote>ul.task-list:last-child {
   border: 4px solid var(--theme-color,#42b983);
   padding: 5px 20px;
   transition: 0.5s;
-  box-shadow: 0px 3px 10px rgba(16, 19, 122, 0.2)
+  /* box-shadow: 0px 3px 10px rgba(16, 19, 122, 0.2) */
 }
 .markdown-section>blockquote>blockquote>p:first-child {
   transform: translateY(-2.6em);
