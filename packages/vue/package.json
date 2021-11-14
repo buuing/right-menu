@@ -1,16 +1,16 @@
 {
   "name": "@right-menu/vue",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "一个基于vue2和vue3的右键菜单插件",
-  "browser": "dist/rightMenu.umd.js",
-  "module": "dist/rightMenu.common.js",
-  "types": "",
+  "main": "dist/index.cjs",
+  "module": "dist/index.esm",
+  "unpkg": "dist/index.umd",
+  "types": "dist/index.d.ts",
   "scripts": {
-    "dev": "vue-cli-service serve",
-    "pkg": "vue-cli-service build --target lib --name rightMenu --dest ./dist/ ./src/index.js",
-    "docs": "vuepress dev docs",
-    "build": "npm run pkg",
-    "lint": "vue-cli-service lint"
+    "dev": "rollup --config rollup.config.js -w",
+    "build": "rollup --config rollup.config.js",
+    "switch:2": "vue-demi-switch 2 vue2",
+    "switch:3": "vue-demi-switch 3"
   },
   "keywords": [
     "vue右键菜单插件"

@@ -1,1 +1,1 @@
-module.exports = require('./dist/rightMenu.common.js')
+module.exports = require('./dist/index.esm.min.js')
