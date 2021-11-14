@@ -10,12 +10,12 @@
 new RightMenu({
   el: '#box',
   theme: 'mac'
-}, [{...}])
+}, options)
 ```
 
 >> 在 Vue 中使用
 ```html
-<RightMenu :options="[{...}]" theme="mac">
+<RightMenu :options="options" theme="mac">
   <div>hello<div>
 </RightMenu>
 ```
@@ -23,7 +23,7 @@ new RightMenu({
 >> 在 React 中使用
 ```jsx
 render () {
-  return <RightMenu options={options}>
+  return <RightMenu options={options} theme="mac">
     <div>hello</div>
   </RightMenu>
 }
