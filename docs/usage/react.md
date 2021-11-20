@@ -1,4 +1,7 @@
 
+> 修复中
+
+<!-- 
 ### 通过 import 使用 (React)
 
 #### 1. 安装插件
@@ -37,4 +40,4 @@ export default class Demo extends React.Component {
 
 ```html
 <script src="https://cdn.jsdelivr.net/npm/@right-menu/react/dist/index.umd.js"></script>
-```
+``` -->

@@ -35,6 +35,8 @@ export default defineComponent({
           theme: this.theme,
           minWidth: this.minWidth,
           maxWidth: this.minWidth,
+          beforeInit: () => this.$emit('beforeInit'),
+          afterInit: () => this.$emit('afterInit'),
         }, this.options as OptionsType)
       })
     }

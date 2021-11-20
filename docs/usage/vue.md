@@ -60,9 +60,10 @@ export default {
 
 ### 通过 script 标签使用 (Vue)
 
-> `CDN链接`: https://cdn.jsdelivr.net/npm/@right-menu/vue/dist/index.umd.min.js
-
 #### Vue2.x 示例
+
+>> `Vue2.x CDN链接`
+- https://cdn.jsdelivr.net/combine/npm/@vue/composition-api@1.2.4,npm/vue-demi@0.11.4/lib/index.iife.min.js,npm/@right-menu/vue@0.0.4
 
 ```html
 <div id="app">
@@ -74,10 +75,10 @@ export default {
   </right-menu>
 </div>
 
+<!-- 这个 vue 的CDN你可以换成你自己本地的 -->
 <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/@vue/composition-api@1.2.4/dist/vue-composition-api.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/vue-demi@0.11.4/lib/index.iife.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/@right-menu/vue/dist/index.umd.min.js"></script>
+<!-- 这个CDN链接是必须的 -->
+<script src="https://cdn.jsdelivr.net/combine/npm/@vue/composition-api@1.2.4,npm/vue-demi@0.11.4/lib/index.iife.min.js,npm/@right-menu/vue@0.0.4"></script>
 <script>
   new Vue({
     el: '#app',
@@ -96,6 +97,9 @@ export default {
 
 #### Vue3.x 示例
 
+>> `Vue3.x CDN链接`
+- https://cdn.jsdelivr.net/combine/npm/vue-demi@0.11.4/lib/index.iife.min.js,npm/@right-menu/vue@0.0.4
+
 ```html
 <div id="app">
   <!-- 方式1: 指令组件 -->
@@ -106,9 +110,10 @@ export default {
   </right-menu>
 </div>
 
+<!-- 这个 vue 的CDN你可以换成你自己本地的 -->
 <script src="https://cdn.bootcdn.net/ajax/libs/vue/3.1.5/vue.global.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/vue-demi@0.11.4/lib/index.iife.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/@right-menu/vue/dist/index.umd.min.js"></script>
+<!-- 这个CDN链接是必须的 -->
+<script src="https://cdn.jsdelivr.net/combine/npm/vue-demi@0.11.4/lib/index.iife.min.js,npm/@right-menu/vue@0.0.4"></script>
 <script>
   const app = Vue.createApp({
     data() {

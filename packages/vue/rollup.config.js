@@ -13,39 +13,20 @@ export default [
     input: 'src/index.ts',
     output: [
       {
-        file: `${pkg.main}.js`,
+        file: pkg.main,
+        format: 'cjs',
+        sourcemap: true,
+      },
+      {
+        file: pkg.module,
         format: 'esm',
         sourcemap: true,
       },
       {
-        file: `${pkg.main}.min.js`,
-        format: 'esm',
-        plugins: [terser()]
-      },
-      {
-        file: `${pkg.module}.js`,
-        format: 'esm',
-        sourcemap: true,
-      },
-      {
-        file: `${pkg.module}.min.js`,
-        format: 'esm',
-        plugins: [terser()]
-      },
-      {
-        file: `${pkg.unpkg}.js`,
+        file: pkg.unpkg,
         format: 'umd',
         name: 'RightMenu',
         sourcemap: true,
-        globals: {
-          'vue-demi': 'VueDemi',
-        },
-      },
-      {
-        file: `${pkg.unpkg}.min.js`,
-        format: 'umd',
-        name: 'RightMenu',
-        plugins: [terser()],
         globals: {
           'vue-demi': 'VueDemi',
         },

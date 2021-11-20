@@ -104,11 +104,6 @@ new RightMenu({
 
 <br />
 
----
-
-<br />
-
-<!-- 
 ### beforeInit 初始化前
 
 - 类型: `Function`
@@ -135,7 +130,7 @@ new RightMenu({
     console.log('初始化后...')
   }
 }, options)
-``` -->
+```
 
 
 <!-- - el

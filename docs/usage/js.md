@@ -1,12 +1,12 @@
 
 ### 通过 script 标签使用 (JS)
 
-- `CDN链接`: https://cdn.jsdelivr.net/npm/@right-menu/core/dist/right-menu.umd.min.js
+- `CDN链接`: https://cdn.jsdelivr.net/npm/@right-menu/core@0.0.7
 
 ```html
 <div id="box" style="height: 300px; background: #ccc"></div>
 
-<script src="https://cdn.jsdelivr.net/npm/@right-menu/core/dist/right-menu.umd.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@right-menu/core@0.0.7"></script>
 <script>
   new RightMenu('#box', [
     {
