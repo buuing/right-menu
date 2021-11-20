@@ -14,7 +14,7 @@
     "dist"
   ],
   "dependencies": {
-    "@right-menu/core": "^0.0.6"
+    "@right-menu/core": "^0.0.7"
   },
   "devDependencies": {
     "@babel/core": "^7.12.10",
