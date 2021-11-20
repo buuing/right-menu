@@ -6,7 +6,7 @@
   "scripts": {
     "docs": "npx docsify serve -o",
     "bootstrap": "lerna bootstrap",
-    "dev": "lerna run --scope @right-menu/core dev --parallel",
+    "dev": "lerna run --scope @right-menu/core watch --parallel",
     "vue": "lerna run --scope @right-menu/core --scope vue-right-menu dev --parallel",
     "react": "lerna run --scope @right-menu/core --scope @right-menu/react dev --parallel",
     "build": "lerna run build --sort --stream",

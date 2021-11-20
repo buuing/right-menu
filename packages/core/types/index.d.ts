@@ -49,7 +49,7 @@ declare class RightMenu {
     private config;
     private eventList;
     private menuStyle;
-    constructor(config: ConfigType, options: OptionsType);
+    constructor(el: ConfigType, options: OptionsType);
     /**
      * 组件初始化
      * @param e 鼠标事件参数

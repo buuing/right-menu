@@ -23,10 +23,10 @@ export default class RightMenu {
   }
 
   constructor(
-    config: ConfigType,
+    el: ConfigType,
     options: OptionsType,
   ) {
-    this.config = config
+    const config = this.config = typeof el === 'string' ? { el } : el
     // 设置主题
     config.theme = config.theme || OperatSystem.toLowerCase().replace(/is/, '') || 'mac'
     // 如果用户输入的主题名称里包含了 'theme-' 则删除
@@ -41,10 +41,7 @@ export default class RightMenu {
       this.menuStyle['max-width'] = getValue(config.maxWidth)
     }
     // 获取dom并绑定事件
-    const dom =
-      typeof config.el === 'string'
-        ? document.querySelector(config.el)
-        : config.el
+    const dom = typeof config.el === 'string' ? document.querySelector(config.el) : config.el
     dom?.addEventListener('contextmenu', (e) => {
       const res = typeof options === 'function' ? options(e, config) : options
       this.init(e as MouseEvent, res)
@@ -61,6 +58,9 @@ export default class RightMenu {
     e: MouseEvent,
     thenable: ItemType[] | Promise<ItemType[]>,
   ): Promise<void> {
+    // 触发生命周期
+    this.config.beforeInit?.call(this)
+
     // 开始就要阻止本身的默认事件
     preventDefault(e)
 
@@ -86,7 +86,11 @@ export default class RightMenu {
 
     // 开始创建菜单栏
     this.menu = this.renderMenu(options)
+    // 渲染菜单栏
     this.initMenu(e, this.menu)
+
+    // 触发生命周期
+    this.config.afterInit?.call(this)
   }
 
   /**
@@ -142,10 +146,9 @@ export default class RightMenu {
   destroyMenu(): void {
     const menuList = document.querySelectorAll('.right-menu-list')
     // 清除所有菜单栏, 有多少清多少
-    menuList &&
-      menuList.forEach((item) => {
-        item.parentNode?.removeChild(item)
-      })
+    menuList && menuList.forEach((item) => {
+      item.parentNode?.removeChild(item)
+    })
     // 移除所有事件
     this.removeEvent()
     this.menu = null

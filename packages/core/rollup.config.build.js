@@ -14,33 +14,17 @@ export default [
     input: 'src/index.ts',
     output: [
       {
-        file: `${pkg.main}.js`,
+        file: pkg.main,
         format: 'cjs',
       },
       {
-        file: `${pkg.main}.min.js`,
-        format: 'cjs',
-        plugins: [terser()],
-      },
-      {
-        file: `${pkg.module}.js`,
+        file: pkg.module,
         format: 'esm',
       },
       {
-        file: `${pkg.module}.min.js`,
-        format: 'esm',
-        plugins: [terser()],
-      },
-      {
-        file: `${pkg.unpkg}.js`,
+        file: pkg.unpkg,
         format: 'umd',
         name: 'RightMenu',
-      },
-      {
-        file: `${pkg.unpkg}.min.js`,
-        format: 'umd',
-        name: 'RightMenu',
-        plugins: [terser()],
       },
     ],
     plugins: [
