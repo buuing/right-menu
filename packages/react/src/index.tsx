@@ -1,10 +1,20 @@
 export { default as default } from './component'
 export { useRightMenu } from './hook'
 
-/**
- * 引入组件
- * import RightMenu, { useRightMenu } from '@right-menu/react'
- * 
- * 使用组件
- * <RightMenu options=[{...}, {...}]>xxx</RightMenu>
- */
+/*
+
+component组件的使用方式：
+
+import RightMenu from '@right-menu/react'
+
+const options = [
+ {
+    { type: 'li', text: '普通节点' },
+    { type: 'hr' },
+    { type: 'li', text: '普通节点' },
+  }
+]
+<RightMenu options={options} >...</RightMenu >
+
+*/
+
