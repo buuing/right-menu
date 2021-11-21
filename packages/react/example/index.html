@@ -78,7 +78,7 @@
     function HookComponent (){
         const [state,setState] = React.useState(false);
         const myRef = RightMenu.useRightMenu(
-            [
+            {},[
                 {
                     type:'li',
                     text: 'Hook',
@@ -86,7 +86,6 @@
                 },
                 ...base
             ],
-            {}
         );
         return (
             <div style={{background: "#6cf"}} ref={myRef}>
@@ -106,6 +105,7 @@
           }}>
             <span>Win10</span>
           </RightMenu.default>
+          <HookComponent />
       </React.StrictMode>,
       document.getElementById('root')
     )
