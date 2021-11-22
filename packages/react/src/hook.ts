@@ -1,16 +1,21 @@
-import { useEffect, useRef } from 'react';
-import { default as Menu, ConfigType, OptionsType } from '@right-menu/core';
+import { useEffect,useRef } from 'react';
+import { default as Menu, ConfigType as OringinConfigType, OptionsType } from '@right-menu/core';
+
+export type ConfigType = Omit<OringinConfigType,'el'>;
 
 export function useRightMenu<T extends HTMLElement = HTMLDivElement>(
+  config: ConfigType,
   options: OptionsType,
-  config: Omit<ConfigType, 'el'>,
-): React.MutableRefObject<Element | undefined> {
-  const domRef = useRef<T>();
-  useEffect(() => {
-    new Menu({
+):React.MutableRefObject<T|null> {
+  const domRef = useRef<T>(null);
+  useEffect(()=>{
+    const menu = new Menu({
       ...config,
       el: domRef.current as HTMLElement
-    }, options)
-  }, []);
+    },options);
+    return ()=>{
+      menu.destroyMenu();
+    }
+  },[]);
   return domRef;
 }

@@ -24,6 +24,24 @@ render () {
 }
 ```
 
+```jsx
+import { useRightMenu } from '@right-menu/react'
+
+function App(){
+  const menuRef = useRightMenu(
+    {
+      theme: 'win10'
+    },
+    [{
+      type: 'li',
+      text: 'Hello RightMenu'
+    }]
+  );
+  return <div ref={menuRef}>测试右键菜单</div>
+}
+
+```
+
 ### 高级配置
 
 ...
