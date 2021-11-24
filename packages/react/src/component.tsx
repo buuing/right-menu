@@ -1,45 +1,45 @@
-import React, { CSSProperties, memo, useEffect,useRef } from 'react'
+import React, { memo, useEffect,useRef } from 'react'
 import type { ReactElement } from 'react'
 import RightMenu, { default as Menu, ConfigType, OptionsType } from '@right-menu/core'
-
-
 interface Props {
   options: OptionsType; // 菜单选项
   config: ConfigType; // 高级配置
   children: ReactElement;
-  style?: CSSProperties
-  className?: string
 }
 const RightMenuComponent: React.FC<Props> = (props) => {
-  const { options, config, children, style, className, ...otherProps } = props;
-
-  const contentRef = useRef<HTMLDivElement>(null)
-  const menuRef = useRef<RightMenu>()
+  const { options, config, children } = props;
+  const menuRef = useRef<RightMenu[]>([])
+  const childrenRef = useRef<any[]>([])
 
   // 子元素的更换对右键菜单的调起不影响，因此初始化即可
   useEffect(() => {
-    if (contentRef.current) {
-      menuRef.current = new Menu({
-        el: contentRef.current
-      }, options)
+    // 兼容有一个子元素/多个子元素的情况
+    if (childrenRef.current && childrenRef.current.length) {
+      childrenRef.current.forEach((item, index) => {
+        menuRef.current[index] = new Menu({
+          ...config,
+          el: item
+        }, options)
+      })
     }
 
     return () => {
-      if (menuRef.current) {
-        menuRef.current.destroyMenu()
-        menuRef.current = undefined
+      if (menuRef.current && menuRef.current.length) {
+        menuRef.current.forEach(item => {
+          item.destroyMenu()
+        })
+        menuRef.current.length = 0
+        // console.warn('RightMenu组件因参数变动，触发了刷新；若非主动修改传入参数，建议将参数通过state/memo等方式保存，以减少RightMenu组件的重新构建')
       }
     }
-  }, [])
-
+  }, [options, config])
 
   return (
-    // 这里有个问题，就是react不能轻易拿到chidren的dom节点
-    // 有ReactDOM.findDOMNode，但是对函数组件不能使用；也不推荐使用：https://zh-hans.reactjs.org/docs/react-dom.html#finddomnode
-    // 因此使用div包裹作为当前方案，若有更好的解决方案，还请issue；也欢迎讨论，感谢！
-    <div style={style} ref={contentRef} className={className}>
-      {children}
-    </div>
+    <>
+      { React.Children.map(children, (child, index) => {
+        return React.cloneElement(child, { ref: (element: any) => childrenRef.current[index] = element });
+      })}
+    </>
   )
 }
 

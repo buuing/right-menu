@@ -75,7 +75,7 @@
             children: dfs(max - 1)
         }]
     }
-    function HookComponent (){
+    function HookComponent () {
         const [state,setState] = React.useState(false);
         const myRef = RightMenu.useRightMenu(
             {},[
@@ -95,17 +95,38 @@
         )
     };
     console.log(RightMenu)
-    ReactDOM.render(
-      <React.StrictMode>
+
+    function FunctionComponent () {
+      return <div>i am functionComponent</div>
+    }
+    class ClassComponent extends React.Component {
+      render() {
+        return <div> i am classComponent</div>
+      }
+    }
+
+    function Main() {
+      const [state, setState] = React.useState(true)
+      function handleClick () {
+        setState(state => !state)
+      }
+      return (
+        <React.Fragment>
           <RightMenu.default theme="win10" options={[{
-              type: 'li',
-              text: 'win10',
-          }, ...base]}  style={{
-              background: "#ccc"
-          }}>
-            <span>Win10</span>
+            type: 'li',
+            text: 'win10',
+          }, ...base]}>
+            <div><ClassComponent></ClassComponent></div>
+            <div><FunctionComponent></FunctionComponent></div>
           </RightMenu.default>
           <HookComponent />
+          <button onClick={handleClick}>点我会触发刷新</button>
+        </React.Fragment>
+      )
+    }
+    ReactDOM.render(
+      <React.StrictMode>
+          <Main />
       </React.StrictMode>,
       document.getElementById('root')
     )
