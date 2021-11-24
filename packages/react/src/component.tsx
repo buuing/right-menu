@@ -1,28 +1,46 @@
 import React, { memo, useEffect,useRef } from 'react'
 import type { ReactElement } from 'react'
-import { default as Menu, ConfigType, OptionsType } from '@right-menu/core'
+import RightMenu, { default as Menu, ConfigType, OptionsType } from '@right-menu/core'
+interface Props {
+  options: OptionsType; // 菜单选项
+  config: ConfigType; // 高级配置
+  children: ReactElement;
+}
+const RightMenuComponent: React.FC<Props> = (props) => {
+  const { options, config, children } = props;
+  const menuRef = useRef<RightMenu[]>([])
+  const childrenRef = useRef<any[]>([])
 
-const RightMenu = memo((props: {
-  options: OptionsType,
-  config: ConfigType
-  children: ReactElement,
-}) => {
-  const { options, config, children, ...otherProps } = props;
-  const myRef = useRef<HTMLElement>()
+  // 子元素的更换对右键菜单的调起不影响，因此初始化即可
   useEffect(() => {
-    new Menu({
-      el: myRef.current as HTMLElement
-    }, props.options)
-  }, [myRef])
+    // 兼容有一个子元素/多个子元素的情况
+    if (childrenRef.current && childrenRef.current.length) {
+      childrenRef.current.forEach((item, index) => {
+        menuRef.current[index] = new Menu({
+          ...config,
+          el: item
+        }, options)
+      })
+    }
+
+    return () => {
+      if (menuRef.current && menuRef.current.length) {
+        menuRef.current.forEach(item => {
+          item.destroyMenu()
+        })
+        menuRef.current.length = 0
+        // console.warn('RightMenu组件因参数变动，触发了刷新；若非主动修改传入参数，建议将参数通过state/memo等方式保存，以减少RightMenu组件的重新构建')
+      }
+    }
+  }, [options, config])
+
   return (
     <>
-      {
-        React.Children.map(children, (element: any) => {
-          return (React.createElement('div', { ref: myRef, ...otherProps }, element))
-        })
-      }
+      { React.Children.map(children, (child, index) => {
+        return React.cloneElement(child, { ref: (element: any) => childrenRef.current[index] = element });
+      })}
     </>
   )
-})
+}
 
-export default RightMenu
+export default memo(RightMenuComponent)
