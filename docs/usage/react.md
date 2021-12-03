@@ -38,44 +38,30 @@ export default class Demo extends React.Component {
 ### 通过 script 标签使用 (React) 不推荐
 
 ```html
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
-</head>
-<body>
-  <div id="root"></div>
-  <!-- 引入 react -->
-  <script src="https://cdn.jsdelivr.net/npm/react@17.0.2/umd/react.development.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/react-dom@17.0.2/umd/react-dom.development.js"></script>
-  <script src="https://cdn.staticfile.org/babel-standalone/6.26.0/babel.min.js"></script>
-  <!-- 引入 right-menu -->
-  <script src="https://cdn.jsdelivr.net/npm/@right-menu/react@0.0.5"></script>
-  <script type="text/babel">
-    function Test () {
-      return (
-        <div>
-          <RightMenu.default theme="mac" options={[
-            {
-              type: 'li',
-              text: 'win10',
-            }
-          ]}>
-            <div style={{ height: '200px', background: '#ccc' }}>hello RightMenu</div>
-          </RightMenu.default>
-        </div>
-      )
-    }
-    ReactDOM.render(
-      <React.StrictMode>
-        <Test />
-      </React.StrictMode>,
-      document.getElementById('root')
+<div id="root"></div>
+<!-- react -->
+<script src="https://cdn.jsdelivr.net/npm/react@17.0.2/umd/react.development.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/react-dom@17.0.2/umd/react-dom.development.js"></script>
+<script src="https://cdn.staticfile.org/babel-standalone/6.26.0/babel.min.js"></script>
+<!-- 引入 right-menu -->
+<script src="https://cdn.jsdelivr.net/npm/@right-menu/react@0.0.5"></script>
+<script type="text/babel">
+  function Test () {
+    return (
+      <div>
+        <RightMenu.default theme="mac" options={[
+          { type: 'li', text: 'win10' }
+        ]}>
+          <div style={{ height: '200px', background: '#ccc' }}>hello RightMenu</div>
+        </RightMenu.default>
+      </div>
     )
-  </script>
-</body>
-</html>
+  }
+  ReactDOM.render(
+    <React.StrictMode>
+      <Test />
+    </React.StrictMode>,
+    document.getElementById('root')
+  )
+</script>
 ```
