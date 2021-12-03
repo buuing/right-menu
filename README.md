@@ -107,7 +107,7 @@
     <td align="center"><a href="https://github.com/qingtiantongxie" target="_blank"><img width="50px" src="https://avatars.githubusercontent.com/u/24731632"></a><div><span title="核心开发">🤖</span> <span title="基础建设">🛰</span> <span title="需求功能">🚧</span></div></td>
     <td align="center"><a href="https://github.com/Deja-vuuu" target="_blank"><img width="50px" src="https://avatars.githubusercontent.com/u/27748682"></a><div><span title="核心开发">🤖</span> <span title="基础建设">🛰</span></div></td>
     <td align="center"><a href="https://github.com/yushen7" target="_blank"><img width="50px" src="https://avatars.githubusercontent.com/u/35678187"></a><div><span title="核心开发">🤖</span> <span title="修复bug">🛠</span></div></td>
-    <td align="center"><a href="https://github.com/dora1995" target="_blank"><img width="50px" src="https://avatars.githubusercontent.com/u/53267289"></a><div><span title="基础建设">🛰</span> <span title="修复bug">🛠</span></div></td>
+    <td align="center"><a href="https://github.com/dora1995" target="_blank"><img width="50px" src="https://avatars.githubusercontent.com/u/53267289"></a><div><span title="核心开发">🤖</span> <span title="基础建设">🛰</span> <span title="修复bug">🛠</span></div></td>
     <td align="center"><a href="https://github.com/pingxinwen" target="_blank"><img width="50px" src="https://avatars.githubusercontent.com/u/60872624"></a><div><span title="需求功能">🚧</span></div></td>
   </tr>
 </table>
@@ -116,17 +116,17 @@
 
 ## 需求计划
 
-- `📆 进行中`
-  - [ ] 🚧 增加icon选项, 可以使用一些内置图标, 想法可以让用户自由使用外部的svg图标
+<!-- - `📆 进行中` -->
 
 - `💡 待认领`
   - [ ] 🛠 [**在mac系统下, 第二次点击控制台时 blur 事件没有触发**](https://github.com/buuing/vue-right-menu/issues/10)
+  - [ ] 🚧 增加icon选项, 可以使用一些内置图标, 或让用户自由使用外部的svg图标
   - [ ] 🚧 [增加 XP / win7 两种经典菜单主题样式](https://github.com/buuing/right-menu/discussions/31)
-  - [ ] 🚧 随着浏览器放大/缩小时, 将菜单组件尽可能的维持在同一个大小
+  <!-- - [ ] 🚧 随着浏览器放大/缩小时, 将菜单组件尽可能的维持在同一个大小 -->
   - [ ] 🚧 [增加导航栏模式](https://github.com/buuing/right-menu/discussions/26)
   - [ ] 🚧 [增加 defaultProps 属性](https://github.com/buuing/right-menu/discussions/23)
   - [ ] 🤖 [增加 include 和 exclude 属性](https://github.com/buuing/right-menu/discussions/25)
-  - [ ] 🤖 看看能否对外暴露一个作用域插槽或者是render函数, 来渲染jsx?
+  <!-- - [ ] 🤖 看看能否对外暴露一个作用域插槽或者是render函数, 来渲染jsx? -->
 
 <br />
 

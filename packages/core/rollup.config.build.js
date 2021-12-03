@@ -22,7 +22,7 @@ export default [
         format: 'esm',
       },
       {
-        file: pkg.unpkg,
+        file: pkg.jsdelivr,
         format: 'umd',
         name: 'RightMenu',
       },

@@ -38,12 +38,12 @@
             border-radius: 5px;
         }
     </style>
-    <!-- <script src="https://cdn.staticfile.org/react/16.4.0/umd/react.development.js"></script>
-    <script src="https://cdn.staticfile.org/react-dom/16.4.0/umd/react-dom.development.js"></script> -->
+    <!-- <script src="https://cdn.staticfile.org/react/16.4.0/umd/react.development.js"></script> -->
+    <!-- <script src="https://cdn.staticfile.org/react-dom/16.4.0/umd/react-dom.development.js"></script> -->
 
-    <script src="https://unpkg.com/react@17/umd/react.development.js" ></script>
-    <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
-     <script src="https://cdn.staticfile.org/babel-standalone/6.26.0/babel.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/react@17.0.2/umd/react.development.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/react-dom@17.0.2/umd/react-dom.development.js"></script>
+    <script src="https://cdn.staticfile.org/babel-standalone/6.26.0/babel.min.js"></script>
 </head>
 
 <body>
@@ -124,9 +124,23 @@
         </React.Fragment>
       )
     }
+    function Test () {
+      return (
+        <React.Fragment>
+          <RightMenu.default theme="mac" options={[{
+            type: 'li',
+            text: 'win10',
+          }, ...base]}>
+            <button>123</button>
+            <br />
+            <button>222</button>
+          </RightMenu.default>
+        </React.Fragment>
+      )
+    }
     ReactDOM.render(
       <React.StrictMode>
-          <Main />
+        <Test />
       </React.StrictMode>,
       document.getElementById('root')
     )

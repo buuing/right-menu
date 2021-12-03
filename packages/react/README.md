@@ -1,6 +1,10 @@
 
 # 一个基于react的右键菜单插件
 
+## 官网
+
+- [官方文档 - 首页](https://buuing.github.io/right-menu/)
+
 ## 通过 import 使用
 
 ### 安装
@@ -28,26 +32,12 @@ render () {
 import { useRightMenu } from '@right-menu/react'
 
 function App(){
-  const menuRef = useRightMenu(
+  const menuRef = useRightMenu([
     {
-      theme: 'win10'
-    },
-    [{
       type: 'li',
       text: 'Hello RightMenu'
-    }]
-  );
+    }
+  ])
   return <div ref={menuRef}>测试右键菜单</div>
 }
-
-```
-
-### 高级配置
-
-...
-
-## 通过 script 标签使用
-
-```html
-
 ```

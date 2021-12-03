@@ -1,16 +1,21 @@
-import React, { memo, useEffect,useRef } from 'react'
+import React, { memo, useEffect, useRef } from 'react'
 import type { ReactElement } from 'react'
 import RightMenu, { default as Menu, ConfigType, OptionsType } from '@right-menu/core'
+
 interface Props {
-  options: OptionsType; // 菜单选项
-  config: ConfigType; // 高级配置
-  children: ReactElement;
+  options: OptionsType
+  theme: ConfigType['theme']
+  minWidth: ConfigType['minWidth']
+  maxWidth: ConfigType['maxWidth']
+  onBeforeInit: ConfigType['beforeInit']
+  onAfterInit: ConfigType['afterInit']
+  children: ReactElement
 }
+
 const RightMenuComponent: React.FC<Props> = (props) => {
-  const { options, config, children } = props;
+  const { options, children, ...config } = props
   const menuRef = useRef<RightMenu[]>([])
   const childrenRef = useRef<any[]>([])
-
   // 子元素的更换对右键菜单的调起不影响，因此初始化即可
   useEffect(() => {
     // 兼容有一个子元素/多个子元素的情况
@@ -22,7 +27,6 @@ const RightMenuComponent: React.FC<Props> = (props) => {
         }, options)
       })
     }
-
     return () => {
       if (menuRef.current && menuRef.current.length) {
         menuRef.current.forEach(item => {
@@ -33,11 +37,10 @@ const RightMenuComponent: React.FC<Props> = (props) => {
       }
     }
   }, [options, config])
-
   return (
     <>
       { React.Children.map(children, (child, index) => {
-        return React.cloneElement(child, { ref: (element: any) => childrenRef.current[index] = element });
+        return React.cloneElement(child, { ref: (element: any) => childrenRef.current[index] = element })
       })}
     </>
   )

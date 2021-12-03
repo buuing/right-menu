@@ -26,10 +26,10 @@
 
 ```shell
 # 通过 npm 安装
-npm install @right-menu/core
+npm install @right-menu/core@0.0.7
 
 # 通过 yarn 安装
-yarn add @right-menu/core
+yarn add @right-menu/core@0.0.7
 ```
 
 #### 2. 使用插件

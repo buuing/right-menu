@@ -20,7 +20,7 @@ export default  {
       sourcemap: true,
     },
     {
-      file: pkg.unpkg,
+      file: pkg.jsdelivr,
       format: 'umd',
       sourcemap: true,
       name: 'RightMenu',

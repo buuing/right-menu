@@ -6,13 +6,15 @@
 
 ```shell
 # 通过 npm 安装
-npm install @right-menu/vue
+npm install @right-menu/vue@0.0.4
 
 # 通过 yarn 安装
-yarn add @right-menu/vue
+yarn add @right-menu/vue@0.0.4
 ```
 
 #### 2. 使用插件
+
+在`main.js`中全局注册组件
 
 >> **Vue2.x 注册组件**
 ```js
