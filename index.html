@@ -95,7 +95,30 @@
         // 404显示
         noData: '找不到结果'
       },
-      executeScript: true
+      executeScript: true,
+      // mini sandbox 公共配置
+      sandboxOptions: {
+        publicResources: {
+          css: `
+            .right-menu {
+              height: 100px;
+              background: #ccc;
+              text-align: center;
+              line-height: 100px;
+            }
+          `,
+          js: `
+            window.options = [
+              { type: 'li', text: 'asd' }
+            ]
+          `,
+          jsLibs: ['https://cdn.jsdelivr.net/npm/@right-menu/core@latest']
+        },
+        defaultConfig: {
+          height: '350px',
+          editorWidth: '50%'
+        },
+      },
     }
   </script>
   <script src="./static/docsify.min.js"></script>
@@ -105,5 +128,8 @@
   <script src="./static/prism-jsx.js"></script>
   <script src="./static/prism-tsx.js"></script>
   <script src="./static/prism-typescript.js"></script>
+  <script src="https://cdn.jsdelivr.net/combine/npm/mini-sandbox@0.3.1,npm/mini-sandbox@0.3.1/dist/docsify-plugin.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mini-sandbox@0.3.1/dist/vue-loader.js"></script>
+  <!-- <script src="https://cdn.jsdelivr.net/npm/mini-sandbox@0.3.1/dist/react-loader.js"></script> -->
 </body>
 </html>

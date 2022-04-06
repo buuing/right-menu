@@ -39,16 +39,23 @@ render () {
 
 !> 简写时只能接受一个字符串类型, 如果你想传入一个`dom`元素, 请你使用完整写法
 
-```js
-// 简写 (我内部会执行 document.querySelector() 方法)
-new RightMenu('#box', options)
 
-// 完整写法
-new RightMenu({
-  // el: '#box'
-  // el: document.querySelector('#box')
-  // el: window
-}, options)
+```html [index.html]
+<div class="right-menu">测试区域</div>
+
+<script>
+  const options = [{ type: 'li', text: '测试111' }]
+
+  // 简写 (我内部会执行 document.querySelector 方法)
+  new RightMenu('.right-menu', options)
+
+  // 完整写法
+  // new RightMenu({
+  //   el: '.right-menu',
+  //   el: document.querySelector('.right-menu'),
+  //   el: window,
+  // }, options)
+</script>
 ```
 
 <br />
@@ -59,13 +66,29 @@ new RightMenu({
 - 可选值: `'win10'` | `'mac'`
 - 默认值: 无 (非必填)
 
-默认主题样式是根据操作系统自动切换样式的, 但是你可以通过`theme`属性来指定一个固定的主题, 比如你希望无论是在 windows 还是 mac 上都展示 mac 的主题样式, 那你可以设置`theme: 'mac'`
+**默认主题样式是根据操作系统自动切换样式的**, 但是你可以通过`theme`属性来指定一个固定的主题, 比如你希望无论是在 windows 还是 mac 上都展示 mac 的主题样式, 那你可以设置`theme: 'mac'`
 
-```js
-new RightMenu({
-  el: '#box',
-  theme: 'mac'
-}, options)
+
+```html [index.html]
+<div class="right-menu demo1">win10主题</div>
+<br />
+<div class="right-menu demo2">mac主题</div>
+
+<script>
+  const options = [{ type: 'li', text: '测试111' }]
+
+  // 指定主题样式为win10
+  new RightMenu({
+    el: '.demo1',
+    theme: 'win10'
+  }, options)
+
+  // 指定主题样式为mac
+  new RightMenu({
+    el: '.demo2',
+    theme: 'mac'
+  }, options)
+</script>
 ```
 
 <br />
@@ -78,11 +101,17 @@ new RightMenu({
 
 该属性可以设置菜单栏的最小宽度, 如果你的某个菜单栏文字内容非常少, 菜单栏的宽度同样也会变得非常小
 
-```js
-new RightMenu({
-  el: '#box',
-  minWidth: '180px'
-}, options)
+```html [index.html]
+<div class="right-menu">测试区域</div>
+
+<script>
+  const options = [{ type: 'li', text: '哈哈' }]
+
+  new RightMenu({
+    el: '.right-menu',
+    minWidth: 'auto'
+  }, options)
+</script>
 ```
 
 <br />
@@ -95,11 +124,20 @@ new RightMenu({
 
 该属性可以设置菜单栏的最大宽度, 当文字长度超出最大宽度时, 会以这个形式展现: `'这是一段很长很长很长很...'`
 
-```js
-new RightMenu({
-  el: '#box',
-  maxWidth: '500px'
-}, options)
+```html [index.html]
+<div class="right-menu">测试区域</div>
+
+<script>
+  const options = [{
+    type: 'li',
+    text: '这是一段很长很长很长很长的文字'
+  }]
+
+  new RightMenu({
+    el: '.right-menu',
+    maxWidth: '200px'
+  }, options)
+</script>
 ```
 
 <br />

@@ -121,12 +121,11 @@
 - `💡 待认领`
   - [ ] 🛠 [**在mac系统下, 第二次点击控制台时 blur 事件没有触发**](https://github.com/buuing/vue-right-menu/issues/10)
   - [ ] 🚧 增加icon选项, 可以使用一些内置图标, 或让用户自由使用外部的svg图标
-  - [ ] 🚧 [增加 XP / win7 两种经典菜单主题样式](https://github.com/buuing/right-menu/discussions/31)
+  <!-- - [ ] 🚧 [增加 XP / win7 两种经典菜单主题样式](https://github.com/buuing/right-menu/discussions/31) -->
   <!-- - [ ] 🚧 随着浏览器放大/缩小时, 将菜单组件尽可能的维持在同一个大小 -->
-  - [ ] 🚧 [增加导航栏模式](https://github.com/buuing/right-menu/discussions/26)
-  - [ ] 🚧 [增加 defaultProps 属性](https://github.com/buuing/right-menu/discussions/23)
-  - [ ] 🤖 [增加 include 和 exclude 属性](https://github.com/buuing/right-menu/discussions/25)
-  <!-- - [ ] 🤖 看看能否对外暴露一个作用域插槽或者是render函数, 来渲染jsx? -->
+  <!-- - [ ] 🚧 [增加导航栏模式](https://github.com/buuing/right-menu/discussions/26) -->
+  <!-- - [ ] 🚧 [增加 defaultProps 属性](https://github.com/buuing/right-menu/discussions/23) -->
+  <!-- - [ ] 🤖 [增加 include 和 exclude 属性](https://github.com/buuing/right-menu/discussions/25) -->
 
 <br />
 

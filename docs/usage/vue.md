@@ -30,32 +30,7 @@ createApp(App).use(RightMenu).mount('#app')
 
 #### 3. 在 `xxx.vue` 中使用
 
-```vue
-<template>
-  <div>
-    <!-- 方式1: 指令组件 -->
-    <div v-menu="options" style="height: 300px; background-color: #82acff"></div>
-    <!-- 方式2: 抽象组件 -->
-    <right-menu :options="options">
-      <div style="height: 300px; background-color: #82acff"></div>
-    </right-menu>
-  </div>
-</template>
-
-<script>
-export default {
-  data () {
-    return {
-      options: [{
-        type: 'li', // type为li是普通按钮
-        text: '复制(C)', // 按钮的名称
-        callback: () => alert('点击了复制') // 回调函数
-      }]
-    }
-  }
-}
-</script>
-```
+<div id="vue-demo-esm"></div>
 
 
 <br />
@@ -67,13 +42,16 @@ export default {
 >> `Vue2.x CDN链接`
 - https://cdn.jsdelivr.net/combine/npm/@vue/composition-api@1.2.4,npm/vue-demi@0.11.4/lib/index.iife.min.js,npm/@right-menu/vue@0.0.4
 
-```html
+```html [vue2.html]
 <div id="app">
   <!-- 方式1: 指令组件 -->
-  <div v-menu="options" style="height: 300px; background-color: #82acff"></div>
+  <div v-menu="options" style="height: 100px; background-color: #a4d8c2">
+    指令组件
+  </div>
+  <br />
   <!-- 方式2: 抽象组件 -->
   <right-menu :options="options">
-    <div style="height: 300px; background-color: #82acff"></div>
+    <div style="height: 100px; background-color: #fcebaa">抽象组件</div>
   </right-menu>
 </div>
 
@@ -105,10 +83,13 @@ export default {
 ```html
 <div id="app">
   <!-- 方式1: 指令组件 -->
-  <div v-menu="options" style="height: 300px; background-color: #82acff"></div>
+  <div v-menu="options" style="height: 100px; background-color: #a4d8c2">
+    指令组件
+  </div>
+  <br />
   <!-- 方式2: 抽象组件 -->
   <right-menu :options="options">
-    <div style="height: 300px; background-color: #82acff"></div>
+    <div style="height: 100px; background-color: #fcebaa">抽象组件</div>
   </right-menu>
 </div>
 
@@ -130,3 +111,51 @@ export default {
   }).use(RightMenu).mount('#app')
 </script>
 ```
+
+<script>
+  new MiniSandbox({
+    el: '#vue-demo-esm',
+    files: {
+      'Demo.vue': {
+        defaultValue: `<template>
+  <div>
+    <!-- 方式1: 指令组件 -->
+    <div v-menu="options" style="height: 100px; background-color: #a4d8c2">
+      指令组件
+    </div>
+    <br />
+    <!-- 方式2: 抽象组件 -->
+    <right-menu :options="options">
+      <div style="height: 100px; background-color: #fcebaa">抽象组件</div>
+    </right-menu>
+  </div>
+</template>
+
+<script>
+export default {
+  data () {
+    return {
+      options: [{
+        type: 'li', // type为li是普通按钮
+        text: '复制(C)', // 按钮的名称
+        callback: () => alert('点击了复制') // 回调函数
+      }]
+    }
+  }
+}
+<\/script>`,
+        jsLibs: [
+          'https://cdn.jsdelivr.net/npm/vue@2.6.14', // vue的模板必须引入 vue.js
+          'https://cdn.jsdelivr.net/combine/npm/@vue/composition-api@1.2.4,npm/vue-demi@0.11.4/lib/index.iife.min.js,npm/@right-menu/vue@0.0.4'
+        ],
+      }
+    },
+    loaders: {
+      '.vue': SandboxVueLoader,
+    },
+    defaultConfig: {
+      height: '600px',
+      editorWidth: '55%'
+    }
+  })
+</script>

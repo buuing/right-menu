@@ -22,25 +22,32 @@
   - `class?: string` 额外添加的类名
   - `style?: string` 额外添加的样式
 
-```js
-const options = [
-  { type: 'li', text: '普通节点' },
-  {
-    type: 'li',
-    text: '可以点击的节点',
-    callback: () => alert('Hello RightMenu')
-  },
-  {
-    type: 'li',
-    text: '可以跳转的节点',
-    callback: () => window.location.href = 'https://100px.net'
-  },
-  {
-    type: 'li',
-    text: '被禁用的节点',
-    disabled: true
-  },
-]
+```html [普通节点.html]
+<div class="right-menu">点击右键</div>
+
+<script>
+  const options = [
+    { type: 'li', text: '普通节点' },
+    {
+      type: 'li',
+      text: '可以点击的节点',
+      callback: () => alert('Hello RightMenu')
+    },
+    {
+      type: 'li',
+      text: '可以跳转的节点',
+      callback: () => {
+        window.location.href = 'https://100px.net'
+      }
+    },
+    {
+      type: 'li',
+      text: '被禁用的节点',
+      disabled: true
+    },
+  ]
+  new RightMenu('.right-menu', options)
+</script>
 ```
 
 <br />
@@ -55,23 +62,27 @@ const options = [
   - `class?: string` 额外添加的类名
   - `style?: string` 额外添加的样式
 
-```js
-// children 可以无限向下渲染子菜单, 但是估计没人用得到吧
-const options = [
-  {
-    type: 'ul',
-    text: '一级菜单',
-    children: [{
+```html [多级菜单.html]
+<div class="right-menu">点击右键</div>
+
+<script>
+  const options = [
+    {
       type: 'ul',
-      text: '二级菜单',
+      text: '一级菜单',
       children: [{
-        type: 'li',
-        text: '三级菜单',
-        children: []
+        type: 'ul',
+        text: '二级菜单',
+        children: [{
+          type: 'li',
+          text: '三级菜单',
+          children: []
+        }]
       }]
-    }]
-  }
-]
+    }
+  ]
+  new RightMenu('.right-menu', options)
+</script>
 ```
 
 <br />
@@ -84,12 +95,16 @@ const options = [
   - `class?: string` 额外添加的类名
   - `style?: string` 额外添加的样式
 
-```js
-// 你最好不要把分割线放在开头或者结尾, 因为那样会很丑
-const options = [
-  { type: 'li', text: '普通节点' },
-  { type: 'hr' }, // 分割线
-  { type: 'li', text: '普通节点' },
-]
-```
+```html [分割线.html]
+<div class="right-menu">点击右键</div>
 
+<script>
+// 你最好不要把分割线放在开头或者结尾, 因为那样会很丑
+  const options = [
+    { type: 'li', text: '普通节点' },
+    { type: 'hr' }, // 分割线
+    { type: 'li', text: '普通节点' },
+  ]
+  new RightMenu('.right-menu', options)
+</script>
+```

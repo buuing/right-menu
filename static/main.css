@@ -40,3 +40,9 @@ blockquote>ul.task-list:last-child {
   padding: 0 13px;
   position: absolute;
 }
+.mini-sandbox {
+  margin: 20px 0;
+  border: 2px solid #b9d2ff;
+  border-radius: 5px;
+  box-shadow: 0 2px 12px 0 rgb(94 144 232 / 50%);
+}

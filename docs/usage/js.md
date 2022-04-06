@@ -3,12 +3,14 @@
 
 - `CDN链接`: https://cdn.jsdelivr.net/npm/@right-menu/core@0.0.7
 
-```html
-<div id="box" style="height: 300px; background: #ccc"></div>
+```html [demo.html]
+<div class="right-menu" style="background: #ccc; height: 100px">
+  测试区域
+</div>
 
 <script src="https://cdn.jsdelivr.net/npm/@right-menu/core@0.0.7"></script>
 <script>
-  new RightMenu('#box', [
+  new RightMenu('.right-menu', [
     {
       type: 'li', // type为li是普通按钮
       text: '复制(C)', // 按钮的名称
