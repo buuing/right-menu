@@ -5,7 +5,7 @@
 
 ```html [demo.html]
 <div class="right-menu" style="background: #ccc; height: 100px">
-  测试区域
+  点击右键
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/@right-menu/core@0.0.7"></script>

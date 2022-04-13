@@ -6,7 +6,7 @@
 | 节点属性 | type | text | callback | disabled | children | class | style | icon |
 | :-:     |  :-: |  :-: |  :-:     |  :-:     |  :-:     |  :-:  |  :-:  | :-:  |
 | 普通节点  | li   |  √   |  √       |   √      |     ×    |   √   |   √   |  -   |
-| 多级菜单  | ul   |  √   |  ×       |   √      |     √    |   √   |   √   |  -   |
+| 菜单节点  | ul   |  √   |  ×       |   √      |     √    |   √   |   √   |  -   |
 | 分割线    | hr   |  ×   |  ×       |   ×      |     ×    |   √   |   √   |  -   |
 
 !> 其中`type`属性为必填项, 因为我会根据每个节点的`type`类型, 来区分渲染的内容
@@ -53,16 +53,16 @@
 <br />
 
 
-## 多级菜单
+## 菜单节点
 
 - `type = 'ul'`
   - `text: string` 节点显示的文字内容
   - `disabled?: boolean` 节点是否被禁用, 禁用之后回调函数不会触发
-  - `children?: Array<object>` 用来渲染多级菜单
+  - `children?: Array<object>` 用来渲染子级菜单
   - `class?: string` 额外添加的类名
   - `style?: string` 额外添加的样式
 
-```html [多级菜单.html]
+```html [菜单节点.html]
 <div class="right-menu">点击右键</div>
 
 <script>

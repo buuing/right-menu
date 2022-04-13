@@ -41,7 +41,7 @@ render () {
 
 
 ```html [index.html]
-<div class="right-menu">测试区域</div>
+<div class="right-menu">点击右键</div>
 
 <script>
   const options = [{ type: 'li', text: '测试111' }]
@@ -102,7 +102,7 @@ render () {
 该属性可以设置菜单栏的最小宽度, 如果你的某个菜单栏文字内容非常少, 菜单栏的宽度同样也会变得非常小
 
 ```html [index.html]
-<div class="right-menu">测试区域</div>
+<div class="right-menu">点击右键</div>
 
 <script>
   const options = [{ type: 'li', text: '哈哈' }]
@@ -125,7 +125,7 @@ render () {
 该属性可以设置菜单栏的最大宽度, 当文字长度超出最大宽度时, 会以这个形式展现: `'这是一段很长很长很长很...'`
 
 ```html [index.html]
-<div class="right-menu">测试区域</div>
+<div class="right-menu">点击右键</div>
 
 <script>
   const options = [{
