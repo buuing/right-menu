@@ -193,7 +193,8 @@ new RightMenu({
       }
     },
     defaultConfig: {
-      editorWidth: '100%'
+      editorWidth: '100%',
+      draggable: false,
     },
     loaders: {
       '.html': () => {},
