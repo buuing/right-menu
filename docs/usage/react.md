@@ -15,23 +15,8 @@ yarn add @right-menu/react@0.0.5
 
 !> `<RightMenu>`组件只能包裹普通 dom 标签或 class 组件, **如果是 function 组件则需要套一个 dom 标签**
 
-```jsx
-import React from 'react'
-import RightMenu from '@right-menu/react'
+<div id="react-esm-demo"></div>
 
-export default class Demo extends React.Component {
-  render () {
-    const options = [{
-      type: 'li', // type为li是普通按钮
-      text: '复制(C)', // 按钮的名称
-      callback: () => alert('点击了复制') // 回调函数
-    }]
-    return <RightMenu theme="mac" options={options}>
-      <div style="height: 300px; background-color: #ccc"></div>
-    </RightMenu>
-  }
-}
-```
 
 <br />
 
@@ -65,3 +50,55 @@ export default class Demo extends React.Component {
   )
 </script>
 ```
+
+<script>
+  new MiniSandbox({
+    el: '#react-esm-demo',
+    files: {
+      'app.jsx': {
+        defaultValue: `import React from 'react'
+import ReactDOM from 'react-dom'
+import RightMenu from '@right-menu/react'
+
+function App () {
+  const options = [{
+    type: 'li', // type为li是普通按钮
+    text: '复制(C)', // 按钮的名称
+    callback: () => alert('点击了复制') // 回调函数
+  }]
+  return <div>
+    <RightMenu options={options}>
+      <div style={{ height: '100px', background: '#ccc' }}>
+        点击右键
+      </div>
+    </RightMenu>
+  </div>
+}
+
+ReactDOM.render(<App />, document.getElementById("root"))
+`,
+        importMap: {
+          "imports": {
+            "react": "https://ga.jspm.io/npm:react@17.0.2/index.js",
+            "react-dom": "https://ga.jspm.io/npm:react-dom@17.0.2/index.js",
+            "@right-menu/react": "https://cdn.jsdelivr.net/npm/@right-menu/react@0.0.5/dist/index.esm.js"
+          },
+          "scopes": {
+            "https://ga.jspm.io/": {
+              "object-assign": "https://ga.jspm.io/npm:object-assign@4.1.1/index.js",
+              "scheduler": "https://ga.jspm.io/npm:scheduler@0.20.2/index.js",
+              "scheduler/tracing": "https://ga.jspm.io/npm:scheduler@0.20.2/tracing.js"
+            }
+          }
+        }
+      },
+    },
+    loaders: {
+      '.jsx': SandboxReactLoader
+    },
+    defaultConfig: {
+      height: '460px',
+      editorWidth: '58%'
+    }
+  })
+</script>

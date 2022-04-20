@@ -5,29 +5,7 @@
 
 !> 假设我要配置`theme`属性
 
->> 在 JS 中使用
-```js
-new RightMenu({
-  el: '#box',
-  theme: 'mac'
-}, options)
-```
-
->> 在 Vue 中使用
-```html
-<right-menu :options="options" theme="mac">
-  <div>hello<div>
-</right-menu>
-```
-
->> 在 React 中使用
-```jsx
-render () {
-  return <RightMenu options={options} theme="mac">
-    <div>hello</div>
-  </RightMenu>
-}
-```
+<div id="my-sandbox"></div>
 
 <br />
 
@@ -180,3 +158,47 @@ new RightMenu({
 - afterShow?: Function // 显示菜单后
 - beforeHide?: Function // 隐藏菜单前
 - afterHide?: Function // 隐藏菜单后 -->
+
+<script>
+  new MiniSandbox({
+    el: '#my-sandbox',
+    files: {
+      'index.html': {
+        title: 'HTML',
+        defaultValue: `<script>
+  new RightMenu({
+    el: '#box',
+    theme: 'mac' // 在js中设置theme属性
+  }, options)
+<\/script>
+`,
+      },
+      'App.vue': {
+        title: 'Vue',
+        defaultValue: `<template>
+  <right-menu :options="options" theme="mac"><!-- 在vue中设置theme属性 -->
+    <div>hello</div>
+  </right-menu>
+</template>
+`,
+      },
+      'App.jsx': {
+        title: 'React',
+        defaultValue: `render () {
+  return <RightMenu options={options} theme="mac">{/* 在react中设置theme属性 */}
+    <div>hello</div>
+  </RightMenu>
+}
+`,
+      }
+    },
+    defaultConfig: {
+      editorWidth: '100%'
+    },
+    loaders: {
+      '.html': () => {},
+      '.vue': () => {},
+      '.jsx': () => {},
+    }
+  })
+</script>

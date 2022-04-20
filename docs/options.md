@@ -99,7 +99,7 @@
 <div class="right-menu">点击右键</div>
 
 <script>
-// 你最好不要把分割线放在开头或者结尾, 因为那样会很丑
+  // 你最好不要把分割线放在开头或者结尾, 因为那样会很丑
   const options = [
     { type: 'li', text: '普通节点' },
     { type: 'hr' }, // 分割线
