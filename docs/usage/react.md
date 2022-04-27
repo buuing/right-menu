@@ -56,16 +56,15 @@ yarn add @right-menu/react@0.0.5
     el: '#react-esm-demo',
     files: {
       'app.jsx': {
-        defaultValue: `import React from 'react'
-import ReactDOM from 'react-dom'
+        defaultValue: `import React, { useState } from 'react'
 import RightMenu from '@right-menu/react'
 
-function App () {
-  const options = [{
-    type: 'li', // type为li是普通按钮
-    text: '复制(C)', // 按钮的名称
-    callback: () => alert('点击了复制') // 回调函数
-  }]
+export default function App () {
+  const [options, setOptions] = useState([{
+    type: 'li',
+    text: '复制(C)',
+    callback: () => alert('点击了复制')
+  }])
   return <div>
     <RightMenu options={options}>
       <div style={{ height: '100px', background: '#ccc' }}>
@@ -73,10 +72,7 @@ function App () {
       </div>
     </RightMenu>
   </div>
-}
-
-ReactDOM.render(<App />, document.getElementById("root"))
-`,
+}`,
         importMap: {
           "imports": {
             "react": "https://ga.jspm.io/npm:react@17.0.2/index.js",
@@ -97,7 +93,7 @@ ReactDOM.render(<App />, document.getElementById("root"))
       '.jsx': SandboxReactLoader
     },
     defaultConfig: {
-      height: '460px',
+      height: '390px',
       editorWidth: '58%'
     }
   })
