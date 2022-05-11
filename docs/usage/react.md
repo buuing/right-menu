@@ -52,7 +52,7 @@ yarn add @right-menu/react@0.0.5
 ```
 
 <script>
-  new MiniSandbox({
+  var ms = new MiniSandbox({
     el: '#react-esm-demo',
     files: {
       'app.jsx': {
@@ -77,7 +77,7 @@ export default function App () {
           "imports": {
             "react": "https://ga.jspm.io/npm:react@17.0.2/index.js",
             "react-dom": "https://ga.jspm.io/npm:react-dom@17.0.2/index.js",
-            "@right-menu/react": "https://cdn.jsdelivr.net/npm/@right-menu/react@0.0.5/dist/index.esm.js"
+            "@right-menu/react": "https://cdn.jsdelivr.net/npm/@right-menu/react@0.0.5/dist/index.esm.js",
           },
           "scopes": {
             "https://ga.jspm.io/": {
@@ -95,6 +95,11 @@ export default function App () {
     defaultConfig: {
       height: '390px',
       editorWidth: '58%'
+    },
+    events: {
+      onChange () {
+        ms && ms.run(true)
+      }
     }
   })
 </script>
