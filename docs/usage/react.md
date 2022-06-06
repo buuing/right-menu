@@ -94,7 +94,7 @@ export default function App () {
     },
     defaultConfig: {
       height: '390px',
-      editorWidth: '58%'
+      editorRange: '58%',
     },
     events: {
       onChange () {

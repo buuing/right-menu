@@ -102,7 +102,7 @@
       executeScript: true,
       // mini sandbox 公共配置
       sandboxOptions: {
-        publicResources: {
+        resource: {
           css: `
             .right-menu {
               height: 100px;
@@ -120,7 +120,7 @@
         },
         defaultConfig: {
           height: '350px',
-          editorWidth: '50%'
+          editorRange: '50%',
         },
       },
     }
@@ -132,8 +132,8 @@
   <script src="./static/prism-jsx.js"></script>
   <script src="./static/prism-tsx.js"></script>
   <script src="./static/prism-typescript.js"></script>
-  <script src="https://cdn.jsdelivr.net/combine/npm/mini-sandbox@0.3.7,npm/mini-sandbox@0.3.7/dist/docsify-plugin.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/mini-sandbox@0.3.7/dist/vue-loader.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/mini-sandbox@0.3.7/dist/react-loader.js"></script>
+  <script src="https://cdn.jsdelivr.net/combine/npm/mini-sandbox@0.3.9,npm/mini-sandbox@0.3.9/dist/docsify-plugin.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mini-sandbox@0.3.9/dist/vue-loader.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mini-sandbox@0.3.9/dist/react-loader.js"></script>
 </body>
 </html>

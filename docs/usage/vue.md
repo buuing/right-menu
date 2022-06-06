@@ -93,7 +93,7 @@ export default {
     },
     defaultConfig: {
       height: '600px',
-      editorWidth: '55%'
+      editorRange: '55%'
     }
   })
 
@@ -178,7 +178,7 @@ export default {
     },
     defaultConfig: {
       height: '730px',
-      editorWidth: '55%'
+      editorRange: '55%'
     }
   })
 </script>
