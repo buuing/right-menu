@@ -10,6 +10,15 @@ import {
 } from './utils'
 import { version } from '../package.json'
 
+const systemTheme = window.matchMedia('(prefers-color-scheme: dark)')
+const cssVar = (theme: string | undefined) => {
+  switch (theme) {
+    case 'light': return 'theme-light'
+    case 'dark': return 'theme-dark'
+    default: return systemTheme.matches ? 'theme-dark' : 'theme-light'
+  }
+}
+
 export { ConfigType, OptionsType }
 
 export default class RightMenu {
@@ -42,7 +51,7 @@ export default class RightMenu {
     }
     // 获取dom并绑定事件
     const dom = typeof config.el === 'string' ? document.querySelector(config.el) : config.el
-    dom?.addEventListener('contextmenu', (e) => {
+    dom?.addEventListener(config.mode || 'contextmenu', (e) => {
       const res = typeof options === 'function' ? options(e, config) : options
       this.init(e as MouseEvent, res)
     })
@@ -106,7 +115,7 @@ export default class RightMenu {
     layoutMenuPositionEffect(e, menu, LayoutMenuDirection.Right)
 
     // 防止菜单组件里点出系统菜单
-    menu.addEventListener('contextmenu', preventDefault)
+    menu.addEventListener(this.config.mode || 'contextmenu', preventDefault)
     // 窗口 blur 时销毁菜单栏
     this.addEvent(window, 'blur', this.destroyMenu.bind(this))
     // 窗口 resize 时销毁菜单栏
@@ -130,7 +139,7 @@ export default class RightMenu {
     const skeleton = this.createDom(
       'ul',
       {
-        class: `right-menu-list theme-${this.config.theme}`,
+        class: `right-menu-list theme-${this.config.theme} ${cssVar(this.config.theme)}`,
         style: this.menuStyle,
       },
       children,
@@ -166,7 +175,7 @@ export default class RightMenu {
     eventName: string,
     callback: LiType['callback'],
   ): void {
-    target.addEventListener(eventName, callback)
+    target.addEventListener(eventName, callback!)
     this.eventList.push([target, eventName, callback])
   }
 
@@ -177,7 +186,7 @@ export default class RightMenu {
   removeEvent(): void {
     while (this.eventList.length) {
       const [target, eventName, callback] = this.eventList.shift()!
-      target.removeEventListener(eventName, callback)
+      target.removeEventListener(eventName, callback!)
     }
   }
 
@@ -202,7 +211,7 @@ export default class RightMenu {
     return this.createDom(
       'ul',
       {
-        class: `right-menu-list theme-${this.config.theme}`,
+        class: `right-menu-list theme-${this.config.theme} ${cssVar(this.config.theme)}`,
         style: this.menuStyle,
       },
       children,
@@ -266,7 +275,7 @@ export default class RightMenu {
     const li = this.createDom('li', filterAttrs(opt, attrs), [span])
     if (!opt.disabled && opt.type === 'li' && opt.callback) {
       li.addEventListener('mousedown', (e) => {
-        opt.callback(e)
+        opt.callback?.(e)
         this.destroyMenu()
       })
     }

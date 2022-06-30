@@ -5,7 +5,7 @@ declare type LiType = {
     type: 'li';
     text: string;
     disabled?: boolean;
-    callback: EventListener;
+    callback?: EventListener;
 };
 interface AttrsType {
     class?: string;
@@ -25,7 +25,7 @@ declare type GetKeysType<T> = T extends ElementType ? keyof T : never;
 declare type ElementKeysType = GetKeysType<ElementType>;
 declare type ConfigType = {
     el: string | HTMLElement;
-    mode?: 'context-menu' | 'nav-menu';
+    mode?: keyof HTMLElementEventMap;
     theme?: string;
     minWidth?: string | number;
     maxWidth?: string | number;

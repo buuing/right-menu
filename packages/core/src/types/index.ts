@@ -8,8 +8,7 @@ export type LiType = {
   type: 'li'
   text: string
   disabled?: boolean
-  // eslint-disable-next-line no-undef
-  callback: EventListener
+  callback?: EventListener
 }
 
 export interface AttrsType {
@@ -34,7 +33,7 @@ type ElementKeysType = GetKeysType<ElementType>
 
 export type ConfigType = {
   el: string | HTMLElement
-  mode?: 'context-menu' | 'nav-menu' // 模式, 默认为context-menu
+  mode?: keyof HTMLElementEventMap // 触发模式
   theme?: string // 主题样式, 默认为auto
   minWidth?: string | number // 最小宽度
   maxWidth?: string | number // 最大宽度
