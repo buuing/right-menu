@@ -16,11 +16,14 @@ export default class RightMenu {
   private version: string = version
   private menu: HTMLElement | null = null
   private config: ConfigType
+  private options: OptionsType
   private eventList: Array<[Window | Document, string, LiType['callback']]> = []
   private menuStyle = {
     'min-width': '',
     'max-width': '',
   }
+
+  private bindEl: Element | null = null
 
   constructor(
     el: ConfigType,
@@ -40,12 +43,25 @@ export default class RightMenu {
     if (config.maxWidth) {
       this.menuStyle['max-width'] = getValue(config.maxWidth)
     }
+    this.options = options
+
     // 获取dom并绑定事件
     const dom = typeof config.el === 'string' ? document.querySelector(config.el) : config.el
-    dom?.addEventListener('contextmenu', (e) => {
-      const res = typeof options === 'function' ? options(e, config) : options
-      this.init(e as MouseEvent, res)
-    })
+    this.bindEl = dom
+
+    this.contextMenuHandler = this.contextMenuHandler.bind(this)
+
+    dom?.addEventListener('contextmenu', this.contextMenuHandler)
+  }
+
+  contextMenuHandler(e: Event) {
+    const { options, config } = this
+    const res = typeof options === 'function' ? options(e, config) : options
+    this.init(e as MouseEvent, res)
+  }
+
+  destroy() {
+    this.bindEl?.removeEventListener('contextmenu', this.contextMenuHandler)
   }
 
   /**
