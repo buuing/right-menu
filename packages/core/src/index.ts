@@ -113,7 +113,7 @@ export default class RightMenu {
     this.addEvent(window, 'resize', this.destroyMenu.bind(this))
     // 页面点击时销毁菜单栏
     this.addEvent(document, 'mousedown', (e) => {
-      const hasMenu = e['path']?.some((node: HTMLDivElement) => node === menu)
+      const hasMenu = (e['path'] || e.composedPath())?.some((node: HTMLDivElement) => node === menu)
       if (!hasMenu) this.destroyMenu()
     })
   }
@@ -278,13 +278,24 @@ export default class RightMenu {
     // 添加二级菜单
     if (opt.children && opt.children.length) {
       const ul = this.renderMenu(opt.children)
+      const parentMouseLeaveListener = () => li.removeChild(ul)
       li.addEventListener('mouseenter', (e) => {
         li.appendChild(ul)
+        li.parentElement?.removeEventListener('mouseleave', parentMouseLeaveListener)
         layoutMenuPositionEffect(li, ul)
       })
       li.addEventListener('mouseleave', (e: MouseEvent) => {
         if (!e['toElement']) return
         let curr = e['toElement']
+
+        if (li.parentElement && curr === li.parentElement && (e.offsetX < 0 || e.offsetX >= li.offsetWidth)) {
+          // fix 存在滚动条时，从左右两侧移入子菜单
+          li.parentElement.addEventListener('mouseleave', parentMouseLeaveListener, {
+            once: true,
+          })
+          return
+        }
+
         while (curr) {
           // 如果路径里存在 ul 标签, 就不需要销毁
           if (curr === ul) return
