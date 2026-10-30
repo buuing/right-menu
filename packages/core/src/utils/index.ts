@@ -110,9 +110,24 @@ export const layoutMenuPositionEffect = (
 
   const layoutToTop = () => {
     let y = baseY
-    // 尝试向上布局，判断菜单最顶端是否超出屏幕上边缘（视窗高度）
+    // 尝试向上布局，判断菜单最底端是否超出屏幕下边缘（视窗高度）
     if (menu.offsetHeight + y > window.innerHeight) {
-      y = baseY + baseH - height
+      const topY = baseY + baseH - height
+      if (topY >= 0) {
+        // 可以向上布局
+        y = topY
+        return y
+      }
+      // 上下都放不下时，使用向上、向下两种方式中更高的区域+滚动条的形式
+      const bottomHeight = window.innerHeight - baseY
+      const topHeight = baseY + baseH
+      const isBottom = bottomHeight > topHeight
+      const menuHeight = Math.max(bottomHeight, topHeight)
+      const menuMaxHeight = Math.floor(menuHeight - 5)
+      y = isBottom ? baseY : baseY + baseH - menuMaxHeight
+      menu.style.maxHeight = `${menuMaxHeight}px`
+      menu.style.overflowY = 'auto'
+      return y
     }
     return y
   }
